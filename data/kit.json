@@ -1,0 +1,418 @@
+[
+ {
+  "id": "k00",
+  "group": "Car",
+  "item": "Spare tyre, jack, wheel spanner, tyre inflator",
+  "tags": [
+   "all"
+  ],
+  "order": 0
+ },
+ {
+  "id": "k01",
+  "group": "Car",
+  "item": "Jumper cables and a small tool kit",
+  "tags": [
+   "all"
+  ],
+  "order": 1
+ },
+ {
+  "id": "k02",
+  "group": "Car",
+  "item": "Torch with spare batteries",
+  "tags": [
+   "all"
+  ],
+  "order": 2
+ },
+ {
+  "id": "k03",
+  "group": "Car",
+  "item": "Phone holder and car charger",
+  "tags": [
+   "all"
+  ],
+  "order": 3
+ },
+ {
+  "id": "k04",
+  "group": "Car",
+  "item": "Microfibre cloth and windshield washer fluid",
+  "tags": [
+   "all"
+  ],
+  "order": 4
+ },
+ {
+  "id": "k05",
+  "group": "Car",
+  "item": "Tow rope",
+  "tags": [
+   "hills",
+   "jungle",
+   "monsoon"
+  ],
+  "order": 5
+ },
+ {
+  "id": "k06",
+  "group": "Documents",
+  "item": "Driving licence, RC, insurance and PUC (DigiLocker copies too)",
+  "tags": [
+   "all"
+  ],
+  "order": 6
+ },
+ {
+  "id": "k07",
+  "group": "Documents",
+  "item": "ID for every traveller (Aadhaar or PAN)",
+  "tags": [
+   "all"
+  ],
+  "order": 7
+ },
+ {
+  "id": "k08",
+  "group": "Documents",
+  "item": "Booking confirmations offline (screenshots)",
+  "tags": [
+   "all"
+  ],
+  "order": 8
+ },
+ {
+  "id": "k09",
+  "group": "Documents",
+  "item": "Forest or fort permits if needed",
+  "tags": [
+   "jungle",
+   "hills"
+  ],
+  "order": 9
+ },
+ {
+  "id": "k10",
+  "group": "Money",
+  "item": "Cash ₹3,000–5,000 for tolls, villages and homestays",
+  "tags": [
+   "all"
+  ],
+  "order": 10
+ },
+ {
+  "id": "k11",
+  "group": "Money",
+  "item": "FASTag balance topped up",
+  "tags": [
+   "all"
+  ],
+  "order": 11
+ },
+ {
+  "id": "k12",
+  "group": "Money",
+  "item": "UPI on two phones",
+  "tags": [
+   "all"
+  ],
+  "order": 12
+ },
+ {
+  "id": "k13",
+  "group": "Health",
+  "item": "Personal medicines for the full trip plus 2 days",
+  "tags": [
+   "all"
+  ],
+  "order": 13
+ },
+ {
+  "id": "k14",
+  "group": "Health",
+  "item": "Fever and pain tablets, ORS, antacid, anti-allergy",
+  "tags": [
+   "all"
+  ],
+  "order": 14
+ },
+ {
+  "id": "k15",
+  "group": "Health",
+  "item": "Motion sickness tablets for ghat roads",
+  "tags": [
+   "hills",
+   "monsoon"
+  ],
+  "order": 15
+ },
+ {
+  "id": "k16",
+  "group": "Health",
+  "item": "Band-aids, antiseptic, crepe bandage",
+  "tags": [
+   "all"
+  ],
+  "order": 16
+ },
+ {
+  "id": "k17",
+  "group": "Health",
+  "item": "Sunscreen, cap and sunglasses",
+  "tags": [
+   "beach",
+   "hills",
+   "temple"
+  ],
+  "order": 17
+ },
+ {
+  "id": "k18",
+  "group": "Health",
+  "item": "Mosquito repellent",
+  "tags": [
+   "jungle",
+   "camping",
+   "monsoon",
+   "beach"
+  ],
+  "order": 18
+ },
+ {
+  "id": "k19",
+  "group": "Health",
+  "item": "Hand sanitiser and wet wipes",
+  "tags": [
+   "all"
+  ],
+  "order": 19
+ },
+ {
+  "id": "k20",
+  "group": "Health",
+  "item": "Knee support and walking stick",
+  "tags": [
+   "seniors",
+   "hills"
+  ],
+  "order": 20
+ },
+ {
+  "id": "k21",
+  "group": "Food",
+  "item": "Water bottles (2 litres per person per day)",
+  "tags": [
+   "all"
+  ],
+  "order": 21
+ },
+ {
+  "id": "k22",
+  "group": "Food",
+  "item": "Veg snacks: thepla, khakhra, chikki, dry fruits, fruit",
+  "tags": [
+   "all"
+  ],
+  "order": 22
+ },
+ {
+  "id": "k23",
+  "group": "Food",
+  "item": "Small steel tiffin and cutlery",
+  "tags": [
+   "all"
+  ],
+  "order": 23
+ },
+ {
+  "id": "k24",
+  "group": "Food",
+  "item": "Instant poha or upma cups for remote stays",
+  "tags": [
+   "jungle",
+   "camping"
+  ],
+  "order": 24
+ },
+ {
+  "id": "k25",
+  "group": "Food",
+  "item": "Cooler bag",
+  "tags": [
+   "beach",
+   "camping"
+  ],
+  "order": 25
+ },
+ {
+  "id": "k26",
+  "group": "Clothes",
+  "item": "Comfortable walking shoes with grip",
+  "tags": [
+   "all"
+  ],
+  "order": 26
+ },
+ {
+  "id": "k27",
+  "group": "Clothes",
+  "item": "Light rain jacket or umbrella",
+  "tags": [
+   "monsoon",
+   "hills"
+  ],
+  "order": 27
+ },
+ {
+  "id": "k28",
+  "group": "Clothes",
+  "item": "Warm layer and cap for Dec–Jan nights",
+  "tags": [
+   "hills",
+   "camping",
+   "jungle"
+  ],
+  "order": 28
+ },
+ {
+  "id": "k29",
+  "group": "Clothes",
+  "item": "Swimwear and quick-dry towel",
+  "tags": [
+   "beach"
+  ],
+  "order": 29
+ },
+ {
+  "id": "k30",
+  "group": "Clothes",
+  "item": "Modest clothes for temples, socks for hot stone floors",
+  "tags": [
+   "temple"
+  ],
+  "order": 30
+ },
+ {
+  "id": "k31",
+  "group": "Clothes",
+  "item": "Earth-coloured clothes for safaris",
+  "tags": [
+   "jungle"
+  ],
+  "order": 31
+ },
+ {
+  "id": "k32",
+  "group": "Camping",
+  "item": "Head torch per person",
+  "tags": [
+   "camping",
+   "jungle"
+  ],
+  "order": 32
+ },
+ {
+  "id": "k33",
+  "group": "Camping",
+  "item": "Power bank (20,000 mAh)",
+  "tags": [
+   "all"
+  ],
+  "order": 33
+ },
+ {
+  "id": "k34",
+  "group": "Camping",
+  "item": "Dry bag for phones",
+  "tags": [
+   "beach",
+   "monsoon"
+  ],
+  "order": 34
+ },
+ {
+  "id": "k35",
+  "group": "Camping",
+  "item": "Light blanket or sleeping-bag liner",
+  "tags": [
+   "camping"
+  ],
+  "order": 35
+ },
+ {
+  "id": "k36",
+  "group": "Fun",
+  "item": "Cards, Uno, Ludo or a board game",
+  "tags": [
+   "all"
+  ],
+  "order": 36
+ },
+ {
+  "id": "k37",
+  "group": "Fun",
+  "item": "Downloaded songs, podcasts and offline maps",
+  "tags": [
+   "all"
+  ],
+  "order": 37
+ },
+ {
+  "id": "k38",
+  "group": "Fun",
+  "item": "Binoculars for birds",
+  "tags": [
+   "jungle",
+   "hills"
+  ],
+  "order": 38
+ },
+ {
+  "id": "k39",
+  "group": "Kids",
+  "item": "Kids' medicines, thermometer",
+  "tags": [
+   "kids"
+  ],
+  "order": 39
+ },
+ {
+  "id": "k40",
+  "group": "Kids",
+  "item": "Car games, colouring book, snacks",
+  "tags": [
+   "kids"
+  ],
+  "order": 40
+ },
+ {
+  "id": "k41",
+  "group": "Kids",
+  "item": "Life jacket check before any boat",
+  "tags": [
+   "kids",
+   "beach"
+  ],
+  "order": 41
+ },
+ {
+  "id": "k42",
+  "group": "Seniors",
+  "item": "Seat cushion for long drives",
+  "tags": [
+   "seniors"
+  ],
+  "order": 42
+ },
+ {
+  "id": "k43",
+  "group": "Seniors",
+  "item": "Check lift or ropeway options at forts and temples",
+  "tags": [
+   "seniors",
+   "temple"
+  ],
+  "order": 43
+ }
+]

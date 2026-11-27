@@ -2865,5 +2865,1652 @@
     "id": "velas-velas-beach"
    }
   ]
+ },
+ {
+  "id": "raigad",
+  "name": "Raigad Fort",
+  "km": 130,
+  "hours": 3.5,
+  "region": "Raigad",
+  "lat": 18.234,
+  "lon": 73.44,
+  "tags": [
+   "fort",
+   "mountains",
+   "treks",
+   "nature"
+  ],
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3
+  ],
+  "veg": 3,
+  "cost": "₹",
+  "activities": [
+   {
+    "name": "Ropeway up"
+   },
+   {
+    "name": "Shivaji's samadhi and throne"
+   },
+   {
+    "name": "Takmak tok cliff"
+   }
+  ],
+  "vegNote": "Simple veg thalis at the base and top",
+  "tips": [
+   "Ropeway saves the 1,400-step climb; go on a weekday"
+  ],
+  "risks": [
+   "Hot after 11 AM in summer; little shade on top"
+  ],
+  "stops": [
+   {
+    "name": "Raigad ropeway",
+    "kind": "view",
+    "best": "morning",
+    "mins": 30,
+    "note": "Four-minute ride with valley views",
+    "indoor": false,
+    "photoQuery": "Raigad ropeway",
+    "id": "raigad-raigad-ropeway"
+   },
+   {
+    "name": "Raj Sadar and Holi cha Mal",
+    "kind": "fort",
+    "best": "morning",
+    "mins": 90,
+    "note": "Coronation site and market street ruins",
+    "indoor": false,
+    "photoQuery": "Raj Sadar and Holi cha Mal",
+    "id": "raigad-raj-sadar-and-holi-cha-mal"
+   },
+   {
+    "name": "Takmak Tok",
+    "kind": "view",
+    "best": "morning",
+    "mins": 30,
+    "note": "Sheer cliff point",
+    "indoor": false,
+    "photoQuery": "Takmak Tok",
+    "id": "raigad-takmak-tok"
+   },
+   {
+    "name": "Jijamata samadhi, Pachad",
+    "kind": "heritage",
+    "best": "afternoon",
+    "mins": 30,
+    "note": "At the base village",
+    "indoor": false,
+    "photoQuery": "Jijamata samadhi",
+    "id": "raigad-jijamata-samadhi-pachad"
+   }
+  ],
+  "mapsQuery": "Raigad Fort, Maharashtra",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
+ },
+ {
+  "id": "ashtavinayak",
+  "name": "Ashtavinayak circuit (Morgaon, Theur, Ranjangaon, Siddhatek)",
+  "km": 80,
+  "hours": 2.0,
+  "region": "Pune district",
+  "lat": 18.276,
+  "lon": 74.318,
+  "tags": [
+   "spiritual",
+   "food"
+  ],
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "veg": 3,
+  "cost": "₹",
+  "activities": [
+   {
+    "name": "Eight Ganpati temples, four within 2 hours of Pune"
+   }
+  ],
+  "vegNote": "Pure veg prasad and thalis everywhere",
+  "tips": [
+   "Do Morgaon, Siddhatek, Theur and Ranjangaon in one long day",
+   "Avoid Sankashti and Angarki days if you dislike crowds"
+  ],
+  "risks": [
+   "Long day of driving; start at 6 AM"
+  ],
+  "stops": [
+   {
+    "name": "Mayureshwar temple, Morgaon",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 60,
+    "note": "First of the Ashtavinayak",
+    "indoor": true,
+    "photoQuery": "Mayureshwar temple",
+    "id": "ashtavinayak-mayureshwar-temple-morgaon"
+   },
+   {
+    "name": "Siddhivinayak, Siddhatek",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 60,
+    "note": "On the Bhima river",
+    "indoor": true,
+    "photoQuery": "Siddhivinayak",
+    "id": "ashtavinayak-siddhivinayak-siddhatek"
+   },
+   {
+    "name": "Chintamani, Theur",
+    "kind": "temple",
+    "best": "afternoon",
+    "mins": 45,
+    "note": "Close to Pune",
+    "indoor": true,
+    "photoQuery": "Chintamani",
+    "id": "ashtavinayak-chintamani-theur"
+   },
+   {
+    "name": "Mahaganapati, Ranjangaon",
+    "kind": "temple",
+    "best": "afternoon",
+    "mins": 45,
+    "note": "On the Pune–Ahilyanagar road",
+    "indoor": true,
+    "photoQuery": "Mahaganapati",
+    "id": "ashtavinayak-mahaganapati-ranjangaon"
+   }
+  ],
+  "mapsQuery": "Ashtavinayak circuit, Maharashtra",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
+ },
+ {
+  "id": "jejuri",
+  "name": "Jejuri & Purandar",
+  "km": 55,
+  "hours": 1.5,
+  "region": "Pune district",
+  "lat": 18.276,
+  "lon": 74.161,
+  "tags": [
+   "spiritual",
+   "fort",
+   "treks"
+  ],
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3,
+   6,
+   7,
+   8,
+   9
+  ],
+  "veg": 3,
+  "cost": "₹",
+  "activities": [
+   {
+    "name": "Khandoba temple"
+   },
+   {
+    "name": "Purandar fort"
+   }
+  ],
+  "vegNote": "Veg thalis near the temple",
+  "tips": [
+   "Turmeric (bhandara) is thrown during festivals; wear old clothes"
+  ],
+  "risks": [
+   "Purandar is army land: carry ID, check entry rules"
+  ],
+  "stops": [
+   {
+    "name": "Khandoba temple, Jejuri",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 90,
+    "note": "About 200 steps up; turmeric everywhere",
+    "indoor": false,
+    "photoQuery": "Khandoba temple",
+    "id": "jejuri-khandoba-temple-jejuri"
+   },
+   {
+    "name": "Purandar fort",
+    "kind": "fort",
+    "best": "morning",
+    "mins": 150,
+    "note": "Twin forts Purandar and Vajragad; ID needed",
+    "indoor": false,
+    "photoQuery": "Purandar fort",
+    "id": "jejuri-purandar-fort"
+   },
+   {
+    "name": "Narayanpur Datta temple",
+    "kind": "temple",
+    "best": "afternoon",
+    "mins": 30,
+    "note": "Below Purandar",
+    "indoor": true,
+    "photoQuery": "Narayanpur Datta temple",
+    "id": "jejuri-narayanpur-datta-temple"
+   }
+  ],
+  "mapsQuery": "Jejuri & Purandar, Maharashtra",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
+ },
+ {
+  "id": "bhor-bhatghar",
+  "name": "Bhor & Bhatghar dam",
+  "km": 55,
+  "hours": 1.5,
+  "region": "Pune district",
+  "lat": 18.15,
+  "lon": 73.84,
+  "tags": [
+   "water",
+   "greenery",
+   "nature",
+   "river"
+  ],
+  "months": [
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   1
+  ],
+  "veg": 2,
+  "cost": "₹",
+  "activities": [
+   {
+    "name": "Bhatghar dam spillway in monsoon"
+   },
+   {
+    "name": "Bhor palace"
+   },
+   {
+    "name": "Neera river drives"
+   }
+  ],
+  "vegNote": "Dhabas with veg",
+  "tips": [
+   "Quiet alternative to Lonavala on monsoon weekends"
+  ],
+  "risks": [
+   "Varandha ghat beyond Bhor closes in monsoon"
+  ],
+  "stops": [
+   {
+    "name": "Bhatghar dam spillway",
+    "kind": "view",
+    "best": "afternoon",
+    "mins": 45,
+    "note": "Gates open in heavy monsoon",
+    "indoor": false,
+    "photoQuery": "Bhatghar dam spillway",
+    "id": "bhor-bhatghar-bhatghar-dam-spillway"
+   },
+   {
+    "name": "Bhor Rajwada (palace)",
+    "kind": "heritage",
+    "best": "morning",
+    "mins": 45,
+    "note": "Film location; view from outside",
+    "indoor": false,
+    "photoQuery": "Bhor Rajwada",
+    "id": "bhor-bhatghar-bhor-rajwada-palace"
+   },
+   {
+    "name": "Nhavi lake viewpoint",
+    "kind": "view",
+    "best": "sunset",
+    "mins": 30,
+    "note": "Quiet lake views",
+    "indoor": false,
+    "photoQuery": "Nhavi lake viewpoint",
+    "id": "bhor-bhatghar-nhavi-lake-viewpoint"
+   }
+  ],
+  "mapsQuery": "Bhor & Bhatghar dam, Maharashtra",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
+ },
+ {
+  "id": "kamshet",
+  "name": "Kamshet & Bedse caves",
+  "km": 50,
+  "hours": 1.3,
+  "region": "Maval",
+  "lat": 18.76,
+  "lon": 73.55,
+  "tags": [
+   "adventure",
+   "heritage",
+   "nature"
+  ],
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "veg": 2,
+  "cost": "₹₹",
+  "activities": [
+   {
+    "name": "Tandem paragliding"
+   },
+   {
+    "name": "Bedse caves"
+   },
+   {
+    "name": "Kondeshwar temple"
+   }
+  ],
+  "vegNote": "Camps and dhabas with veg",
+  "tips": [
+   "Paragliding season roughly Oct–May; weather decides daily"
+  ],
+  "risks": [
+   "Use certified paragliding schools"
+  ],
+  "stops": [
+   {
+    "name": "Tandem paragliding",
+    "kind": "adventure",
+    "best": "afternoon",
+    "mins": 120,
+    "note": "Best afternoon thermals",
+    "indoor": false,
+    "photoQuery": "Tandem paragliding",
+    "id": "kamshet-tandem-paragliding"
+   },
+   {
+    "name": "Bedse caves",
+    "kind": "heritage",
+    "best": "morning",
+    "mins": 75,
+    "note": "Quiet Buddhist caves, 2,000 years old",
+    "indoor": false,
+    "photoQuery": "Bedse caves",
+    "id": "kamshet-bedse-caves"
+   },
+   {
+    "name": "Kondeshwar temple",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 45,
+    "note": "Shiva temple in the forest",
+    "indoor": true,
+    "photoQuery": "Kondeshwar temple",
+    "id": "kamshet-kondeshwar-temple"
+   }
+  ],
+  "mapsQuery": "Kamshet & Bedse caves, Maharashtra",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
+ },
+ {
+  "id": "naneghat",
+  "name": "Naneghat & Harishchandragad",
+  "km": 150,
+  "hours": 3.5,
+  "region": "Junnar",
+  "lat": 19.29,
+  "lon": 73.67,
+  "tags": [
+   "treks",
+   "mountains",
+   "nature",
+   "heritage"
+  ],
+  "months": [
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   1
+  ],
+  "veg": 2,
+  "cost": "₹",
+  "activities": [
+   {
+    "name": "Ancient trade pass with Satavahana inscriptions"
+   },
+   {
+    "name": "Konkan Kada cliff at Harishchandragad"
+   }
+  ],
+  "vegNote": "Village food is simple veg",
+  "tips": [
+   "Harishchandragad is a full-day or overnight trek; go with a local guide"
+  ],
+  "risks": [
+   "Very slippery in monsoon; fog"
+  ],
+  "stops": [
+   {
+    "name": "Naneghat pass and caves",
+    "kind": "heritage",
+    "best": "morning",
+    "mins": 120,
+    "note": "2,000-year-old inscriptions",
+    "indoor": false,
+    "photoQuery": "Naneghat pass and caves",
+    "id": "naneghat-naneghat-pass-and-caves"
+   },
+   {
+    "name": "Konkan Kada, Harishchandragad",
+    "kind": "view",
+    "best": "sunset",
+    "mins": 60,
+    "note": "Huge concave cliff; famous sunset",
+    "indoor": false,
+    "photoQuery": "Konkan Kada",
+    "id": "naneghat-konkan-kada-harishchandragad"
+   },
+   {
+    "name": "Kedareshwar cave",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 45,
+    "note": "Shivling in waist-deep water",
+    "indoor": false,
+    "photoQuery": "Kedareshwar cave",
+    "id": "naneghat-kedareshwar-cave"
+   }
+  ],
+  "mapsQuery": "Naneghat & Harishchandragad, Maharashtra",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
+ },
+ {
+  "id": "sandhan",
+  "name": "Sandhan Valley",
+  "km": 190,
+  "hours": 4.0,
+  "region": "Ahilyanagar",
+  "lat": 19.52,
+  "lon": 73.7,
+  "tags": [
+   "adventure",
+   "treks",
+   "tents",
+   "nature"
+  ],
+  "months": [
+   11,
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "veg": 2,
+  "cost": "₹",
+  "activities": [
+   {
+    "name": "Valley of shadows canyon walk"
+   },
+   {
+    "name": "Camping at Samrad"
+   }
+  ],
+  "vegNote": "Camps serve veg",
+  "tips": [
+   "Go with an organised group; rappelling at the end"
+  ],
+  "risks": [
+   "Closed in monsoon; flash floods"
+  ],
+  "stops": [
+   {
+    "name": "Sandhan canyon walk",
+    "kind": "adventure",
+    "best": "morning",
+    "mins": 300,
+    "note": "Narrow gorge with water pools",
+    "indoor": false,
+    "photoQuery": "Sandhan canyon walk",
+    "id": "sandhan-sandhan-canyon-walk"
+   },
+   {
+    "name": "Samrad village camp",
+    "kind": "stay",
+    "best": "evening",
+    "mins": 600,
+    "note": "Stargazing in winter",
+    "indoor": false,
+    "photoQuery": "Samrad village camp",
+    "id": "sandhan-samrad-village-camp"
+   }
+  ],
+  "mapsQuery": "Sandhan Valley, Maharashtra",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
+ },
+ {
+  "id": "saptashrungi",
+  "name": "Saptashrungi (Vani)",
+  "km": 260,
+  "hours": 5.0,
+  "region": "Nashik",
+  "lat": 20.39,
+  "lon": 73.91,
+  "tags": [
+   "spiritual",
+   "mountains"
+  ],
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3
+  ],
+  "veg": 3,
+  "cost": "₹",
+  "activities": [
+   {
+    "name": "Saptashrungi Devi temple"
+   },
+   {
+    "name": "Funicular trolley"
+   }
+  ],
+  "vegNote": "Pure veg",
+  "tips": [
+   "Funicular saves 500 steps"
+  ],
+  "risks": [
+   "Very crowded during Navratri and Chaitra"
+  ],
+  "stops": [
+   {
+    "name": "Saptashrungi Devi temple",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 90,
+    "note": "Half Shakti Peeth on a hill",
+    "indoor": true,
+    "photoQuery": "Saptashrungi Devi temple",
+    "id": "saptashrungi-saptashrungi-devi-temple"
+   },
+   {
+    "name": "Funicular trolley ride",
+    "kind": "view",
+    "best": "morning",
+    "mins": 20,
+    "note": "Cliff views on the way up",
+    "indoor": false,
+    "photoQuery": "Funicular trolley ride",
+    "id": "saptashrungi-funicular-trolley-ride"
+   }
+  ],
+  "mapsQuery": "Saptashrungi, Maharashtra",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
+ },
+ {
+  "id": "saputara",
+  "name": "Saputara (Gujarat)",
+  "km": 330,
+  "hours": 6.5,
+  "region": "Dang, Gujarat",
+  "lat": 20.574,
+  "lon": 73.749,
+  "tags": [
+   "mountains",
+   "water",
+   "nature",
+   "fun",
+   "craft"
+  ],
+  "months": [
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   1,
+   2
+  ],
+  "veg": 3,
+  "cost": "₹₹",
+  "activities": [
+   {
+    "name": "Lake boating"
+   },
+   {
+    "name": "Sunrise and sunset points"
+   },
+   {
+    "name": "Ropeway"
+   },
+   {
+    "name": "Gira falls"
+   }
+  ],
+  "vegNote": "Gujarati veg thalis everywhere",
+  "tips": [
+   "Monsoon Festival Aug–Sep is crowded but beautiful"
+  ],
+  "risks": [
+   "Ghat roads foggy in rain"
+  ],
+  "stops": [
+   {
+    "name": "Saputara lake boating",
+    "kind": "water",
+    "best": "afternoon",
+    "mins": 60,
+    "note": "Paddle boats",
+    "indoor": false,
+    "photoQuery": "Saputara lake boating",
+    "id": "saputara-saputara-lake-boating"
+   },
+   {
+    "name": "Sunrise point (Valley view)",
+    "kind": "view",
+    "best": "sunrise",
+    "mins": 45,
+    "note": "Sunrise over the Dang forest",
+    "indoor": false,
+    "photoQuery": "Sunrise point",
+    "id": "saputara-sunrise-point-valley-view"
+   },
+   {
+    "name": "Sunset point and ropeway",
+    "kind": "view",
+    "best": "sunset",
+    "mins": 60,
+    "note": "Ropeway to Table Point",
+    "indoor": false,
+    "photoQuery": "Sunset point and ropeway",
+    "id": "saputara-sunset-point-and-ropeway"
+   },
+   {
+    "name": "Gira falls, Waghai",
+    "kind": "view",
+    "best": "morning",
+    "mins": 60,
+    "note": "Best Jul–Oct",
+    "indoor": false,
+    "photoQuery": "Gira falls",
+    "id": "saputara-gira-falls-waghai"
+   },
+   {
+    "name": "Artist Village",
+    "kind": "craft",
+    "best": "afternoon",
+    "mins": 60,
+    "note": "Dang tribal art",
+    "indoor": true,
+    "photoQuery": "Artist Village",
+    "id": "saputara-artist-village"
+   }
+  ],
+  "mapsQuery": "Saputara, Gujarat",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
+ },
+ {
+  "id": "jawhar",
+  "name": "Jawhar & Dabhosa falls",
+  "km": 240,
+  "hours": 5.0,
+  "region": "Palghar",
+  "lat": 19.912,
+  "lon": 73.23,
+  "tags": [
+   "greenery",
+   "craft",
+   "water",
+   "nature"
+  ],
+  "months": [
+   7,
+   8,
+   9,
+   10,
+   11
+  ],
+  "veg": 2,
+  "cost": "₹",
+  "activities": [
+   {
+    "name": "Warli painting villages"
+   },
+   {
+    "name": "Dabhosa waterfall"
+   },
+   {
+    "name": "Jai Vilas palace"
+   }
+  ],
+  "vegNote": "Simple veg",
+  "tips": [
+   "Buy Warli art directly from artists"
+  ],
+  "risks": [
+   "Remote; fuel up before"
+  ],
+  "stops": [
+   {
+    "name": "Dabhosa waterfall",
+    "kind": "view",
+    "best": "morning",
+    "mins": 60,
+    "note": "Tall falls, best monsoon",
+    "indoor": false,
+    "photoQuery": "Dabhosa waterfall",
+    "id": "jawhar-dabhosa-waterfall"
+   },
+   {
+    "name": "Warli painting village",
+    "kind": "craft",
+    "best": "afternoon",
+    "mins": 90,
+    "note": "Watch and buy Warli art",
+    "indoor": true,
+    "photoQuery": "Warli painting village",
+    "id": "jawhar-warli-painting-village"
+   },
+   {
+    "name": "Jai Vilas palace",
+    "kind": "heritage",
+    "best": "afternoon",
+    "mins": 45,
+    "note": "View from outside",
+    "indoor": false,
+    "photoQuery": "Jai Vilas palace",
+    "id": "jawhar-jai-vilas-palace"
+   }
+  ],
+  "mapsQuery": "Jawhar & Dabhosa falls, Maharashtra",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
+ },
+ {
+  "id": "dahanu",
+  "name": "Dahanu & Bordi",
+  "km": 300,
+  "hours": 6.0,
+  "region": "Palghar",
+  "lat": 19.975,
+  "lon": 72.71,
+  "tags": [
+   "sea",
+   "food",
+   "nature"
+  ],
+  "months": [
+   11,
+   12,
+   1,
+   2,
+   3
+  ],
+  "veg": 3,
+  "cost": "₹₹",
+  "activities": [
+   {
+    "name": "Bordi beach"
+   },
+   {
+    "name": "Chikoo farms"
+   },
+   {
+    "name": "Parsi Atash Behram at Udvada nearby"
+   }
+  ],
+  "vegNote": "Gujarati and Parsi veg options; chikoo everything",
+  "tips": [
+   "Chikoo festival in winter"
+  ],
+  "risks": [
+   "Long drive via Mumbai traffic; start early"
+  ],
+  "stops": [
+   {
+    "name": "Bordi beach",
+    "kind": "sea",
+    "best": "sunset",
+    "mins": 120,
+    "note": "Long shallow beach",
+    "indoor": false,
+    "photoQuery": "Bordi beach",
+    "id": "dahanu-bordi-beach"
+   },
+   {
+    "name": "Chikoo farm visit",
+    "kind": "food",
+    "best": "morning",
+    "mins": 90,
+    "note": "Farm stays and chikoo treats",
+    "indoor": false,
+    "photoQuery": "Chikoo farm visit",
+    "id": "dahanu-chikoo-farm-visit"
+   },
+   {
+    "name": "Udvada Atash Behram (outside view)",
+    "kind": "heritage",
+    "best": "afternoon",
+    "mins": 45,
+    "note": "Holiest Parsi fire temple; non-Parsis can't enter",
+    "indoor": false,
+    "photoQuery": "Udvada Atash Behram",
+    "id": "dahanu-udvada-atash-behram-outside-view"
+   }
+  ],
+  "mapsQuery": "Dahanu & Bordi, Maharashtra",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
+ },
+ {
+  "id": "koyna-tapola",
+  "name": "Koyna & Tapola",
+  "km": 160,
+  "hours": 4.0,
+  "region": "Satara",
+  "lat": 17.88,
+  "lon": 73.63,
+  "tags": [
+   "water",
+   "jungle",
+   "nature",
+   "adventure"
+  ],
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "veg": 2,
+  "cost": "₹",
+  "activities": [
+   {
+    "name": "Tapola 'mini Kashmir' boating"
+   },
+   {
+    "name": "Koyna dam"
+   },
+   {
+    "name": "Vasota fort boat-trek"
+   }
+  ],
+  "vegNote": "Simple veg at Tapola",
+  "tips": [
+   "Vasota needs forest permission and an early boat"
+  ],
+  "risks": [
+   "Forest roads; no driving after dark"
+  ],
+  "stops": [
+   {
+    "name": "Tapola backwater boating",
+    "kind": "water",
+    "best": "afternoon",
+    "mins": 90,
+    "note": "Shivsagar lake",
+    "indoor": false,
+    "photoQuery": "Tapola backwater boating",
+    "id": "koyna-tapola-tapola-backwater-boating"
+   },
+   {
+    "name": "Vasota fort boat and jungle trek",
+    "kind": "adventure",
+    "best": "morning",
+    "mins": 420,
+    "note": "Permit from forest office at Bamnoli",
+    "indoor": false,
+    "photoQuery": "Vasota fort boat and jungle trek",
+    "id": "koyna-tapola-vasota-fort-boat-and-jungle-trek"
+   },
+   {
+    "name": "Koyna dam and Nehru garden",
+    "kind": "view",
+    "best": "morning",
+    "mins": 60,
+    "note": "Big dam viewpoint",
+    "indoor": false,
+    "photoQuery": "Koyna dam and Nehru garden",
+    "id": "koyna-tapola-koyna-dam-and-nehru-garden"
+   }
+  ],
+  "mapsQuery": "Koyna & Tapola, Maharashtra",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
+ },
+ {
+  "id": "chiplun-guhagar",
+  "name": "Chiplun & Guhagar",
+  "km": 250,
+  "hours": 5.5,
+  "region": "Ratnagiri",
+  "lat": 17.52,
+  "lon": 73.18,
+  "tags": [
+   "sea",
+   "river",
+   "nature",
+   "spiritual"
+  ],
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "veg": 2,
+  "cost": "₹₹",
+  "activities": [
+   {
+    "name": "Vashishti river crocodile safari"
+   },
+   {
+    "name": "Parshuram temple"
+   },
+   {
+    "name": "Guhagar beach"
+   }
+  ],
+  "vegNote": "Homestays cook veg Konkani food",
+  "tips": [
+   "Guhagar beach is long and very clean"
+  ],
+  "risks": [
+   "Kumbharli ghat landslides in monsoon"
+  ],
+  "stops": [
+   {
+    "name": "Vashishti river crocodile boat ride",
+    "kind": "nature",
+    "best": "morning",
+    "mins": 90,
+    "note": "Mugger crocodiles and birds",
+    "indoor": false,
+    "photoQuery": "Vashishti river crocodile boat ride",
+    "id": "chiplun-guhagar-vashishti-river-crocodile-boat-ride"
+   },
+   {
+    "name": "Parshuram temple",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 45,
+    "note": "Above the Mumbai–Goa highway",
+    "indoor": true,
+    "photoQuery": "Parshuram temple",
+    "id": "chiplun-guhagar-parshuram-temple"
+   },
+   {
+    "name": "Guhagar beach",
+    "kind": "sea",
+    "best": "sunset",
+    "mins": 120,
+    "note": "Long clean beach",
+    "indoor": false,
+    "photoQuery": "Guhagar beach",
+    "id": "chiplun-guhagar-guhagar-beach"
+   },
+   {
+    "name": "Vyadeshwar temple, Guhagar",
+    "kind": "temple",
+    "best": "evening",
+    "mins": 30,
+    "note": "Old stone temple",
+    "indoor": true,
+    "photoQuery": "Vyadeshwar temple",
+    "id": "chiplun-guhagar-vyadeshwar-temple-guhagar"
+   }
+  ],
+  "mapsQuery": "Chiplun & Guhagar, Maharashtra",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
+ },
+ {
+  "id": "devgad-kunkeshwar",
+  "name": "Devgad & Kunkeshwar",
+  "km": 400,
+  "hours": 8.0,
+  "region": "Sindhudurg",
+  "lat": 16.38,
+  "lon": 73.38,
+  "tags": [
+   "sea",
+   "spiritual",
+   "food"
+  ],
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "veg": 2,
+  "cost": "₹₹",
+  "activities": [
+   {
+    "name": "Kunkeshwar beach temple"
+   },
+   {
+    "name": "Devgad fort and windmills"
+   },
+   {
+    "name": "Alphonso orchards"
+   }
+  ],
+  "vegNote": "Homestays do veg on request",
+  "tips": [
+   "Devgad Alphonso season Apr–May"
+  ],
+  "risks": [
+   "Narrow coastal roads"
+  ],
+  "stops": [
+   {
+    "name": "Kunkeshwar temple on the beach",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 60,
+    "note": "Shiva temple by the sea",
+    "indoor": true,
+    "photoQuery": "Kunkeshwar temple on the beach",
+    "id": "devgad-kunkeshwar-kunkeshwar-temple-on-the-beach"
+   },
+   {
+    "name": "Devgad fort and lighthouse",
+    "kind": "fort",
+    "best": "sunset",
+    "mins": 60,
+    "note": "Sunset over the harbour",
+    "indoor": false,
+    "photoQuery": "Devgad fort and lighthouse",
+    "id": "devgad-kunkeshwar-devgad-fort-and-lighthouse"
+   },
+   {
+    "name": "Mithbav Gajba beach",
+    "kind": "sea",
+    "best": "afternoon",
+    "mins": 90,
+    "note": "Empty beach",
+    "indoor": false,
+    "photoQuery": "Mithbav Gajba beach",
+    "id": "devgad-kunkeshwar-mithbav-gajba-beach"
+   }
+  ],
+  "mapsQuery": "Devgad & Kunkeshwar, Maharashtra",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
+ },
+ {
+  "id": "vengurla-sawantwadi",
+  "name": "Vengurla & Sawantwadi",
+  "km": 400,
+  "hours": 8.0,
+  "region": "Sindhudurg",
+  "lat": 15.86,
+  "lon": 73.63,
+  "tags": [
+   "sea",
+   "craft",
+   "food"
+  ],
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "veg": 2,
+  "cost": "₹₹",
+  "activities": [
+   {
+    "name": "Sawantwadi lacquer toys"
+   },
+   {
+    "name": "Moti lake"
+   },
+   {
+    "name": "Vengurla and Sagareshwar beach"
+   }
+  ],
+  "vegNote": "Malvani food is seafood heavy; veg needs asking",
+  "tips": [
+   "Wooden toys from Sawantwadi artisans make good gifts"
+  ],
+  "risks": [
+   "Few veg restaurants; plan meals"
+  ],
+  "stops": [
+   {
+    "name": "Sawantwadi lacquer toy workshops",
+    "kind": "craft",
+    "best": "afternoon",
+    "mins": 60,
+    "note": "Ganjifa cards and wooden fruits",
+    "indoor": true,
+    "photoQuery": "Sawantwadi lacquer toy workshops",
+    "id": "vengurla-sawantwadi-sawantwadi-lacquer-toy-workshops"
+   },
+   {
+    "name": "Moti lake, Sawantwadi",
+    "kind": "water",
+    "best": "evening",
+    "mins": 45,
+    "note": "Evening walk",
+    "indoor": false,
+    "photoQuery": "Moti lake",
+    "id": "vengurla-sawantwadi-moti-lake-sawantwadi"
+   },
+   {
+    "name": "Sagareshwar beach",
+    "kind": "sea",
+    "best": "sunset",
+    "mins": 90,
+    "note": "Quiet beach",
+    "indoor": false,
+    "photoQuery": "Sagareshwar beach",
+    "id": "vengurla-sawantwadi-sagareshwar-beach"
+   },
+   {
+    "name": "Vengurla lighthouse viewpoint",
+    "kind": "view",
+    "best": "sunset",
+    "mins": 30,
+    "note": "Rocky headland",
+    "indoor": false,
+    "photoQuery": "Vengurla lighthouse viewpoint",
+    "id": "vengurla-sawantwadi-vengurla-lighthouse-viewpoint"
+   }
+  ],
+  "mapsQuery": "Vengurla & Sawantwadi, Maharashtra",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
+ },
+ {
+  "id": "radhanagari",
+  "name": "Radhanagari & Dajipur",
+  "km": 290,
+  "hours": 6.0,
+  "region": "Kolhapur",
+  "lat": 16.41,
+  "lon": 73.99,
+  "tags": [
+   "jungle",
+   "nature",
+   "water"
+  ],
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "veg": 2,
+  "cost": "₹",
+  "activities": [
+   {
+    "name": "Gaur (Indian bison) sanctuary"
+   },
+   {
+    "name": "Radhanagari dam"
+   },
+   {
+    "name": "Butterfly trails"
+   }
+  ],
+  "vegNote": "Simple veg at forest lodges",
+  "tips": [
+   "Jeep safari mornings and evenings"
+  ],
+  "risks": [
+   "Leeches and closures in monsoon"
+  ],
+  "stops": [
+   {
+    "name": "Dajipur bison sanctuary safari",
+    "kind": "nature",
+    "best": "sunrise",
+    "mins": 150,
+    "note": "Indian gaur, birds",
+    "indoor": false,
+    "photoQuery": "Dajipur bison sanctuary safari",
+    "id": "radhanagari-dajipur-bison-sanctuary-safari"
+   },
+   {
+    "name": "Radhanagari dam",
+    "kind": "view",
+    "best": "afternoon",
+    "mins": 45,
+    "note": "Old stone dam with automatic gates",
+    "indoor": false,
+    "photoQuery": "Radhanagari dam",
+    "id": "radhanagari-radhanagari-dam"
+   },
+   {
+    "name": "Butterfly park walk",
+    "kind": "nature",
+    "best": "morning",
+    "mins": 60,
+    "note": "Best after monsoon",
+    "indoor": false,
+    "photoQuery": "Butterfly park walk",
+    "id": "radhanagari-butterfly-park-walk"
+   }
+  ],
+  "mapsQuery": "Radhanagari & Dajipur, Maharashtra",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
+ },
+ {
+  "id": "tuljapur",
+  "name": "Tuljapur & Naldurg",
+  "km": 280,
+  "hours": 5.5,
+  "region": "Dharashiv",
+  "lat": 18.01,
+  "lon": 76.07,
+  "tags": [
+   "spiritual",
+   "fort"
+  ],
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2
+  ],
+  "veg": 3,
+  "cost": "₹",
+  "activities": [
+   {
+    "name": "Tulja Bhavani temple"
+   },
+   {
+    "name": "Naldurg fort with water palace"
+   }
+  ],
+  "vegNote": "Pure veg",
+  "tips": [
+   "Naldurg's Pani Mahal is inside a dam wall"
+  ],
+  "risks": [
+   "Very crowded during Navratri"
+  ],
+  "stops": [
+   {
+    "name": "Tulja Bhavani temple",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 120,
+    "note": "Kuldevi of many Maharashtrian families",
+    "indoor": true,
+    "photoQuery": "Tulja Bhavani temple",
+    "id": "tuljapur-tulja-bhavani-temple"
+   },
+   {
+    "name": "Naldurg fort and Pani Mahal",
+    "kind": "fort",
+    "best": "afternoon",
+    "mins": 120,
+    "note": "Water palace within the dam",
+    "indoor": false,
+    "photoQuery": "Naldurg fort and Pani Mahal",
+    "id": "tuljapur-naldurg-fort-and-pani-mahal"
+   }
+  ],
+  "mapsQuery": "Tuljapur & Naldurg, Maharashtra",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
+ },
+ {
+  "id": "vijayapura",
+  "name": "Vijayapura (Bijapur, Karnataka)",
+  "km": 370,
+  "hours": 7.0,
+  "region": "Karnataka",
+  "lat": 16.83,
+  "lon": 75.71,
+  "tags": [
+   "craft",
+   "heritage",
+   "food"
+  ],
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2
+  ],
+  "veg": 2,
+  "cost": "₹₹",
+  "activities": [
+   {
+    "name": "Gol Gumbaz whispering gallery"
+   },
+   {
+    "name": "Ibrahim Rauza"
+   },
+   {
+    "name": "Bara Kaman"
+   }
+  ],
+  "vegNote": "North Karnataka veg thalis: jolada rotti, ennegai",
+  "tips": [
+   "Gol Gumbaz is quietest at opening time"
+  ],
+  "risks": [
+   "Very hot from March"
+  ],
+  "stops": [
+   {
+    "name": "Gol Gumbaz whispering gallery",
+    "kind": "heritage",
+    "best": "morning",
+    "mins": 90,
+    "note": "Second-largest dome of its kind",
+    "indoor": true,
+    "photoQuery": "Gol Gumbaz whispering gallery",
+    "id": "vijayapura-gol-gumbaz-whispering-gallery"
+   },
+   {
+    "name": "Ibrahim Rauza",
+    "kind": "heritage",
+    "best": "afternoon",
+    "mins": 60,
+    "note": "Called the Taj of the Deccan",
+    "indoor": false,
+    "photoQuery": "Ibrahim Rauza",
+    "id": "vijayapura-ibrahim-rauza"
+   },
+   {
+    "name": "Malik-e-Maidan cannon",
+    "kind": "heritage",
+    "best": "afternoon",
+    "mins": 30,
+    "note": "Huge 16th-century cannon",
+    "indoor": false,
+    "photoQuery": "Malik-e-Maidan cannon",
+    "id": "vijayapura-malik-e-maidan-cannon"
+   }
+  ],
+  "mapsQuery": "Vijayapura, Karnataka",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
+ },
+ {
+  "id": "gokak-belagavi",
+  "name": "Gokak Falls & Belagavi (Karnataka)",
+  "km": 330,
+  "hours": 6.0,
+  "region": "Karnataka",
+  "lat": 16.19,
+  "lon": 74.78,
+  "tags": [
+   "water",
+   "nature",
+   "greenery"
+  ],
+  "months": [
+   7,
+   8,
+   9,
+   10,
+   11
+  ],
+  "veg": 2,
+  "cost": "₹",
+  "activities": [
+   {
+    "name": "Gokak falls and hanging bridge"
+   },
+   {
+    "name": "Godachinamalki falls"
+   },
+   {
+    "name": "Belagavi fort"
+   }
+  ],
+  "vegNote": "Karnataka veg meals and Belgaum kunda sweet",
+  "tips": [
+   "Best Jul–Oct when falls are full"
+  ],
+  "risks": [
+   "Slippery rocks; keep children close"
+  ],
+  "stops": [
+   {
+    "name": "Gokak falls and hanging bridge",
+    "kind": "view",
+    "best": "morning",
+    "mins": 60,
+    "note": "Horseshoe falls on the Ghataprabha",
+    "indoor": false,
+    "photoQuery": "Gokak falls and hanging bridge",
+    "id": "gokak-belagavi-gokak-falls-and-hanging-bridge"
+   },
+   {
+    "name": "Godachinamalki falls",
+    "kind": "view",
+    "best": "afternoon",
+    "mins": 60,
+    "note": "Two-step falls in forest",
+    "indoor": false,
+    "photoQuery": "Godachinamalki falls",
+    "id": "gokak-belagavi-godachinamalki-falls"
+   },
+   {
+    "name": "Belgaum kunda at Purohit sweets",
+    "kind": "food",
+    "best": "evening",
+    "mins": 20,
+    "note": "Famous milk sweet",
+    "indoor": true,
+    "photoQuery": "Belgaum kunda at Purohit sweets",
+    "id": "gokak-belagavi-belgaum-kunda-at-purohit-sweets"
+   }
+  ],
+  "mapsQuery": "Gokak Falls & Belagavi, Karnataka",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
+ },
+ {
+  "id": "chorla",
+  "name": "Chorla Ghat",
+  "km": 420,
+  "hours": 8.0,
+  "region": "Goa–Karnataka border",
+  "lat": 15.64,
+  "lon": 74.11,
+  "tags": [
+   "greenery",
+   "nature",
+   "water",
+   "wellness"
+  ],
+  "months": [
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   1
+  ],
+  "veg": 2,
+  "cost": "₹₹",
+  "activities": [
+   {
+    "name": "Monsoon waterfalls"
+   },
+   {
+    "name": "Vazra falls"
+   },
+   {
+    "name": "Forest stays"
+   }
+  ],
+  "vegNote": "Forest resorts serve veg",
+  "tips": [
+   "Quieter route to Goa than Amboli"
+  ],
+  "risks": [
+   "Fog and heavy rain; daylight only"
+  ],
+  "stops": [
+   {
+    "name": "Vazra Sakla falls",
+    "kind": "view",
+    "best": "morning",
+    "mins": 120,
+    "note": "Short forest trek, monsoon",
+    "indoor": false,
+    "photoQuery": "Vazra Sakla falls",
+    "id": "chorla-vazra-sakla-falls"
+   },
+   {
+    "name": "Chorla ghat viewpoints drive",
+    "kind": "view",
+    "best": "afternoon",
+    "mins": 60,
+    "note": "Mist and forest views",
+    "indoor": false,
+    "photoQuery": "Chorla ghat viewpoints drive",
+    "id": "chorla-chorla-ghat-viewpoints-drive"
+   },
+   {
+    "name": "Forest resort stay",
+    "kind": "stay",
+    "best": "evening",
+    "mins": 600,
+    "note": "Birding at dawn",
+    "indoor": false,
+    "photoQuery": "Forest resort stay",
+    "id": "chorla-forest-resort-stay"
+   }
+  ],
+  "mapsQuery": "Chorla Ghat, Maharashtra",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
+ },
+ {
+  "id": "karnala",
+  "name": "Karnala Bird Sanctuary",
+  "km": 110,
+  "hours": 2.5,
+  "region": "Raigad",
+  "lat": 18.88,
+  "lon": 73.12,
+  "tags": [
+   "nature",
+   "treks",
+   "jungle"
+  ],
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3
+  ],
+  "veg": 2,
+  "cost": "₹",
+  "activities": [
+   {
+    "name": "Bird trails"
+   },
+   {
+    "name": "Karnala fort pinnacle"
+   }
+  ],
+  "vegNote": "Dhabas with veg on the highway",
+  "tips": [
+   "Early morning for birds"
+  ],
+  "risks": [
+   "Busy Mumbai–Goa highway nearby"
+  ],
+  "stops": [
+   {
+    "name": "Karnala bird trail",
+    "kind": "nature",
+    "best": "sunrise",
+    "mins": 120,
+    "note": "Over 200 bird species",
+    "indoor": false,
+    "photoQuery": "Karnala bird trail",
+    "id": "karnala-karnala-bird-trail"
+   },
+   {
+    "name": "Karnala fort pinnacle",
+    "kind": "fort",
+    "best": "morning",
+    "mins": 150,
+    "note": "Thumb-shaped rock pinnacle",
+    "indoor": false,
+    "photoQuery": "Karnala fort pinnacle",
+    "id": "karnala-karnala-fort-pinnacle"
+   }
+  ],
+  "mapsQuery": "Karnala Bird Sanctuary, Maharashtra",
+  "checked": "2026-11-27",
+  "source": "Claude research, distances approximate"
  }
 ]

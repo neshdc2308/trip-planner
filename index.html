@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <title>Pune Trip Planner</title>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
@@ -87,6 +89,11 @@ details>summary{cursor:pointer;font-weight:600}
 .ctl button{padding:2px 8px;font-size:.75rem;font-weight:500}
 .warn{color:var(--bad);font-weight:600}
 .addrow{display:flex;flex-direction:column;gap:6px;border-top:1px dashed var(--line);padding-top:8px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+.pgrid figure{margin:0;display:flex;flex-direction:column;gap:2px}
+.pgrid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;background:var(--line)}
+#lmap{height:420px;border-radius:12px;border:1px solid var(--line)}
+#ringmap text{pointer-events:none}
 @media (max-width:700px){.two{grid-template-columns:1fr}}
 </style>
 </head>
@@ -95,7 +102,7 @@ details>summary{cursor:pointer;font-weight:600}
 <div class="top"><div class="in">
   <div class="row"><h1>Pune Trip Planner</h1><span class="status" id="status">Connecting…</span></div>
   <nav id="nav">
-    <a href="#explore">Explore</a><a href="#plan">Plan</a><a href="#trips">Trips</a><a href="#stays">Stays</a><a href="#prep">Prep</a><a href="#road">Road watch</a><a href="#log">Research log</a>
+    <a href="#explore">Explore</a><a href="#map">Map</a><a href="#plan">Plan</a><a href="#trips">Trips</a><a href="#stays">Stays</a><a href="#prep">Prep</a><a href="#road">Road watch</a><a href="#log">Research log</a>
   </nav>
 </div></div>
 
@@ -124,6 +131,14 @@ details>summary{cursor:pointer;font-weight:600}
       <div><button class="primary" type="submit">Save place</button></div>
     </form>
   </details>
+</section>
+
+<!-- MAP -->
+<section id="v-map" class="view" hidden style="display:flex;flex-direction:column;gap:14px">
+  <p class="muted">Every place by distance from Pune. Rings are every 100 km in a straight line; road distance is usually 20–40% more. Tap a dot to open the place.</p>
+  <div id="lmap" hidden></div>
+  <div class="card" style="align-items:center"><div class="tbl" style="width:100%"><svg id="ringmap" viewBox="0 0 520 520" role="img" aria-label="Places around Pune with distance rings" style="width:100%;max-width:620px;display:block;margin:0 auto"></svg></div>
+  <div class="row small muted"><span class="pill veg3">Easy veg</span><span class="pill veg2">Veg available</span><span class="pill veg1">Mostly non-veg</span></div></div>
 </section>
 
 <!-- PLAN -->
@@ -183,6 +198,19 @@ details>summary{cursor:pointer;font-weight:600}
   <p class="muted">The countdown checklist. Pick a trip to tick items off for it; ticks are saved with that trip.</p>
   <div class="filters"><label for="pp-trip">Trip<select id="pp-trip"><option value="">No trip, just read</option></select></label><div class="small muted" id="pp-count"></div></div>
   <div class="grid" id="prep"></div>
+  <h2>Trip kit and essentials</h2>
+  <p class="muted small">Pick the kind of trip; items for every trip always show. Ticks are saved with the trip chosen above.</p>
+  <div class="tagbtns" id="kit-tags"></div>
+  <div class="grid" id="kit"></div>
+  <div class="card"><h3>Emergency numbers (India)</h3>
+    <div class="tbl"><table><tbody>
+      <tr><td class="km">112</td><td>All emergencies: police, fire, ambulance</td></tr>
+      <tr><td class="km">108</td><td>Ambulance (Maharashtra and most states)</td></tr>
+      <tr><td class="km">1033</td><td>National highway helpline (NHAI): breakdowns and accidents on highways</td></tr>
+      <tr><td class="km">1091</td><td>Women's helpline</td></tr>
+    </tbody></table></div>
+    <div class="row small"><a href="https://www.google.com/maps/search/hospital+near+me" target="_blank" rel="noopener">Hospitals near me</a> · <a href="https://www.google.com/maps/search/petrol+pump+near+me" target="_blank" rel="noopener">Petrol pumps near me</a> · <a href="https://www.google.com/maps/search/ev+charging+near+me" target="_blank" rel="noopener">EV charging near me</a></div>
+  </div>
 </section>
 
 <!-- ROAD -->
@@ -211,7 +239,7 @@ details>summary{cursor:pointer;font-weight:600}
 "use strict";
 var TAGS=["wellness","nature","sea","mountains","water","river","greenery","treks","jungle","tents","adventure","food","craft","spiritual","fun"];
 var MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-var S={spots:[],routes:[],alerts:[],research:[],requests:[],trips:[],stays:[],prep:[]};
+var S={spots:[],routes:[],alerts:[],research:[],requests:[],trips:[],stays:[],prep:[],notes:[],kit:[],photos:[]};
 var STOPS_ALL=[];Object.defineProperty(S,"stops",{enumerable:false,get:function(){return STOPS_ALL}});
 function deriveStops(){STOPS_ALL=[];S.spots.forEach(function(sp){(sp.stops||[]).forEach(function(x){var v=Object.assign({},x);v.spotId=sp.id;STOPS_ALL.push(v)})})}
 var openTrips=new Set();
@@ -227,11 +255,11 @@ function vegPill(v){v=+v||2;return el("span",{class:"pill veg"+v,text:v===3?"Eas
 function setStatus(t){$("status").textContent=t}
 
 /* ---------- routing ---------- */
-var VIEWS=["explore","plan","trips","stays","prep","road","log"];
+var VIEWS=["explore","map","plan","trips","stays","prep","road","log"];
 function show(){var h=(location.hash||"#explore").slice(1);if(VIEWS.indexOf(h)<0)h="explore";
   VIEWS.forEach(function(v){$("v-"+v).hidden=v!==h});
   Array.prototype.forEach.call($("nav").children,function(a){if(a.getAttribute("href")==="#"+h)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});}
-window.addEventListener("hashchange",show);show();
+window.addEventListener("hashchange",function(){show();if(location.hash==="#map")renderMap()});show();
 
 /* ---------- explore ---------- */
 var now=new Date();
@@ -280,12 +308,15 @@ function renderSpots(){
       s.checked?el("p",{class:"small muted",text:"Last checked "+s.checked}):null,
       weatherLine(s.id),
       extra.length?el("div",{style:"display:flex;flex-direction:column;gap:4px"},extra):null,
+      socialRow(s),
+      notesBox(s),
       el("a",{href:"#stays",class:"small",text:nStays?nStays+" saved stays":"No stays saved yet",onclick:function(){$("st-spot").value=s.id;renderStays()}}),
       el("div",{class:"row"},[
         dealBtn,
         el("button",{type:"button",class:on?"on":"",text:on?"Picked ✓":"Pick for plan",onclick:function(){if(picked.has(s.id))picked.delete(s.id);else picked.add(s.id);renderSpots();renderPicked()}}),
         el("a",{href:mapsUrl(s.mapsQuery||s.name),target:"_blank",rel:"noopener",text:"Route in Maps"}),
-        reqBtn
+        reqBtn,
+        el("button",{type:"button",text:"Listen",title:"Hear a short guide to this place",onclick:function(){speakText(placeStory(s))}})
       ])
     ]));
   });
@@ -413,12 +444,8 @@ function renderTrips(){var box=$("trips");box.textContent="";
     if(t.plan){var pb=el("details",{},[el("summary",{class:"small",text:"Claude's plan summary, budget and risks"})]);var pbi=el("div");renderPlan(pbi,b,t.plan,false);pb.appendChild(pbi);body.appendChild(pb)}
     else if(t.outline&&!(t.itinerary&&t.itinerary.length)){body.appendChild(el("ul",{class:"acts"},t.outline.map(function(x){return el("li",{text:x})})))}
     // expenses
-    var amt=el("input",{type:"number",min:"0",placeholder:"₹",id:"ex-a-"+t.id}), cat=el("select",{id:"ex-c-"+t.id},["Fuel + tolls","Stays","Food","Activities","Other"].map(function(c){return el("option",{text:c})})), nt=el("input",{placeholder:"Note",id:"ex-n-"+t.id});
-    body.appendChild(el("div",{class:"card"},[el("h3",{text:"Spending"}),
-      el("p",{},[el("span",{class:"km",text:rs(spent)}),b.budget?" of "+rs(b.budget)+" budget":""]),
-      el("ul",{class:"acts"},(t.expenses||[]).map(function(x){return el("li",{text:x.date+" · "+x.cat+" · "+rs(x.amount)+(x.note?" · "+x.note:"")})})),
-      el("div",{class:"row"},[amt,cat,nt,el("button",{text:"Add",onclick:function(){var a=+amt.value;if(!a||!db)return;
-        db.collection("trips").doc(t.id).update({expenses:(t.expenses||[]).concat([{amount:a,cat:cat.value,note:nt.value.trim(),date:new Date().toISOString().slice(0,10)}])})}})])]));
+    body.appendChild(expenseCard(t,b,spent));
+    body.appendChild(photoCard(t));
     // review + status
     var hp=el("select",{id:"rv-h-"+t.id},[1,2,3,4,5].map(function(n){var o=el("option",{value:String(n),text:n+" / 5"});if(t.review&&+t.review.happiness===n)o.selected=true;return o}));
     var rn=el("textarea",{id:"rv-n-"+t.id,placeholder:"Repeat, skip, lessons"});rn.value=(t.review&&t.review.notes)||"";
@@ -454,6 +481,71 @@ function renderLog(){var rq=$("requests");rq.textContent="";
       el("p",{class:"small",style:"margin-top:8px;white-space:pre-line",text:r.summary||""}),
       el("p",{class:"small muted"},["Sources: "].concat((r.sources||[]).map(function(u,i){var l=link(u);return l?el("span",{},[i?", ":"",l]):null})))]))});
 }
+/* ---------- recent posts, own notes, audio ---------- */
+function q(s){return encodeURIComponent(s)}
+function socialRow(s){var n=s.name.split(" (")[0].split(" & ")[0], tag=n.toLowerCase().replace(/[^a-z]/g,"");
+  var L=[["Instagram","https://www.instagram.com/explore/tags/"+tag+"/"],["X (latest)","https://x.com/search?q="+q(n)+"&f=live"],["YouTube (newest)","https://www.youtube.com/results?search_query="+q(n+" trip vlog")+"&sp=CAI%253D"],["Reddit","https://www.reddit.com/search/?q="+q(n)+"&sort=new"],["News","https://news.google.com/search?q="+q(n+" road OR closed OR tourists")+"&hl=en-IN&gl=IN&ceid=IN:en"],["Google reviews","https://www.google.com/maps/search/?api=1&query="+q(s.mapsQuery||s.name)],["Hospitals near","https://www.google.com/maps/search/"+q("hospital near "+(s.mapsQuery||s.name))],["Petrol pumps near","https://www.google.com/maps/search/"+q("petrol pump near "+(s.mapsQuery||s.name))]];
+  return el("details",{},[el("summary",{class:"small",text:"Recent posts, reviews and nearby help"}),el("div",{class:"row small",style:"margin-top:6px"},L.map(function(l){return el("a",{href:l[1],target:"_blank",rel:"noopener",class:"chip",text:l[0]})}))]);}
+function noteFor(id){return S.notes.find(function(x){return x.id===id})}
+function notesBox(s){var n=noteFor(s.id)||{}, links=n.links||[];
+  var ta=el("textarea",{id:"nt-"+s.id,placeholder:"What you learnt: tips from friends, Instagram finds, what to avoid…"});ta.value=n.text||"";
+  var ln=el("input",{id:"nl-"+s.id,placeholder:"Paste a link (Instagram post, reel, video, article)"});
+  var mic=el("button",{type:"button",text:"Speak",title:"Dictate into your notes",onclick:function(){dictateInto(ta,mic)}});
+  var msg=el("span",{class:"small muted"});
+  function save(extra){if(!db)return;var d={text:ta.value.trim(),links:links,updatedAt:new Date().toISOString()};if(extra)d.links=links.concat([extra]);db.collection("notes").doc(s.id).set(d).then(function(){msg.textContent="Saved"})}
+  return el("details",{},[el("summary",{class:"small",text:"My notes and finds"+((n.text||links.length)?" ("+(links.length+(n.text?1:0))+")":"")}),
+    el("div",{style:"display:flex;flex-direction:column;gap:6px;margin-top:6px"},[ta,
+      el("div",{class:"row"},[el("button",{type:"button",class:"primary",text:"Save notes",onclick:function(){save()}}),mic,msg]),
+      links.length?el("ul",{class:"acts"},links.map(function(u){return el("li",{},[link(u,hostOf(u)+" · "+u.replace(/^https:\/\/(www\.)?[^\/]+/,"").slice(0,40))])})):null,
+      el("div",{class:"row"},[ln,el("button",{type:"button",text:"Add link",onclick:function(){var u=safeUrl(ln.value.trim());if(!u){msg.textContent="Links must start with https://";return}save(u)}})])])]);}
+function placeStory(s){var parts=[s.name+". About "+s.km+" kilometres from Pune, roughly "+s.hours+" hours by car."];
+  var mo=(s.months||[]).map(function(n){return MONTHS[n-1]});if(mo.length)parts.push("Best months: "+mo.join(", ")+".");
+  if(s.vegNote)parts.push("Food: "+s.vegNote+".");
+  var st=S.stops.filter(function(x){return x.spotId===s.id}).slice(0,6);if(st.length)parts.push("Things to do: "+st.map(function(x){return x.name+", best "+(BEST_LABEL[x.best]||x.best).toLowerCase()}).join("; ")+".");
+  (s.tips||[]).forEach(function(t){parts.push("Tip: "+t+".")});(s.risks||[]).forEach(function(t){parts.push("Watch out: "+t+".")});
+  var n=noteFor(s.id);if(n&&n.text)parts.push("Your notes: "+n.text);
+  return parts.join(" ").slice(0,1990);}
+var AUDIO={tts:null,dict:null,target:null,btn:null};
+function speakText(t){
+  if(AUDIO.tts){AUDIO.tts.speak(t,{language:"en"}).catch(function(e){if(e&&e.code!=="stopped")setStatus("Couldn't play audio ("+(e&&e.code||"error")+")")});return}
+  if(window.speechSynthesis){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang="en-IN";speechSynthesis.speak(u);return}catch(e){}}
+  setStatus("Audio isn't available in this browser.");}
+function dictateInto(input,btn){
+  if(AUDIO.dict){AUDIO.target=input;AUDIO.btn=btn;btn.textContent="Listening… tap to stop";
+    if(AUDIO.dict.active()){AUDIO.dict.stop();return}
+    AUDIO.dict.start({language:"en-IN"}).catch(function(e){btn.textContent=(e&&e.code==="not_granted")?"Voice turned off":"Speak";});return}
+  var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(SR){try{var r=new SR();r.lang="en-IN";r.interimResults=false;btn.textContent="Listening…";
+    r.onresult=function(ev){var t=ev.results[0][0].transcript;input.value=(input.value?input.value+" ":"")+t;input.dispatchEvent(new Event("input"))};
+    r.onend=function(){btn.textContent="Speak"};r.onerror=function(){btn.textContent="Speak"};r.start();return}catch(e){}}
+  btn.textContent="Voice not available here";}
+
+/* ---------- map ---------- */
+var PUNE={lat:18.5204,lon:73.8567};
+function renderMap(){var svg=$("ringmap");if(!svg)return;while(svg.firstChild)svg.removeChild(svg.firstChild);
+  var NS="http://www.w3.org/2000/svg",c=260,R=240,k=R/420,cl=Math.cos(PUNE.lat*Math.PI/180);
+  function mk(t,a){var e=document.createElementNS(NS,t);for(var x in a)e.setAttribute(x,a[x]);svg.appendChild(e);return e}
+  [100,200,300,400].forEach(function(r){mk("circle",{cx:c,cy:c,r:r*k,fill:"none",stroke:"var(--line)","stroke-width":r>=300?1.6:1,"stroke-dasharray":r===400?"":"4 4"});
+    var t=mk("text",{x:c+4,y:c-r*k-4,"font-size":11,fill:"var(--muted)","font-family":"JetBrains Mono, monospace"});t.textContent=r+" km"});
+  mk("text",{x:c,y:16,"text-anchor":"middle","font-size":11,fill:"var(--muted)"}).textContent="N";
+  S.spots.forEach(function(s){if(s.lat==null)return;var dx=(s.lon-PUNE.lon)*111.32*cl,dy=(s.lat-PUNE.lat)*110.57;
+    var x=c+dx*k,y=c-dy*k;if(Math.abs(x-c)>255||Math.abs(y-c)>255)return;
+    var col=+s.veg===3?"var(--ok)":+s.veg===1?"var(--bad)":"var(--warn)";
+    var g=document.createElementNS(NS,"g");g.setAttribute("tabindex","0");g.style.cursor="pointer";svg.appendChild(g);
+    var dot=document.createElementNS(NS,"circle");dot.setAttribute("cx",x);dot.setAttribute("cy",y);dot.setAttribute("r",6);dot.setAttribute("fill",col);dot.setAttribute("stroke","var(--surface)");dot.setAttribute("stroke-width",1.5);g.appendChild(dot);
+    var lb=document.createElementNS(NS,"text");lb.setAttribute("x",x+8);lb.setAttribute("y",y+4);lb.setAttribute("font-size",9.5);lb.setAttribute("fill","var(--ink)");lb.textContent=s.name.split(/ [(&]/)[0].split(",")[0];g.appendChild(lb);
+    var tt=document.createElementNS(NS,"title");tt.textContent=s.name+" · "+s.km+" km by road";g.appendChild(tt);
+    function go(){$("f-q").value=s.name.split(/ [(&]/)[0];$("f-km").value=600;location.hash="#explore";renderSpots()}
+    g.addEventListener("click",go);g.addEventListener("keydown",function(e){if(e.key==="Enter")go()});});
+  mk("circle",{cx:c,cy:c,r:7,fill:"var(--teal)"});mk("text",{x:c+10,y:c+4,"font-size":12,"font-weight":700,fill:"var(--teal)"}).textContent="Pune";
+  if(window.L&&!window._lmap){var box=$("lmap");box.hidden=false;var m=window._lmap=L.map(box).setView([PUNE.lat,PUNE.lon],7);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:"© OpenStreetMap contributors"}).addTo(m);
+    [100,300,500].forEach(function(r){L.circle([PUNE.lat,PUNE.lon],{radius:r*1000,fill:false,weight:1,dashArray:"4 4"}).addTo(m)});
+    S.spots.forEach(function(s){if(s.lat==null)return;var mk2=L.circleMarker([s.lat,s.lon],{radius:7,weight:1,fillOpacity:.9,color:"#fff",fillColor:+s.veg===3?"#2f7d3a":+s.veg===1?"#b3261e":"#a85d00"}).addTo(m);
+      var d=document.createElement("div");var b=document.createElement("b");b.textContent=s.name;d.appendChild(b);d.appendChild(document.createElement("br"));d.appendChild(document.createTextNode(s.km+" km · ~"+s.hours+" h"));mk2.bindPopup(d)});}
+  else if(window._lmap)window._lmap.invalidateSize();
+}
+
 /* ---------- small spots + photos ---------- */
 var BEST_ORDER=["sunrise","morning","afternoon","sunset","evening","any"];
 var BEST_LABEL={sunrise:"Sunrise",morning:"Morning",afternoon:"Afternoon",sunset:"Sunset",evening:"Evening",any:"Any time"};
@@ -569,6 +661,50 @@ function renderTimeline(t,box){
   box.appendChild(el("div",{class:"row"},[el("button",{type:"button",text:"Add a day",onclick:function(){it.push({start:"07:30",place:"",stay:"",items:[]});save()}})]));
 }
 
+/* ---------- expenses ---------- */
+var CATS=["Fuel + tolls","Stays","Food","Activities","Other"], SPLIT={"Fuel + tolls":.2,"Stays":.4,"Food":.2,"Activities":.1,"Other":.1};
+function guessCat(t){t=t.toLowerCase();if(/fuel|petrol|diesel|toll|cng|parking|charging/.test(t))return"Fuel + tolls";if(/hotel|stay|room|homestay|camp|tent|resort|lodge/.test(t))return"Stays";
+  if(/food|lunch|dinner|breakfast|tea|chai|snack|thali|meal|water|juice|ice ?cream/.test(t))return"Food";if(/ticket|entry|safari|boat|raft|activity|guide|ride|ropeway|museum|darshan/.test(t))return"Activities";return"Other"}
+function expenseCard(t,b,spent){
+  var ex=t.expenses||[], planned=(t.plan&&t.plan.budget)||null, cap=+b.budget||0;
+  function plan(c){if(planned){var m={"Fuel + tolls":planned.fuelTolls,"Stays":planned.stays,"Food":planned.food,"Activities":planned.activities,"Other":planned.buffer};return +m[c]||0}return cap?Math.round(cap*SPLIT[c]):0}
+  var by={};CATS.forEach(function(c){by[c]=0});ex.forEach(function(x){by[x.cat]=(by[x.cat]||0)+(+x.amount||0)});
+  var quick=el("input",{id:"ex-q-"+t.id,placeholder:"Quick add: “petrol 2500 Lonavala” or “lunch 640”"});
+  var mic=el("button",{type:"button",text:"Speak",onclick:function(){dictateInto(quick,mic)}});
+  var msg=el("span",{class:"small muted"});
+  function addQuick(){var v=quick.value.trim(),m=v.match(/(\d[\d,]*(\.\d+)?)/);if(!m){msg.textContent="Include an amount, like “tea 120”.";return}
+    var amt=+m[1].replace(/,/g,""),note=v.replace(m[0],"").replace(/₹|rs\.?|rupees/ig,"").trim();if(!db)return;
+    db.collection("trips").doc(t.id).update({expenses:ex.concat([{amount:amt,cat:guessCat(v),note:note,date:new Date().toISOString().slice(0,10)}])}).then(function(){quick.value=""})}
+  quick.addEventListener("keydown",function(e){if(e.key==="Enter")addQuick()});
+  var rows=CATS.map(function(c){var p=plan(c),sp=by[c]||0;return el("tr",{},[el("td",{text:c}),el("td",{class:"km",text:rs(sp)}),el("td",{class:"km muted",text:p?rs(p):"–"}),el("td",{},[p&&sp>p?el("span",{class:"pill veg1",text:"Over"}):p?el("span",{class:"small muted",text:Math.round(sp/p*100)+"%"}):null])])});
+  return el("div",{class:"card"},[el("h3",{text:"Spending"}),
+    el("p",{},[el("span",{class:"big km",text:rs(spent)}),cap?el("span",{class:"muted",text:" of "+rs(cap)+" budget"}):null]),
+    el("div",{class:"tbl"},[el("table",{},[el("thead",{},[el("tr",{},[el("th",{text:"Category"}),el("th",{text:"Spent"}),el("th",{text:"Planned"}),el("th",{text:""})])]),el("tbody",{},rows)])]),
+    el("div",{class:"row"},[quick,el("button",{type:"button",class:"primary",text:"Add",onclick:addQuick}),mic,msg]),
+    ex.length?el("details",{},[el("summary",{class:"small",text:"All entries ("+ex.length+")"}),el("ul",{class:"acts"},ex.map(function(x,i){return el("li",{},[x.date+" · "+x.cat+" · "+rs(x.amount)+(x.note?" · "+x.note:"")+" ",el("button",{type:"button",class:"small",style:"padding:0 6px",text:"×",title:"Delete entry",onclick:function(){var n=ex.slice();n.splice(i,1);db.collection("trips").doc(t.id).update({expenses:n})}})])}))]):null]);
+}
+
+/* ---------- trip photos ---------- */
+var PHOTOS={assets:null,
+  ok:function(){return !!this.assets},
+  save:function(blob){return this.assets.upload(blob).then(function(r){return{ref:r.id,url:r.url}})},
+  src:function(d){return Promise.resolve(safeUrl(d.url)||(d.url&&d.url.indexOf("/_blob/")===0?d.url:null))}};
+function shrink(file){return new Promise(function(res){try{var img=new Image(),u=URL.createObjectURL(file);img.onload=function(){var m=1600,w=img.width,h=img.height,r=Math.min(1,m/Math.max(w,h));var cv=document.createElement("canvas");cv.width=Math.round(w*r);cv.height=Math.round(h*r);cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height);URL.revokeObjectURL(u);cv.toBlob(function(b){res(b||file)},"image/jpeg",.82)};img.onerror=function(){res(file)};img.src=u}catch(e){res(file)}})}
+function photoCard(t){
+  var mine=S.photos.filter(function(x){return x.tripId===t.id}).sort(function(a,b){return(a.date||"").localeCompare(b.date||"")});
+  var cap=el("input",{id:"ph-c-"+t.id,placeholder:"Caption or place (optional)"}), msg=el("span",{class:"small muted"});
+  var fi=el("input",{type:"file",id:"ph-f-"+t.id,accept:"image/*",multiple:"multiple"});
+  fi.addEventListener("change",function(){var files=Array.prototype.slice.call(fi.files||[]);if(!files.length||!db)return;msg.textContent="Uploading "+files.length+"…";
+    files.reduce(function(pr,f){return pr.then(function(){return shrink(f).then(function(b){return PHOTOS.save(b)}).then(function(r){return db.collection("photos").add({tripId:t.id,ref:r.ref,url:r.url||"",caption:cap.value.trim(),date:new Date().toISOString()})})})},Promise.resolve())
+    .then(function(){msg.textContent="Added";fi.value="";cap.value=""}).catch(function(e){msg.textContent="Upload failed ("+(e&&e.code||"error")+")"})});
+  var grid=el("div",{class:"pgrid"});
+  mine.forEach(function(d){var fig=el("figure",{}),im=el("img",{alt:d.caption||"Trip photo",loading:"lazy"});fig.appendChild(im);if(d.caption)fig.appendChild(el("figcaption",{class:"small",text:d.caption}));grid.appendChild(fig);
+    PHOTOS.src(d).then(function(u){if(u)im.src=u})});
+  return el("div",{class:"card"},[el("h3",{text:"Trip photos"+(mine.length?" ("+mine.length+")":"")}),
+    PHOTOS.ok()?el("div",{class:"row"},[cap,el("label",{class:"check",for:fi.id,style:"color:var(--ink)"},["Add photos ",fi]),msg]):el("p",{class:"small muted",text:"Photo upload isn't available in this view."}),
+    mine.length?grid:el("p",{class:"small muted",text:"No photos yet. Add them during the trip; they stay with this trip."})]);
+}
+
 var WX=null;
 fetch("data/weather.json").then(function(r){return r.ok?r.json():null}).then(function(j){WX=j;renderSpots()}).catch(function(){});
 function weatherLine(id){var w=WX&&WX.places&&WX.places[id];if(!w||!w.days)return null;
@@ -616,7 +752,18 @@ function renderPrep(){var box=$("prep");box.textContent="";
   });
   $("pp-count").textContent=trip?ticked+" of "+total+" done for "+trip.name:"Choose a trip to tick items.";
 }
-function renderAll(){renderSpots();renderPicked();renderTrips();renderRoad();renderLog();spotOptions();renderStays();tripOptions();renderPrep()}
+var KIT_TAGS=["beach","hills","jungle","temple","monsoon","camping","kids","seniors"],kitSel=new Set(["beach"]);
+KIT_TAGS.forEach(function(k){var b=el("button",{type:"button",text:k,class:kitSel.has(k)?"on":"",onclick:function(){if(kitSel.has(k))kitSel.delete(k);else kitSel.add(k);b.classList.toggle("on");renderKit()}});$("kit-tags").appendChild(b)});
+function renderKit(){var box=$("kit");box.textContent="";
+  var trip=S.trips.find(function(t){return t.id===$("pp-trip").value}),done=(trip&&trip.kitDone)||[];
+  var list=S.kit.filter(function(x){var tg=x.tags||[];if(tg.indexOf("all")>=0)return true;for(var i=0;i<tg.length;i++)if(kitSel.has(tg[i]))return true;return false}).sort(function(a,b){return(a.order||0)-(b.order||0)});
+  if(!list.length){box.appendChild(el("div",{class:"empty",text:loaded?"No kit items yet.":"Loading…"}));return}
+  var g={};list.forEach(function(x){(g[x.group]=g[x.group]||[]).push(x)});
+  Object.keys(g).forEach(function(k){box.appendChild(el("div",{class:"card"},[el("h3",{text:k})].concat(g[k].map(function(x){var cb=el("input",{type:"checkbox",id:"kt-"+x.id});cb.checked=done.indexOf(x.id)>=0;cb.disabled=!trip;
+    cb.addEventListener("change",function(){if(!db||!trip)return;var nd=done.filter(function(y){return y!==x.id});if(cb.checked)nd.push(x.id);db.collection("trips").doc(trip.id).update({kitDone:nd})});
+    return el("label",{class:"check",for:"kt-"+x.id},[cb,el("span",{text:x.item})])}))))});}
+$("pp-trip").addEventListener("input",renderKit);
+function renderAll(){renderKit();renderMap();renderSpots();renderPicked();renderTrips();renderRoad();renderLog();spotOptions();renderStays();tripOptions();renderPrep()}
 var loaded=false;renderAll();
 
 /* ---------- local database: data/*.json from the repo + your changes saved in this browser ---------- */
@@ -638,6 +785,13 @@ Promise.all(Object.keys(S).map(function(c){return fetch("data/"+c+".json").then(
   Object.keys(S).forEach(function(c){localDb.collection(c).onSnapshot(function(snap){S[c]=snap.docs.map(function(x){return x.data()});if(c==="spots")deriveStops();renderAll();setStatus(S.spots.length+" places · "+S.stops.length+" things to do · "+S.trips.length+" trips · your changes stay in this browser")})});
 });
 var timer=setTimeout(function(){},0);
+/* photos on this device: IndexedDB */
+var IDB=null;function idb(){if(IDB)return IDB;IDB=new Promise(function(res,rej){var r=indexedDB.open("trip-photos",1);r.onupgradeneeded=function(){r.result.createObjectStore("p")};r.onsuccess=function(){res(r.result)};r.onerror=function(){rej(r.error)}});return IDB}
+var PURL={};
+PHOTOS.ok=function(){return typeof indexedDB!=="undefined"};
+PHOTOS.save=function(blob){var k="p"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);return idb().then(function(d){return new Promise(function(res,rej){var tx=d.transaction("p","readwrite");tx.objectStore("p").put(blob,k);tx.oncomplete=function(){res({ref:k,url:""})};tx.onerror=function(){rej(tx.error)}})})};
+PHOTOS.src=function(x){if(x.url&&safeUrl(x.url))return Promise.resolve(x.url);if(!x.ref)return Promise.resolve(null);if(PURL[x.ref])return Promise.resolve(PURL[x.ref]);
+  return idb().then(function(d){return new Promise(function(res){var q=d.transaction("p").objectStore("p").get(x.ref);q.onsuccess=function(){res(q.result?(PURL[x.ref]=URL.createObjectURL(q.result)):null)};q.onerror=function(){res(null)}})}).catch(function(){return null})};
 $("bk-export").addEventListener("click",function(){var blob=new Blob([JSON.stringify(LOCAL,null,1)],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="trip-planner-backup.json";a.click()});
 $("bk-import").addEventListener("change",function(ev){var f=ev.target.files[0];if(!f)return;f.text().then(function(t){try{LOCAL=JSON.parse(t);saveLocal(LOCAL);Object.keys(S).forEach(emit);setStatus("Backup restored")}catch(e){setStatus("That file isn't a planner backup")}})});
 })();
