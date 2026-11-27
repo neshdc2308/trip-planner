@@ -46,7 +46,49 @@
   "vegNote": "Seafood heavy, but veg thalis available at most restaurants",
   "id": "alibaug",
   "lat": 18.64,
-  "lon": 72.87
+  "lon": 72.87,
+  "stops": [
+   {
+    "name": "Kashid beach",
+    "kind": "sea",
+    "best": "sunset",
+    "mins": 120,
+    "note": "White sand, calm sunset",
+    "indoor": false,
+    "photoQuery": "Kashid beach",
+    "id": "alibaug-kashid-beach"
+   },
+   {
+    "name": "Kolaba fort (low tide walk)",
+    "kind": "fort",
+    "best": "morning",
+    "mins": 90,
+    "note": "Walk across only at low tide; check tide times",
+    "indoor": false,
+    "photoQuery": "Kolaba fort",
+    "id": "alibaug-kolaba-fort-low-tide-walk"
+   },
+   {
+    "name": "Murud-Janjira sea fort",
+    "kind": "fort",
+    "best": "morning",
+    "mins": 150,
+    "note": "Boat from Rajapuri jetty",
+    "indoor": false,
+    "photoQuery": "Murud-Janjira sea fort",
+    "id": "alibaug-murud-janjira-sea-fort"
+   },
+   {
+    "name": "Nagaon beach",
+    "kind": "sea",
+    "best": "afternoon",
+    "mins": 120,
+    "note": "Water sports, clean beach",
+    "indoor": false,
+    "photoQuery": "Nagaon beach",
+    "id": "alibaug-nagaon-beach"
+   }
+  ]
  },
  {
   "activities": [
@@ -91,7 +133,59 @@
   "vegNote": "Simple veg eateries",
   "id": "amboli",
   "lat": 15.96,
-  "lon": 74.0
+  "lon": 74.0,
+  "stops": [
+   {
+    "name": "Amboli main waterfall",
+    "kind": "view",
+    "best": "morning",
+    "mins": 45,
+    "note": "Jun–Oct",
+    "indoor": false,
+    "photoQuery": "Amboli main waterfall",
+    "id": "amboli-amboli-main-waterfall"
+   },
+   {
+    "name": "Hiranyakeshi temple and river source",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 45,
+    "note": "Cave source of the river",
+    "indoor": false,
+    "photoQuery": "Hiranyakeshi temple and river source",
+    "id": "amboli-hiranyakeshi-temple-and-river-source"
+   },
+   {
+    "name": "Kavalesad point",
+    "kind": "view",
+    "best": "sunset",
+    "mins": 60,
+    "note": "Reverse waterfall in strong monsoon wind",
+    "indoor": false,
+    "photoQuery": "Kavalesad point",
+    "id": "amboli-kavalesad-point"
+   },
+   {
+    "name": "Night biodiversity walk",
+    "kind": "nature",
+    "best": "evening",
+    "mins": 120,
+    "note": "With local naturalists, monsoon",
+    "indoor": false,
+    "photoQuery": "Night biodiversity walk",
+    "id": "amboli-night-biodiversity-walk"
+   },
+   {
+    "name": "Sunset point",
+    "kind": "view",
+    "best": "sunset",
+    "mins": 30,
+    "note": "Valley view",
+    "indoor": false,
+    "photoQuery": "Sunset point",
+    "id": "amboli-sunset-point"
+   }
+  ]
  },
  {
   "activities": [
@@ -148,7 +242,69 @@
   "vegNote": "Resorts and camps serve veg; MTDC resort",
   "id": "bhandardara",
   "lat": 19.54,
-  "lon": 73.75
+  "lon": 73.75,
+  "stops": [
+   {
+    "name": "Amruteshwar temple, Ratangad base",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 60,
+    "note": "Hemadpanti stone temple",
+    "indoor": false,
+    "photoQuery": "Amruteshwar temple",
+    "id": "bhandardara-amruteshwar-temple-ratangad-base"
+   },
+   {
+    "name": "Arthur lake and Wilson dam",
+    "kind": "water",
+    "best": "morning",
+    "mins": 60,
+    "note": "Lake views, boating",
+    "indoor": false,
+    "photoQuery": "Arthur lake and Wilson dam",
+    "id": "bhandardara-arthur-lake-and-wilson-dam"
+   },
+   {
+    "name": "Kalsubai peak trek",
+    "kind": "walk",
+    "best": "sunrise",
+    "mins": 360,
+    "note": "Maharashtra's highest peak; start by 5 AM; ladders near top",
+    "indoor": false,
+    "photoQuery": "Kalsubai peak trek",
+    "id": "bhandardara-kalsubai-peak-trek"
+   },
+   {
+    "name": "Lakeside tent night",
+    "kind": "stay",
+    "best": "evening",
+    "mins": 600,
+    "note": "Fireflies late May–June",
+    "indoor": false,
+    "photoQuery": "Lakeside tent night",
+    "id": "bhandardara-lakeside-tent-night"
+   },
+   {
+    "name": "Randha falls",
+    "kind": "view",
+    "best": "morning",
+    "mins": 45,
+    "note": "Best Jul–Oct",
+    "indoor": false,
+    "photoQuery": "Randha falls",
+    "id": "bhandardara-randha-falls"
+   },
+   {
+    "name": "Umbrella falls",
+    "kind": "view",
+    "best": "afternoon",
+    "mins": 30,
+    "note": "Dam spillway falls in monsoon",
+    "indoor": false,
+    "photoQuery": "Umbrella falls",
+    "id": "bhandardara-umbrella-falls"
+   }
+  ]
  },
  {
   "activities": [
@@ -189,7 +345,29 @@
   "vegNote": "Simple dhabas; veg available",
   "id": "bhigwan",
   "lat": 18.3,
-  "lon": 74.77
+  "lon": 74.77,
+  "stops": [
+   {
+    "name": "Flamingo boat ride, Kumbhargaon",
+    "kind": "nature",
+    "best": "sunrise",
+    "mins": 120,
+    "note": "Best Dec–Mar; hire local boatman",
+    "indoor": false,
+    "photoQuery": "Flamingo boat ride",
+    "id": "bhigwan-flamingo-boat-ride-kumbhargaon"
+   },
+   {
+    "name": "Ujani backwater sunset",
+    "kind": "view",
+    "best": "sunset",
+    "mins": 45,
+    "note": "Birds returning to roost",
+    "indoor": false,
+    "photoQuery": "Ujani backwater sunset",
+    "id": "bhigwan-ujani-backwater-sunset"
+   }
+  ]
  },
  {
   "activities": [
@@ -237,7 +415,49 @@
   "vegNote": "Temple town, easy veg",
   "id": "bhimashankar",
   "lat": 19.07,
-  "lon": 73.54
+  "lon": 73.54,
+  "stops": [
+   {
+    "name": "Bhimashankar Jyotirlinga temple",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 90,
+    "note": "Go early to avoid queues",
+    "indoor": false,
+    "photoQuery": "Bhimashankar Jyotirlinga temple",
+    "id": "bhimashankar-bhimashankar-jyotirlinga-temple"
+   },
+   {
+    "name": "Gupt Bhimashankar stream",
+    "kind": "walk",
+    "best": "afternoon",
+    "mins": 60,
+    "note": "Short forest trail to a stream",
+    "indoor": false,
+    "photoQuery": "Gupt Bhimashankar stream",
+    "id": "bhimashankar-gupt-bhimashankar-stream"
+   },
+   {
+    "name": "Nagphani Point",
+    "kind": "view",
+    "best": "morning",
+    "mins": 60,
+    "note": "Cliff viewpoint, 1 km walk",
+    "indoor": false,
+    "photoQuery": "Nagphani Point",
+    "id": "bhimashankar-nagphani-point"
+   },
+   {
+    "name": "Sanctuary forest walk (giant squirrel)",
+    "kind": "nature",
+    "best": "morning",
+    "mins": 90,
+    "note": "Shekaru squirrel; quiet walk",
+    "indoor": false,
+    "photoQuery": "Sanctuary forest walk",
+    "id": "bhimashankar-sanctuary-forest-walk-giant-squirrel"
+   }
+  ]
  },
  {
   "activities": [
@@ -289,7 +509,69 @@
   "vegNote": "Jungle lodges serve veg; tell them in advance",
   "id": "dandeli",
   "lat": 15.25,
-  "lon": 74.62
+  "lon": 74.62,
+  "stops": [
+   {
+    "name": "Jungle safari (Kali Tiger Reserve)",
+    "kind": "nature",
+    "best": "sunrise",
+    "mins": 180,
+    "note": "Book jeep slot ahead",
+    "indoor": false,
+    "photoQuery": "Jungle safari",
+    "id": "dandeli-jungle-safari-kali-tiger-reserve"
+   },
+   {
+    "name": "Kali river rafting",
+    "kind": "adventure",
+    "best": "morning",
+    "mins": 150,
+    "note": "Oct–May; age limits apply",
+    "indoor": false,
+    "photoQuery": "Kali river rafting",
+    "id": "dandeli-kali-river-rafting"
+   },
+   {
+    "name": "Kavala caves",
+    "kind": "heritage",
+    "best": "morning",
+    "mins": 90,
+    "note": "Steps down to limestone caves",
+    "indoor": false,
+    "photoQuery": "Kavala caves",
+    "id": "dandeli-kavala-caves"
+   },
+   {
+    "name": "Riverside tent stay",
+    "kind": "stay",
+    "best": "evening",
+    "mins": 600,
+    "note": "Campfire, birding at dawn",
+    "indoor": false,
+    "photoQuery": "Riverside tent stay",
+    "id": "dandeli-riverside-tent-stay"
+   },
+   {
+    "name": "Supa dam viewpoint",
+    "kind": "view",
+    "best": "sunset",
+    "mins": 45,
+    "note": "Reservoir view",
+    "indoor": false,
+    "photoQuery": "Supa dam viewpoint",
+    "id": "dandeli-supa-dam-viewpoint"
+   },
+   {
+    "name": "Syntheri Rocks",
+    "kind": "view",
+    "best": "afternoon",
+    "mins": 60,
+    "note": "Huge monolith over the river",
+    "indoor": false,
+    "photoQuery": "Syntheri Rocks",
+    "id": "dandeli-syntheri-rocks"
+   }
+  ]
  },
  {
   "activities": [
@@ -336,7 +618,59 @@
   "vegNote": "Homestays serve veg on request",
   "id": "dapoli",
   "lat": 17.76,
-  "lon": 73.19
+  "lon": 73.19,
+  "stops": [
+   {
+    "name": "Dolphin boat ride, Harnai",
+    "kind": "nature",
+    "best": "sunrise",
+    "mins": 90,
+    "note": "Early morning only",
+    "indoor": false,
+    "photoQuery": "Dolphin boat ride",
+    "id": "dapoli-dolphin-boat-ride-harnai"
+   },
+   {
+    "name": "Keshavraj temple trek",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 90,
+    "note": "Short forest walk over a stream",
+    "indoor": false,
+    "photoQuery": "Keshavraj temple trek",
+    "id": "dapoli-keshavraj-temple-trek"
+   },
+   {
+    "name": "Murud beach",
+    "kind": "sea",
+    "best": "sunset",
+    "mins": 90,
+    "note": "Calm beach near Dapoli",
+    "indoor": false,
+    "photoQuery": "Murud beach",
+    "id": "dapoli-murud-beach"
+   },
+   {
+    "name": "Suvarnadurg sea fort view",
+    "kind": "fort",
+    "best": "morning",
+    "mins": 45,
+    "note": "From Harnai jetty",
+    "indoor": false,
+    "photoQuery": "Suvarnadurg sea fort view",
+    "id": "dapoli-suvarnadurg-sea-fort-view"
+   },
+   {
+    "name": "Unhavare hot springs",
+    "kind": "wellness",
+    "best": "afternoon",
+    "mins": 60,
+    "note": "Natural warm water tank",
+    "indoor": false,
+    "photoQuery": "Unhavare hot springs",
+    "id": "dapoli-unhavare-hot-springs"
+   }
+  ]
  },
  {
   "activities": [
@@ -389,7 +723,69 @@
   "vegNote": "Homestays will cook veg Konkani food on request (ukadiche modak, amboli)",
   "id": "diveagar",
   "lat": 18.17,
-  "lon": 72.99
+  "lon": 72.99,
+  "stops": [
+   {
+    "name": "Bankot creek ferry and fort",
+    "kind": "view",
+    "best": "afternoon",
+    "mins": 90,
+    "note": "Car ferry across the creek, small fort",
+    "indoor": false,
+    "photoQuery": "Bankot creek ferry and fort",
+    "id": "diveagar-bankot-creek-ferry-and-fort"
+   },
+   {
+    "name": "Diveagar beach",
+    "kind": "sea",
+    "best": "sunset",
+    "mins": 120,
+    "note": "Long quiet beach, casuarina shade",
+    "indoor": false,
+    "photoQuery": "Diveagar beach",
+    "id": "diveagar-diveagar-beach"
+   },
+   {
+    "name": "Golden Ganesh temple, Diveagar",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 30,
+    "note": "Small temple in the village",
+    "indoor": true,
+    "photoQuery": "Golden Ganesh temple",
+    "id": "diveagar-golden-ganesh-temple-diveagar"
+   },
+   {
+    "name": "Harihareshwar temple and pradakshina cliff walk",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 90,
+    "note": "Rocky coastal path, go at low tide",
+    "indoor": false,
+    "photoQuery": "Harihareshwar temple and pradakshina cliff walk",
+    "id": "diveagar-harihareshwar-temple-and-pradakshina-cli"
+   },
+   {
+    "name": "Konkan homestay veg thali",
+    "kind": "food",
+    "best": "evening",
+    "mins": 60,
+    "note": "Ask for amboli, sol kadhi, ukadiche modak",
+    "indoor": true,
+    "photoQuery": "Konkan homestay veg thali",
+    "id": "diveagar-konkan-homestay-veg-thali"
+   },
+   {
+    "name": "Shrivardhan beach",
+    "kind": "sea",
+    "best": "sunset",
+    "mins": 90,
+    "note": "Peshwa town; quiet beach",
+    "indoor": false,
+    "photoQuery": "Shrivardhan beach",
+    "id": "diveagar-shrivardhan-beach"
+   }
+  ]
  },
  {
   "activities": [
@@ -438,7 +834,82 @@
   "vegNote": "Easy veg",
   "id": "ellora",
   "lat": 20.03,
-  "lon": 75.18
+  "lon": 75.18,
+  "stops": [
+   {
+    "name": "Ajanta caves (day trip)",
+    "kind": "heritage",
+    "best": "morning",
+    "mins": 240,
+    "note": "100 km away; closed Mondays",
+    "indoor": false,
+    "photoQuery": "Ajanta caves",
+    "closed": "Mon",
+    "id": "ellora-ajanta-caves-day-trip"
+   },
+   {
+    "name": "Bibi ka Maqbara",
+    "kind": "heritage",
+    "best": "sunset",
+    "mins": 60,
+    "note": "Lit up at dusk",
+    "indoor": false,
+    "photoQuery": "Bibi ka Maqbara",
+    "id": "ellora-bibi-ka-maqbara"
+   },
+   {
+    "name": "Daulatabad fort",
+    "kind": "fort",
+    "best": "afternoon",
+    "mins": 120,
+    "note": "Tough climb, dark passage; carry torch",
+    "indoor": false,
+    "photoQuery": "Daulatabad fort",
+    "id": "ellora-daulatabad-fort"
+   },
+   {
+    "name": "Ellora Jain and Buddhist caves",
+    "kind": "heritage",
+    "best": "morning",
+    "mins": 90,
+    "note": "Caves 10, 32",
+    "indoor": false,
+    "photoQuery": "Ellora Jain and Buddhist caves",
+    "closed": "Tue",
+    "id": "ellora-ellora-jain-and-buddhist-caves"
+   },
+   {
+    "name": "Ellora Kailasa temple (Cave 16)",
+    "kind": "heritage",
+    "best": "morning",
+    "mins": 120,
+    "note": "Closed Tuesdays; go at opening",
+    "indoor": false,
+    "photoQuery": "Ellora Kailasa temple",
+    "closed": "Tue",
+    "id": "ellora-ellora-kailasa-temple-cave-16"
+   },
+   {
+    "name": "Grishneshwar Jyotirlinga",
+    "kind": "temple",
+    "best": "afternoon",
+    "mins": 60,
+    "note": "Next to Ellora",
+    "indoor": true,
+    "photoQuery": "Grishneshwar Jyotirlinga",
+    "id": "ellora-grishneshwar-jyotirlinga"
+   },
+   {
+    "name": "Paithani weaving, Paithan or Yeola",
+    "kind": "craft",
+    "best": "any",
+    "mins": 90,
+    "note": "Watch silk sarees being woven",
+    "indoor": true,
+    "photoQuery": "Paithani weaving",
+    "id": "ellora-paithani-weaving-paithan-or-yeola"
+   }
+  ]
  },
  {
   "activities": [
@@ -490,7 +961,79 @@
   "vegNote": "Temple town; veg is easy",
   "id": "ganpatipule",
   "lat": 17.15,
-  "lon": 73.27
+  "lon": 73.27,
+  "stops": [
+   {
+    "name": "Aare-Ware coastal road",
+    "kind": "view",
+    "best": "sunset",
+    "mins": 60,
+    "note": "Cliff-top road with sea views; daylight",
+    "indoor": false,
+    "photoQuery": "Aare-Ware coastal road",
+    "id": "ganpatipule-aare-ware-coastal-road"
+   },
+   {
+    "name": "Ganpatipule beach",
+    "kind": "sea",
+    "best": "sunset",
+    "mins": 120,
+    "note": "Swim only between lifeguard flags",
+    "indoor": false,
+    "photoQuery": "Ganpatipule beach",
+    "id": "ganpatipule-ganpatipule-beach"
+   },
+   {
+    "name": "Jaigad fort and lighthouse",
+    "kind": "fort",
+    "best": "afternoon",
+    "mins": 90,
+    "note": "Sea fort and Jaigad creek",
+    "indoor": false,
+    "photoQuery": "Jaigad fort and lighthouse",
+    "id": "ganpatipule-jaigad-fort-and-lighthouse"
+   },
+   {
+    "name": "Prachin Konkan museum",
+    "kind": "heritage",
+    "best": "afternoon",
+    "mins": 60,
+    "note": "Open-air Konkan village museum",
+    "indoor": true,
+    "photoQuery": "Prachin Konkan museum",
+    "id": "ganpatipule-prachin-konkan-museum"
+   },
+   {
+    "name": "Ratnagiri Alphonso farms (Apr–May)",
+    "kind": "food",
+    "best": "morning",
+    "mins": 60,
+    "note": "Mango season only",
+    "indoor": false,
+    "photoQuery": "Ratnagiri Alphonso farms",
+    "id": "ganpatipule-ratnagiri-alphonso-farms-apr-may"
+   },
+   {
+    "name": "Swayambhu Ganpati temple and pradakshina",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 75,
+    "note": "Walk around the hill",
+    "indoor": false,
+    "photoQuery": "Swayambhu Ganpati temple and pradakshina",
+    "id": "ganpatipule-swayambhu-ganpati-temple-and-pradakshina"
+   },
+   {
+    "name": "Thibaw Palace and Ratnadurg, Ratnagiri",
+    "kind": "heritage",
+    "best": "afternoon",
+    "mins": 120,
+    "note": "Palace of the last Burmese king; fort",
+    "indoor": false,
+    "photoQuery": "Thibaw Palace and Ratnadurg",
+    "id": "ganpatipule-thibaw-palace-and-ratnadurg-ratnagiri"
+   }
+  ]
  },
  {
   "activities": [
@@ -540,7 +1083,69 @@
   "vegNote": "Seafood dominant; plenty of Udupi and Gujarati veg restaurants",
   "id": "goa",
   "lat": 15.49,
-  "lon": 73.83
+  "lon": 73.83,
+  "stops": [
+   {
+    "name": "Cabo de Rama fort",
+    "kind": "fort",
+    "best": "sunset",
+    "mins": 60,
+    "note": "Cliff fort, South Goa",
+    "indoor": false,
+    "photoQuery": "Cabo de Rama fort",
+    "id": "goa-cabo-de-rama-fort"
+   },
+   {
+    "name": "Dudhsagar falls jeep trip",
+    "kind": "view",
+    "best": "morning",
+    "mins": 240,
+    "note": "Usually Oct–May",
+    "indoor": false,
+    "photoQuery": "Dudhsagar falls jeep trip",
+    "id": "goa-dudhsagar-falls-jeep-trip"
+   },
+   {
+    "name": "Fontainhas walk, Panaji",
+    "kind": "walk",
+    "best": "evening",
+    "mins": 75,
+    "note": "Colourful Latin quarter",
+    "indoor": false,
+    "photoQuery": "Fontainhas walk",
+    "id": "goa-fontainhas-walk-panaji"
+   },
+   {
+    "name": "Old Goa churches",
+    "kind": "heritage",
+    "best": "morning",
+    "mins": 90,
+    "note": "Basilica of Bom Jesus, Se Cathedral",
+    "indoor": true,
+    "photoQuery": "Old Goa churches",
+    "id": "goa-old-goa-churches"
+   },
+   {
+    "name": "Palolem or Agonda beach (South Goa)",
+    "kind": "sea",
+    "best": "sunset",
+    "mins": 150,
+    "note": "Calm family beaches",
+    "indoor": false,
+    "photoQuery": "Palolem or Agonda beach",
+    "id": "goa-palolem-or-agonda-beach-south-goa"
+   },
+   {
+    "name": "Spice plantation tour, Ponda",
+    "kind": "food",
+    "best": "morning",
+    "mins": 120,
+    "note": "Tour with veg Goan lunch",
+    "indoor": false,
+    "photoQuery": "Spice plantation tour",
+    "id": "goa-spice-plantation-tour-ponda"
+   }
+  ]
  },
  {
   "activities": [
@@ -592,7 +1197,59 @@
   "vegNote": "Many veg options",
   "id": "igatpuri",
   "lat": 19.7,
-  "lon": 73.56
+  "lon": 73.56,
+  "stops": [
+   {
+    "name": "Bhavali dam",
+    "kind": "water",
+    "best": "afternoon",
+    "mins": 60,
+    "note": "Lake and green hills",
+    "indoor": false,
+    "photoQuery": "Bhavali dam",
+    "id": "igatpuri-bhavali-dam"
+   },
+   {
+    "name": "Camel Valley viewpoint",
+    "kind": "view",
+    "best": "morning",
+    "mins": 30,
+    "note": "Kasara ghat valley view",
+    "indoor": false,
+    "photoQuery": "Camel Valley viewpoint",
+    "id": "igatpuri-camel-valley-viewpoint"
+   },
+   {
+    "name": "Tringalwadi fort and caves",
+    "kind": "fort",
+    "best": "morning",
+    "mins": 150,
+    "note": "Jain caves at the base",
+    "indoor": false,
+    "photoQuery": "Tringalwadi fort and caves",
+    "id": "igatpuri-tringalwadi-fort-and-caves"
+   },
+   {
+    "name": "Vipassana centre (Dhamma Giri) visit",
+    "kind": "wellness",
+    "best": "morning",
+    "mins": 60,
+    "note": "Pagoda visit; 10-day courses book months ahead",
+    "indoor": true,
+    "photoQuery": "Vipassana centre visit",
+    "id": "igatpuri-vipassana-centre-dhamma-giri-visit"
+   },
+   {
+    "name": "Wellness resort spa",
+    "kind": "wellness",
+    "best": "afternoon",
+    "mins": 120,
+    "note": "Several spa resorts around town",
+    "indoor": true,
+    "photoQuery": "Wellness resort spa",
+    "id": "igatpuri-wellness-resort-spa"
+   }
+  ]
  },
  {
   "activities": [
@@ -635,7 +1292,49 @@
   "vegNote": "Few eateries; carry snacks, veg in Satara",
   "id": "kaas",
   "lat": 17.72,
-  "lon": 73.82
+  "lon": 73.82,
+  "stops": [
+   {
+    "name": "Kaas flower plateau walk",
+    "kind": "nature",
+    "best": "morning",
+    "mins": 120,
+    "note": "Late Aug–early Oct only; book entry slot online",
+    "indoor": false,
+    "photoQuery": "Kaas flower plateau walk",
+    "id": "kaas-kaas-flower-plateau-walk"
+   },
+   {
+    "name": "Kas lake",
+    "kind": "water",
+    "best": "afternoon",
+    "mins": 45,
+    "note": "Picnic spot near the plateau",
+    "indoor": false,
+    "photoQuery": "Kas lake",
+    "id": "kaas-kas-lake"
+   },
+   {
+    "name": "Sajjangad fort",
+    "kind": "temple",
+    "best": "afternoon",
+    "mins": 90,
+    "note": "Samarth Ramdas samadhi; veg prasad",
+    "indoor": false,
+    "photoQuery": "Sajjangad fort",
+    "id": "kaas-sajjangad-fort"
+   },
+   {
+    "name": "Thoseghar waterfall",
+    "kind": "view",
+    "best": "morning",
+    "mins": 60,
+    "note": "Tall falls, viewing gallery; best Jul–Oct",
+    "indoor": false,
+    "photoQuery": "Thoseghar waterfall",
+    "id": "kaas-thoseghar-waterfall"
+   }
+  ]
  },
  {
   "activities": [
@@ -685,7 +1384,39 @@
   "vegNote": "Camps offer veg menus",
   "id": "kolad",
   "lat": 18.43,
-  "lon": 73.25
+  "lon": 73.25,
+  "stops": [
+   {
+    "name": "Kundalika river rafting",
+    "kind": "adventure",
+    "best": "morning",
+    "mins": 150,
+    "note": "Morning release slots; book a licensed operator",
+    "indoor": false,
+    "photoQuery": "Kundalika river rafting",
+    "id": "kolad-kundalika-river-rafting"
+   },
+   {
+    "name": "Riverside camp, kayaking and zip-line",
+    "kind": "adventure",
+    "best": "afternoon",
+    "mins": 180,
+    "note": "Most camps bundle activities",
+    "indoor": false,
+    "photoQuery": "Riverside camp",
+    "id": "kolad-riverside-camp-kayaking-and-zip-line"
+   },
+   {
+    "name": "Sutarwadi lake",
+    "kind": "view",
+    "best": "sunset",
+    "mins": 45,
+    "note": "Quiet lake near Kolad",
+    "indoor": false,
+    "photoQuery": "Sutarwadi lake",
+    "id": "kolad-sutarwadi-lake"
+   }
+  ]
  },
  {
   "activities": [
@@ -734,7 +1465,59 @@
   "vegNote": "Famous for non-veg, but veg Kolhapuri misal and thalis are easy to find",
   "id": "kolhapur",
   "lat": 16.7,
-  "lon": 74.24
+  "lon": 74.24,
+  "stops": [
+   {
+    "name": "Kolhapuri chappal market",
+    "kind": "craft",
+    "best": "evening",
+    "mins": 60,
+    "note": "Chappal lane near Mahadwar road",
+    "indoor": true,
+    "photoQuery": "Kolhapuri chappal market",
+    "id": "kolhapur-kolhapuri-chappal-market"
+   },
+   {
+    "name": "Mahalaxmi temple",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 75,
+    "note": "Early morning darshan",
+    "indoor": true,
+    "photoQuery": "Mahalaxmi temple",
+    "id": "kolhapur-mahalaxmi-temple"
+   },
+   {
+    "name": "New Palace museum",
+    "kind": "heritage",
+    "best": "afternoon",
+    "mins": 75,
+    "note": "Shahu Maharaj museum",
+    "indoor": true,
+    "photoQuery": "New Palace museum",
+    "id": "kolhapur-new-palace-museum"
+   },
+   {
+    "name": "Panhala fort",
+    "kind": "fort",
+    "best": "morning",
+    "mins": 150,
+    "note": "Big fort, cool weather, 20 km",
+    "indoor": false,
+    "photoQuery": "Panhala fort",
+    "id": "kolhapur-panhala-fort"
+   },
+   {
+    "name": "Rankala lake",
+    "kind": "water",
+    "best": "sunset",
+    "mins": 60,
+    "note": "Evening walk and street food",
+    "indoor": false,
+    "photoQuery": "Rankala lake",
+    "id": "kolhapur-rankala-lake"
+   }
+  ]
  },
  {
   "activities": [
@@ -775,7 +1558,39 @@
   "vegNote": "Simple veg food",
   "id": "lonar",
   "lat": 19.98,
-  "lon": 76.51
+  "lon": 76.51,
+  "stops": [
+   {
+    "name": "Crater lake walk",
+    "kind": "walk",
+    "best": "morning",
+    "mins": 150,
+    "note": "Steep path down and back",
+    "indoor": false,
+    "photoQuery": "Crater lake walk",
+    "id": "lonar-crater-lake-walk"
+   },
+   {
+    "name": "Daitya Sudan temple",
+    "kind": "temple",
+    "best": "afternoon",
+    "mins": 45,
+    "note": "Hemadpanti temple in town",
+    "indoor": false,
+    "photoQuery": "Daitya Sudan temple",
+    "id": "lonar-daitya-sudan-temple"
+   },
+   {
+    "name": "Lonar crater rim viewpoint",
+    "kind": "view",
+    "best": "sunrise",
+    "mins": 45,
+    "note": "Best light at sunrise",
+    "indoor": false,
+    "photoQuery": "Lonar crater rim viewpoint",
+    "id": "lonar-lonar-crater-rim-viewpoint"
+   }
+  ]
  },
  {
   "activities": [
@@ -830,7 +1645,79 @@
   "vegNote": "Plenty of pure veg restaurants and Gujarati thalis",
   "id": "lonavala",
   "lat": 18.75,
-  "lon": 73.41
+  "lon": 73.41,
+  "stops": [
+   {
+    "name": "Bhaja Caves",
+    "kind": "heritage",
+    "best": "morning",
+    "mins": 75,
+    "note": "Quieter rock-cut caves near Karla",
+    "indoor": false,
+    "photoQuery": "Bhaja Caves",
+    "id": "lonavala-bhaja-caves"
+   },
+   {
+    "name": "Chikki and fudge shopping",
+    "kind": "shop",
+    "best": "evening",
+    "mins": 45,
+    "note": "Maganlal and others on the main road",
+    "indoor": true,
+    "photoQuery": "Chikki and fudge shopping",
+    "id": "lonavala-chikki-and-fudge-shopping"
+   },
+   {
+    "name": "Della Adventure / Imagicaa (rain plan)",
+    "kind": "fun",
+    "best": "any",
+    "mins": 240,
+    "note": "Paid parks, good indoor or rain backup for kids",
+    "indoor": true,
+    "photoQuery": "Della Adventure / Imagicaa",
+    "id": "lonavala-della-adventure-imagicaa-rain-plan"
+   },
+   {
+    "name": "Karla Caves",
+    "kind": "heritage",
+    "best": "morning",
+    "mins": 90,
+    "note": "2,000-year-old Buddhist chaitya; steps up",
+    "indoor": false,
+    "photoQuery": "Karla Caves",
+    "id": "lonavala-karla-caves"
+   },
+   {
+    "name": "Lion's Point",
+    "kind": "view",
+    "best": "sunset",
+    "mins": 45,
+    "note": "Sunset over the Sahyadris",
+    "indoor": false,
+    "photoQuery": "Lion's Point",
+    "id": "lonavala-lion-s-point"
+   },
+   {
+    "name": "Rajmachi Point, Khandala",
+    "kind": "view",
+    "best": "afternoon",
+    "mins": 30,
+    "note": "View towards Rajmachi fort and the ghat",
+    "indoor": false,
+    "photoQuery": "Rajmachi Point",
+    "id": "lonavala-rajmachi-point-khandala"
+   },
+   {
+    "name": "Tiger Point (Tiger's Leap)",
+    "kind": "view",
+    "best": "sunrise",
+    "mins": 45,
+    "note": "Valley cliff view; foggy Jun–Sep",
+    "indoor": false,
+    "photoQuery": "Tiger Point",
+    "id": "lonavala-tiger-point-tiger-s-leap"
+   }
+  ]
  },
  {
   "activities": [
@@ -888,7 +1775,119 @@
   "vegNote": "Lots of pure veg restaurants and Gujarati thalis",
   "id": "mahabaleshwar",
   "lat": 17.92,
-  "lon": 73.66
+  "lon": 73.66,
+  "stops": [
+   {
+    "name": "Arthur's Seat",
+    "kind": "view",
+    "best": "morning",
+    "mins": 60,
+    "note": "Deep Savitri valley view; clearest in the morning",
+    "indoor": false,
+    "photoQuery": "Arthur's Seat",
+    "id": "mahabaleshwar-arthur-s-seat"
+   },
+   {
+    "name": "Elephant's Head Point",
+    "kind": "view",
+    "best": "sunset",
+    "mins": 40,
+    "note": "Classic sunset cliff",
+    "indoor": false,
+    "photoQuery": "Elephant's Head Point",
+    "id": "mahabaleshwar-elephant-s-head-point"
+   },
+   {
+    "name": "Kate's Point and Needle Hole",
+    "kind": "view",
+    "best": "morning",
+    "mins": 45,
+    "note": "Krishna valley and Dhom dam view",
+    "indoor": false,
+    "photoQuery": "Kate's Point and Needle Hole",
+    "id": "mahabaleshwar-kate-s-point-and-needle-hole"
+   },
+   {
+    "name": "Lingmala waterfall",
+    "kind": "walk",
+    "best": "morning",
+    "mins": 60,
+    "note": "Best Jul–Oct",
+    "indoor": false,
+    "photoQuery": "Lingmala waterfall",
+    "id": "mahabaleshwar-lingmala-waterfall"
+   },
+   {
+    "name": "Mapro Garden, Gureghar",
+    "kind": "food",
+    "best": "afternoon",
+    "mins": 60,
+    "note": "Strawberry cream, veg pizzas, sandwiches",
+    "indoor": true,
+    "photoQuery": "Mapro Garden",
+    "id": "mahabaleshwar-mapro-garden-gureghar"
+   },
+   {
+    "name": "Old Mahabaleshwar temple",
+    "kind": "temple",
+    "best": "any",
+    "mins": 45,
+    "note": "Panchganga temple, source of five rivers",
+    "indoor": true,
+    "photoQuery": "Old Mahabaleshwar temple",
+    "id": "mahabaleshwar-old-mahabaleshwar-temple"
+   },
+   {
+    "name": "Pratapgad fort",
+    "kind": "fort",
+    "best": "morning",
+    "mins": 150,
+    "note": "Shivaji's fort, 24 km; steps",
+    "indoor": false,
+    "photoQuery": "Pratapgad fort",
+    "id": "mahabaleshwar-pratapgad-fort"
+   },
+   {
+    "name": "Strawberry farm picking (Dec–Mar)",
+    "kind": "food",
+    "best": "morning",
+    "mins": 60,
+    "note": "Pick-your-own at farms around Gureghar",
+    "indoor": false,
+    "photoQuery": "Strawberry farm picking",
+    "id": "mahabaleshwar-strawberry-farm-picking-dec-mar"
+   },
+   {
+    "name": "Table Land, Panchgani",
+    "kind": "view",
+    "best": "sunset",
+    "mins": 75,
+    "note": "Huge flat plateau; horse rides, sunset",
+    "indoor": false,
+    "photoQuery": "Table Land",
+    "id": "mahabaleshwar-table-land-panchgani"
+   },
+   {
+    "name": "Venna Lake boating",
+    "kind": "water",
+    "best": "afternoon",
+    "mins": 60,
+    "note": "Pedal and row boats; corn and strawberry cream stalls",
+    "indoor": false,
+    "photoQuery": "Venna Lake boating",
+    "id": "mahabaleshwar-venna-lake-boating"
+   },
+   {
+    "name": "Wilson Point",
+    "kind": "view",
+    "best": "sunrise",
+    "mins": 40,
+    "note": "Highest point, the sunrise spot",
+    "indoor": false,
+    "photoQuery": "Wilson Point",
+    "id": "mahabaleshwar-wilson-point"
+   }
+  ]
  },
  {
   "activities": [
@@ -933,7 +1932,49 @@
   "vegNote": "Dhabas with veg; MTDC resort",
   "id": "malshej",
   "lat": 19.33,
-  "lon": 73.78
+  "lon": 73.78,
+  "stops": [
+   {
+    "name": "Lenyadri Ganpati caves",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 90,
+    "note": "Ashtavinayak cave temple; about 300 steps",
+    "indoor": false,
+    "photoQuery": "Lenyadri Ganpati caves",
+    "id": "malshej-lenyadri-ganpati-caves"
+   },
+   {
+    "name": "Malshej ghat waterfalls",
+    "kind": "view",
+    "best": "morning",
+    "mins": 90,
+    "note": "Jul–Sep; stop only at safe spots",
+    "indoor": false,
+    "photoQuery": "Malshej ghat waterfalls",
+    "id": "malshej-malshej-ghat-waterfalls"
+   },
+   {
+    "name": "Pimpalgaon Joga dam (flamingos)",
+    "kind": "nature",
+    "best": "morning",
+    "mins": 60,
+    "note": "Monsoon flamingos",
+    "indoor": false,
+    "photoQuery": "Pimpalgaon Joga dam",
+    "id": "malshej-pimpalgaon-joga-dam-flamingos"
+   },
+   {
+    "name": "Shivneri fort, Junnar",
+    "kind": "fort",
+    "best": "morning",
+    "mins": 150,
+    "note": "Shivaji's birthplace",
+    "indoor": false,
+    "photoQuery": "Shivneri fort",
+    "id": "malshej-shivneri-fort-junnar"
+   }
+  ]
  },
  {
   "activities": [
@@ -986,7 +2027,69 @@
   "vegNote": "Many veg places; Gujarati thali common",
   "id": "matheran",
   "lat": 18.99,
-  "lon": 73.27
+  "lon": 73.27,
+  "stops": [
+   {
+    "name": "Charlotte Lake",
+    "kind": "water",
+    "best": "afternoon",
+    "mins": 45,
+    "note": "Quiet lake walk",
+    "indoor": false,
+    "photoQuery": "Charlotte Lake",
+    "id": "matheran-charlotte-lake"
+   },
+   {
+    "name": "Echo Point",
+    "kind": "view",
+    "best": "afternoon",
+    "mins": 30,
+    "note": "Fun for kids",
+    "indoor": false,
+    "photoQuery": "Echo Point",
+    "id": "matheran-echo-point"
+   },
+   {
+    "name": "Louisa Point",
+    "kind": "view",
+    "best": "morning",
+    "mins": 45,
+    "note": "Prabal fort and waterfall view",
+    "indoor": false,
+    "photoQuery": "Louisa Point",
+    "id": "matheran-louisa-point"
+   },
+   {
+    "name": "Panorama Point",
+    "kind": "view",
+    "best": "sunrise",
+    "mins": 60,
+    "note": "360° view, best sunrise",
+    "indoor": false,
+    "photoQuery": "Panorama Point",
+    "id": "matheran-panorama-point"
+   },
+   {
+    "name": "Porcupine (Sunset) Point",
+    "kind": "view",
+    "best": "sunset",
+    "mins": 45,
+    "note": "Sunset over the valley",
+    "indoor": false,
+    "photoQuery": "Porcupine Point",
+    "id": "matheran-porcupine-sunset-point"
+   },
+   {
+    "name": "Toy train ride, Neral–Matheran",
+    "kind": "fun",
+    "best": "morning",
+    "mins": 150,
+    "note": "Book ahead; runs limited in monsoon",
+    "indoor": false,
+    "photoQuery": "Toy train ride",
+    "id": "matheran-toy-train-ride-neral-matheran"
+   }
+  ]
  },
  {
   "activities": [
@@ -1040,7 +2143,49 @@
   "vegNote": "Resorts serve veg thalis; ask for Maharashtrian veg",
   "id": "mulshi-tamhini",
   "lat": 18.52,
-  "lon": 73.42
+  "lon": 73.42,
+  "stops": [
+   {
+    "name": "Devkund waterfall trek",
+    "kind": "walk",
+    "best": "morning",
+    "mins": 300,
+    "note": "Plunge-pool trek from Bhira, about 2 h each way; go early, closed in heavy rain",
+    "indoor": false,
+    "photoQuery": "Devkund waterfall trek",
+    "id": "mulshi-tamhini-devkund-waterfall-trek"
+   },
+   {
+    "name": "Lakeside resort time (kayak, yoga)",
+    "kind": "wellness",
+    "best": "afternoon",
+    "mins": 150,
+    "note": "Many resorts offer kayaking and morning yoga",
+    "indoor": false,
+    "photoQuery": "Lakeside resort time",
+    "id": "mulshi-tamhini-lakeside-resort-time-kayak-yoga"
+   },
+   {
+    "name": "Mulshi dam viewpoint",
+    "kind": "view",
+    "best": "morning",
+    "mins": 40,
+    "note": "Lake and hills; best Jul–Jan",
+    "indoor": false,
+    "photoQuery": "Mulshi dam viewpoint",
+    "id": "mulshi-tamhini-mulshi-dam-viewpoint"
+   },
+   {
+    "name": "Tamhini ghat waterfalls drive",
+    "kind": "view",
+    "best": "morning",
+    "mins": 90,
+    "note": "Roadside falls Jun–Sep; stop only at safe pull-offs",
+    "indoor": false,
+    "photoQuery": "Tamhini ghat waterfalls drive",
+    "id": "mulshi-tamhini-tamhini-ghat-waterfalls-drive"
+   }
+  ]
  },
  {
   "activities": [
@@ -1089,7 +2234,59 @@
   "vegNote": "Easy veg; Nashik misal",
   "id": "nashik",
   "lat": 20.0,
-  "lon": 73.79
+  "lon": 73.79,
+  "stops": [
+   {
+    "name": "Anjaneri hill",
+    "kind": "walk",
+    "best": "morning",
+    "mins": 180,
+    "note": "Hanuman's birthplace trek, easy-moderate",
+    "indoor": false,
+    "photoQuery": "Anjaneri hill",
+    "id": "nashik-anjaneri-hill"
+   },
+   {
+    "name": "Pandavleni caves",
+    "kind": "heritage",
+    "best": "morning",
+    "mins": 75,
+    "note": "Buddhist caves on a hill",
+    "indoor": false,
+    "photoQuery": "Pandavleni caves",
+    "id": "nashik-pandavleni-caves"
+   },
+   {
+    "name": "Ramkund and Panchavati",
+    "kind": "temple",
+    "best": "evening",
+    "mins": 90,
+    "note": "Evening aarti on the Godavari",
+    "indoor": false,
+    "photoQuery": "Ramkund and Panchavati",
+    "id": "nashik-ramkund-and-panchavati"
+   },
+   {
+    "name": "Sula Vineyards visit",
+    "kind": "food",
+    "best": "afternoon",
+    "mins": 120,
+    "note": "Tours and grape juice tastings; veg restaurant",
+    "indoor": true,
+    "photoQuery": "Sula Vineyards visit",
+    "id": "nashik-sula-vineyards-visit"
+   },
+   {
+    "name": "Trimbakeshwar Jyotirlinga",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 120,
+    "note": "Long queues on weekends",
+    "indoor": true,
+    "photoQuery": "Trimbakeshwar Jyotirlinga",
+    "id": "nashik-trimbakeshwar-jyotirlinga"
+   }
+  ]
  },
  {
   "activities": [
@@ -1129,7 +2326,29 @@
   "vegNote": "Pure veg town",
   "id": "pandharpur",
   "lat": 17.68,
-  "lon": 75.33
+  "lon": 75.33,
+  "stops": [
+   {
+    "name": "Chandrabhaga river ghats",
+    "kind": "view",
+    "best": "evening",
+    "mins": 45,
+    "note": "Evening on the ghats",
+    "indoor": false,
+    "photoQuery": "Chandrabhaga river ghats",
+    "id": "pandharpur-chandrabhaga-river-ghats"
+   },
+   {
+    "name": "Vitthal–Rukmini temple",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 120,
+    "note": "Darshan queue varies a lot",
+    "indoor": true,
+    "photoQuery": "Vitthal–Rukmini temple",
+    "id": "pandharpur-vitthal-rukmini-temple"
+   }
+  ]
  },
  {
   "activities": [
@@ -1182,7 +2401,49 @@
   "vegNote": "Most camps offer a veg-only package; confirm when booking",
   "id": "pawna",
   "lat": 18.66,
-  "lon": 73.49
+  "lon": 73.49,
+  "stops": [
+   {
+    "name": "Campfire, veg BBQ and board games",
+    "kind": "fun",
+    "best": "evening",
+    "mins": 150,
+    "note": "Ask camp for veg-only menu",
+    "indoor": false,
+    "photoQuery": "Campfire",
+    "id": "pawna-campfire-veg-bbq-and-board-games"
+   },
+   {
+    "name": "Lohagad fort",
+    "kind": "fort",
+    "best": "morning",
+    "mins": 180,
+    "note": "Easy wide steps, good for families",
+    "indoor": false,
+    "photoQuery": "Lohagad fort",
+    "id": "pawna-lohagad-fort"
+   },
+   {
+    "name": "Pawna lake tent site",
+    "kind": "stay",
+    "best": "sunset",
+    "mins": 180,
+    "note": "Sunset over the lake, then campfire",
+    "indoor": false,
+    "photoQuery": "Pawna lake tent site",
+    "id": "pawna-pawna-lake-tent-site"
+   },
+   {
+    "name": "Tikona fort trek",
+    "kind": "fort",
+    "best": "sunrise",
+    "mins": 180,
+    "note": "Short steep climb, lake views from top",
+    "indoor": false,
+    "photoQuery": "Tikona fort trek",
+    "id": "pawna-tikona-fort-trek"
+   }
+  ]
  },
  {
   "activities": [
@@ -1231,7 +2492,39 @@
   "vegNote": "Village homestays cook simple veg meals",
   "id": "rajmachi",
   "lat": 18.83,
-  "lon": 73.4
+  "lon": 73.4,
+  "stops": [
+   {
+    "name": "Fireflies walk (late May–June)",
+    "kind": "nature",
+    "best": "evening",
+    "mins": 60,
+    "note": "Only before monsoon starts; carry a red torch",
+    "indoor": false,
+    "photoQuery": "Fireflies walk",
+    "id": "rajmachi-fireflies-walk-late-may-june"
+   },
+   {
+    "name": "Rajmachi village homestay",
+    "kind": "stay",
+    "best": "evening",
+    "mins": 600,
+    "note": "Simple veg dinner, stars at night",
+    "indoor": false,
+    "photoQuery": "Rajmachi village homestay",
+    "id": "rajmachi-rajmachi-village-homestay"
+   },
+   {
+    "name": "Shrivardhan and Manaranjan forts",
+    "kind": "fort",
+    "best": "sunrise",
+    "mins": 150,
+    "note": "Twin forts above the village",
+    "indoor": false,
+    "photoQuery": "Shrivardhan and Manaranjan forts",
+    "id": "rajmachi-shrivardhan-and-manaranjan-forts"
+   }
+  ]
  },
  {
   "activities": [
@@ -1271,7 +2564,39 @@
   "vegNote": "Pure veg town; prasadalaya meals",
   "id": "shirdi",
   "lat": 19.77,
-  "lon": 74.48
+  "lon": 74.48,
+  "stops": [
+   {
+    "name": "Sai Baba Samadhi Mandir darshan",
+    "kind": "temple",
+    "best": "morning",
+    "mins": 120,
+    "note": "Book darshan slot online",
+    "indoor": true,
+    "photoQuery": "Sai Baba Samadhi Mandir darshan",
+    "id": "shirdi-sai-baba-samadhi-mandir-darshan"
+   },
+   {
+    "name": "Sai Prasadalaya lunch",
+    "kind": "food",
+    "best": "afternoon",
+    "mins": 45,
+    "note": "Large veg dining hall",
+    "indoor": true,
+    "photoQuery": "Sai Prasadalaya lunch",
+    "id": "shirdi-sai-prasadalaya-lunch"
+   },
+   {
+    "name": "Shani Shingnapur",
+    "kind": "temple",
+    "best": "afternoon",
+    "mins": 90,
+    "note": "72 km from Shirdi",
+    "indoor": false,
+    "photoQuery": "Shani Shingnapur",
+    "id": "shirdi-shani-shingnapur"
+   }
+  ]
  },
  {
   "activities": [
@@ -1320,7 +2645,39 @@
   "vegNote": "Famous veg stalls: pithla bhakri, kanda bhaji, mataka dahi",
   "id": "sinhagad",
   "lat": 18.37,
-  "lon": 73.76
+  "lon": 73.76,
+  "stops": [
+   {
+    "name": "Khadakwasla dam backwaters",
+    "kind": "water",
+    "best": "sunset",
+    "mins": 45,
+    "note": "Roadside sunset on the way back; no swimming",
+    "indoor": false,
+    "photoQuery": "Khadakwasla dam backwaters",
+    "id": "sinhagad-khadakwasla-dam-backwaters"
+   },
+   {
+    "name": "Pithla-bhakri and mataka dahi stalls",
+    "kind": "food",
+    "best": "morning",
+    "mins": 45,
+    "note": "Veg breakfast at the top",
+    "indoor": false,
+    "photoQuery": "Pithla-bhakri and mataka dahi stalls",
+    "id": "sinhagad-pithla-bhakri-and-mataka-dahi-stalls"
+   },
+   {
+    "name": "Sinhagad Fort top (Kalyan Darwaza)",
+    "kind": "fort",
+    "best": "sunrise",
+    "mins": 120,
+    "note": "Walk the ramparts; Tanaji memorial",
+    "indoor": false,
+    "photoQuery": "Sinhagad Fort top",
+    "id": "sinhagad-sinhagad-fort-top-kalyan-darwaza"
+   }
+  ]
  },
  {
   "activities": [
@@ -1371,7 +2728,69 @@
   "vegNote": "Seafood capital; veg needs planning, pick a stay with a veg kitchen",
   "id": "tarkarli",
   "lat": 16.03,
-  "lon": 73.47
+  "lon": 73.47,
+  "stops": [
+   {
+    "name": "Backwater houseboat stay",
+    "kind": "stay",
+    "best": "evening",
+    "mins": 600,
+    "note": "Karli river houseboats; ask for veg meals",
+    "indoor": false,
+    "photoQuery": "Backwater houseboat stay",
+    "id": "tarkarli-backwater-houseboat-stay"
+   },
+   {
+    "name": "Devbag sangam boat ride",
+    "kind": "water",
+    "best": "afternoon",
+    "mins": 90,
+    "note": "River meets sea; dolphins sometimes",
+    "indoor": false,
+    "photoQuery": "Devbag sangam boat ride",
+    "id": "tarkarli-devbag-sangam-boat-ride"
+   },
+   {
+    "name": "Sindhudurg fort",
+    "kind": "fort",
+    "best": "morning",
+    "mins": 120,
+    "note": "Boat from Malvan jetty",
+    "indoor": false,
+    "photoQuery": "Sindhudurg fort",
+    "id": "tarkarli-sindhudurg-fort"
+   },
+   {
+    "name": "Snorkelling at Sindhudurg",
+    "kind": "adventure",
+    "best": "morning",
+    "mins": 90,
+    "note": "Oct–May; pick a licensed operator",
+    "indoor": false,
+    "photoQuery": "Snorkelling at Sindhudurg",
+    "id": "tarkarli-snorkelling-at-sindhudurg"
+   },
+   {
+    "name": "Tarkarli beach",
+    "kind": "sea",
+    "best": "sunset",
+    "mins": 90,
+    "note": "Long clean beach",
+    "indoor": false,
+    "photoQuery": "Tarkarli beach",
+    "id": "tarkarli-tarkarli-beach"
+   },
+   {
+    "name": "Tsunami island",
+    "kind": "water",
+    "best": "afternoon",
+    "mins": 90,
+    "note": "Sandbar with water sports",
+    "indoor": false,
+    "photoQuery": "Tsunami island",
+    "id": "tarkarli-tsunami-island"
+   }
+  ]
  },
  {
   "activities": [
@@ -1413,6 +2832,38 @@
   "vegNote": "Village homestays cook veg Konkani meals",
   "id": "velas",
   "lat": 17.96,
-  "lon": 73.03
+  "lon": 73.03,
+  "stops": [
+   {
+    "name": "Bankot fort",
+    "kind": "fort",
+    "best": "afternoon",
+    "mins": 60,
+    "note": "Small fort over the creek",
+    "indoor": false,
+    "photoQuery": "Bankot fort",
+    "id": "velas-bankot-fort"
+   },
+   {
+    "name": "Turtle hatchling release",
+    "kind": "nature",
+    "best": "sunrise",
+    "mins": 60,
+    "note": "Feb–Apr only, around 7 AM and 6 PM",
+    "indoor": false,
+    "photoQuery": "Turtle hatchling release",
+    "id": "velas-turtle-hatchling-release"
+   },
+   {
+    "name": "Velas beach",
+    "kind": "sea",
+    "best": "sunset",
+    "mins": 90,
+    "note": "Undeveloped beach",
+    "indoor": false,
+    "photoQuery": "Velas beach",
+    "id": "velas-velas-beach"
+   }
+  ]
  }
 ]

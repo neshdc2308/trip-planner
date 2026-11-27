@@ -24,7 +24,293 @@
   "prepDone": [],
   "review": null,
   "status": "idea",
-  "id": "coast-calm"
+  "id": "coast-calm",
+  "itinerary": [
+   {
+    "start": "06:00",
+    "place": "Pune → Diveagar",
+    "stay": "Diveagar homestay",
+    "items": [
+     {
+      "k": "drive",
+      "name": "Pune → Diveagar via Tamhini ghat, tea stop at Mulshi",
+      "km": 170,
+      "mins": 300
+     },
+     {
+      "k": "meal",
+      "name": "Lunch at homestay",
+      "mins": 60
+     },
+     {
+      "k": "rest",
+      "name": "Rest",
+      "mins": 120
+     },
+     {
+      "k": "stop",
+      "ref": "diveagar-diveagar-beach"
+     },
+     {
+      "k": "stop",
+      "ref": "diveagar-konkan-homestay-veg-thali"
+     }
+    ]
+   },
+   {
+    "start": "07:00",
+    "place": "Diveagar",
+    "stay": "Diveagar homestay",
+    "items": [
+     {
+      "k": "stop",
+      "ref": "diveagar-golden-ganesh-temple-diveagar"
+     },
+     {
+      "k": "meal",
+      "name": "Breakfast",
+      "mins": 45
+     },
+     {
+      "k": "rest",
+      "name": "Slow morning: yoga or walk",
+      "mins": 150
+     },
+     {
+      "k": "meal",
+      "name": "Lunch",
+      "mins": 60
+     },
+     {
+      "k": "rest",
+      "name": "Rest",
+      "mins": 120
+     },
+     {
+      "k": "stop",
+      "ref": "diveagar-shrivardhan-beach"
+     }
+    ]
+   },
+   {
+    "start": "07:00",
+    "place": "Harihareshwar day trip",
+    "stay": "Diveagar homestay",
+    "items": [
+     {
+      "k": "meal",
+      "name": "Breakfast",
+      "mins": 45
+     },
+     {
+      "k": "drive",
+      "name": "Diveagar → Harihareshwar",
+      "km": 25,
+      "mins": 45
+     },
+     {
+      "k": "stop",
+      "ref": "diveagar-harihareshwar-temple-and-pradakshina-cli"
+     },
+     {
+      "k": "meal",
+      "name": "Lunch",
+      "mins": 60
+     },
+     {
+      "k": "drive",
+      "name": "Back to Diveagar",
+      "km": 25,
+      "mins": 45
+     },
+     {
+      "k": "rest",
+      "name": "Massage or spa at stay (optional)",
+      "mins": 90
+     },
+     {
+      "k": "stop",
+      "ref": "diveagar-diveagar-beach"
+     }
+    ]
+   },
+   {
+    "start": "07:00",
+    "place": "Diveagar → Ganpatipule",
+    "stay": "MTDC Ganpatipule",
+    "items": [
+     {
+      "k": "meal",
+      "name": "Breakfast",
+      "mins": 45
+     },
+     {
+      "k": "drive",
+      "name": "Diveagar → Bankot",
+      "km": 30,
+      "mins": 60
+     },
+     {
+      "k": "stop",
+      "ref": "diveagar-bankot-creek-ferry-and-fort"
+     },
+     {
+      "k": "drive",
+      "name": "Bankot → Ganpatipule (NH66 works, daylight only)",
+      "km": 150,
+      "mins": 240
+     },
+     {
+      "k": "meal",
+      "name": "Late lunch",
+      "mins": 60
+     },
+     {
+      "k": "rest",
+      "name": "Rest",
+      "mins": 60
+     },
+     {
+      "k": "stop",
+      "ref": "ganpatipule-ganpatipule-beach"
+     }
+    ]
+   },
+   {
+    "start": "06:30",
+    "place": "Ganpatipule",
+    "stay": "MTDC Ganpatipule",
+    "items": [
+     {
+      "k": "stop",
+      "ref": "ganpatipule-swayambhu-ganpati-temple-and-pradakshina"
+     },
+     {
+      "k": "meal",
+      "name": "Breakfast",
+      "mins": 45
+     },
+     {
+      "k": "rest",
+      "name": "Pool or beach rest",
+      "mins": 150
+     },
+     {
+      "k": "meal",
+      "name": "Lunch",
+      "mins": 60
+     },
+     {
+      "k": "rest",
+      "name": "Rest",
+      "mins": 120
+     },
+     {
+      "k": "stop",
+      "ref": "ganpatipule-aare-ware-coastal-road"
+     }
+    ]
+   },
+   {
+    "start": "07:30",
+    "place": "Ratnagiri day trip",
+    "stay": "MTDC Ganpatipule",
+    "items": [
+     {
+      "k": "meal",
+      "name": "Breakfast",
+      "mins": 45
+     },
+     {
+      "k": "drive",
+      "name": "Ganpatipule → Ratnagiri",
+      "km": 25,
+      "mins": 50
+     },
+     {
+      "k": "stop",
+      "ref": "ganpatipule-thibaw-palace-and-ratnadurg-ratnagiri"
+     },
+     {
+      "k": "meal",
+      "name": "Lunch in Ratnagiri",
+      "mins": 60
+     },
+     {
+      "k": "stop",
+      "ref": "ganpatipule-prachin-konkan-museum"
+     },
+     {
+      "k": "drive",
+      "name": "Back to Ganpatipule",
+      "km": 25,
+      "mins": 50
+     },
+     {
+      "k": "stop",
+      "ref": "ganpatipule-ganpatipule-beach"
+     }
+    ]
+   },
+   {
+    "start": "07:00",
+    "place": "Ganpatipule",
+    "stay": "MTDC Ganpatipule",
+    "items": [
+     {
+      "k": "rest",
+      "name": "Sunrise yoga on the beach",
+      "mins": 60
+     },
+     {
+      "k": "meal",
+      "name": "Breakfast",
+      "mins": 45
+     },
+     {
+      "k": "rest",
+      "name": "Free morning: cards and board games",
+      "mins": 150
+     },
+     {
+      "k": "meal",
+      "name": "Lunch",
+      "mins": 60
+     },
+     {
+      "k": "stop",
+      "ref": "ganpatipule-jaigad-fort-and-lighthouse"
+     },
+     {
+      "k": "stop",
+      "ref": "ganpatipule-ganpatipule-beach"
+     }
+    ]
+   },
+   {
+    "start": "06:00",
+    "place": "Ganpatipule → Pune",
+    "stay": "Home",
+    "items": [
+     {
+      "k": "drive",
+      "name": "Ganpatipule → Pune via Chiplun and Kumbharli ghat, tea stop",
+      "km": 330,
+      "mins": 420
+     },
+     {
+      "k": "meal",
+      "name": "Lunch on the way (Karad or Satara)",
+      "mins": 60
+     },
+     {
+      "k": "rest",
+      "name": "Unpack and rest",
+      "mins": 60
+     }
+    ]
+   }
+  ]
  },
  {
   "brief": {
@@ -52,7 +338,194 @@
   "prepDone": [],
   "review": null,
   "status": "idea",
-  "id": "hills-trails"
+  "id": "hills-trails",
+  "itinerary": [
+   {
+    "start": "06:30",
+    "place": "Pune → Bhandardara",
+    "stay": "Lake resort",
+    "items": [
+     {
+      "k": "drive",
+      "name": "Pune → Bhandardara via Sangamner, tea stop",
+      "km": 180,
+      "mins": 270
+     },
+     {
+      "k": "meal",
+      "name": "Lunch at resort",
+      "mins": 60
+     },
+     {
+      "k": "rest",
+      "name": "Rest",
+      "mins": 90
+     },
+     {
+      "k": "stop",
+      "ref": "bhandardara-arthur-lake-and-wilson-dam"
+     },
+     {
+      "k": "stop",
+      "ref": "bhandardara-umbrella-falls"
+     }
+    ]
+   },
+   {
+    "start": "07:00",
+    "place": "Bhandardara",
+    "stay": "Lake resort",
+    "items": [
+     {
+      "k": "meal",
+      "name": "Breakfast",
+      "mins": 45
+     },
+     {
+      "k": "stop",
+      "ref": "bhandardara-randha-falls"
+     },
+     {
+      "k": "stop",
+      "ref": "bhandardara-amruteshwar-temple-ratangad-base"
+     },
+     {
+      "k": "meal",
+      "name": "Lunch",
+      "mins": 60
+     },
+     {
+      "k": "rest",
+      "name": "Rest",
+      "mins": 120
+     },
+     {
+      "k": "rest",
+      "name": "Lakeside sunset walk",
+      "mins": 60
+     }
+    ]
+   },
+   {
+    "start": "05:00",
+    "place": "Kalsubai trek",
+    "stay": "Lake resort",
+    "items": [
+     {
+      "k": "stop",
+      "ref": "bhandardara-kalsubai-peak-trek"
+     },
+     {
+      "k": "meal",
+      "name": "Late breakfast and lunch",
+      "mins": 75
+     },
+     {
+      "k": "rest",
+      "name": "Long rest",
+      "mins": 180
+     },
+     {
+      "k": "rest",
+      "name": "Easy evening, board games",
+      "mins": 90
+     }
+    ]
+   },
+   {
+    "start": "08:00",
+    "place": "Tent night",
+    "stay": "Lakeside tent",
+    "items": [
+     {
+      "k": "meal",
+      "name": "Breakfast",
+      "mins": 45
+     },
+     {
+      "k": "rest",
+      "name": "Slow morning",
+      "mins": 120
+     },
+     {
+      "k": "meal",
+      "name": "Lunch",
+      "mins": 60
+     },
+     {
+      "k": "rest",
+      "name": "Move to tent site",
+      "mins": 60
+     },
+     {
+      "k": "stop",
+      "ref": "bhandardara-lakeside-tent-night"
+     }
+    ]
+   },
+   {
+    "start": "07:00",
+    "place": "Bhandardara → Igatpuri",
+    "stay": "Igatpuri wellness resort",
+    "items": [
+     {
+      "k": "meal",
+      "name": "Breakfast",
+      "mins": 45
+     },
+     {
+      "k": "drive",
+      "name": "Bhandardara → Igatpuri",
+      "km": 45,
+      "mins": 75
+     },
+     {
+      "k": "stop",
+      "ref": "igatpuri-camel-valley-viewpoint"
+     },
+     {
+      "k": "meal",
+      "name": "Lunch",
+      "mins": 60
+     },
+     {
+      "k": "stop",
+      "ref": "igatpuri-wellness-resort-spa"
+     },
+     {
+      "k": "stop",
+      "ref": "igatpuri-bhavali-dam"
+     }
+    ]
+   },
+   {
+    "start": "07:30",
+    "place": "Igatpuri → Pune",
+    "stay": "Home",
+    "items": [
+     {
+      "k": "stop",
+      "ref": "igatpuri-vipassana-centre-dhamma-giri-visit"
+     },
+     {
+      "k": "meal",
+      "name": "Breakfast",
+      "mins": 45
+     },
+     {
+      "k": "meal",
+      "name": "Early lunch",
+      "mins": 60
+     },
+     {
+      "k": "drive",
+      "name": "Igatpuri → Pune via Nashik highway (leave by 1 PM)",
+      "km": 220,
+      "mins": 270
+     }
+    ]
+   }
+  ]
  },
  {
   "brief": {
@@ -79,7 +552,149 @@
   "prepDone": [],
   "review": null,
   "status": "idea",
-  "id": "jungle-tents"
+  "id": "jungle-tents",
+  "itinerary": [
+   {
+    "start": "06:00",
+    "place": "Pune → Dandeli",
+    "stay": "Riverside tents",
+    "items": [
+     {
+      "k": "drive",
+      "name": "Pune → Dandeli via Kolhapur and Belagavi, tea stop",
+      "km": 430,
+      "mins": 480
+     },
+     {
+      "k": "meal",
+      "name": "Lunch near Belagavi",
+      "mins": 60
+     },
+     {
+      "k": "rest",
+      "name": "Check in and rest",
+      "mins": 60
+     },
+     {
+      "k": "stop",
+      "ref": "dandeli-riverside-tent-stay"
+     }
+    ]
+   },
+   {
+    "start": "06:00",
+    "place": "Dandeli",
+    "stay": "Riverside tents",
+    "items": [
+     {
+      "k": "stop",
+      "ref": "dandeli-jungle-safari-kali-tiger-reserve"
+     },
+     {
+      "k": "meal",
+      "name": "Breakfast",
+      "mins": 45
+     },
+     {
+      "k": "rest",
+      "name": "Rest",
+      "mins": 150
+     },
+     {
+      "k": "meal",
+      "name": "Lunch",
+      "mins": 60
+     },
+     {
+      "k": "stop",
+      "ref": "dandeli-syntheri-rocks"
+     },
+     {
+      "k": "rest",
+      "name": "Campfire",
+      "mins": 90
+     }
+    ]
+   },
+   {
+    "start": "07:30",
+    "place": "Dandeli",
+    "stay": "Riverside tents",
+    "items": [
+     {
+      "k": "meal",
+      "name": "Breakfast",
+      "mins": 45
+     },
+     {
+      "k": "stop",
+      "ref": "dandeli-kali-river-rafting"
+     },
+     {
+      "k": "meal",
+      "name": "Lunch",
+      "mins": 60
+     },
+     {
+      "k": "rest",
+      "name": "Rest",
+      "mins": 120
+     },
+     {
+      "k": "stop",
+      "ref": "dandeli-kavala-caves"
+     }
+    ]
+   },
+   {
+    "start": "06:00",
+    "place": "Dandeli",
+    "stay": "Riverside tents",
+    "items": [
+     {
+      "k": "stop",
+      "ref": "dandeli-jungle-safari-kali-tiger-reserve"
+     },
+     {
+      "k": "meal",
+      "name": "Breakfast",
+      "mins": 45
+     },
+     {
+      "k": "rest",
+      "name": "Birding and rest",
+      "mins": 180
+     },
+     {
+      "k": "meal",
+      "name": "Lunch",
+      "mins": 60
+     },
+     {
+      "k": "stop",
+      "ref": "dandeli-supa-dam-viewpoint"
+     }
+    ]
+   },
+   {
+    "start": "06:00",
+    "place": "Dandeli → Pune",
+    "stay": "Home",
+    "items": [
+     {
+      "k": "drive",
+      "name": "Dandeli → Pune, tea stop",
+      "km": 430,
+      "mins": 480
+     },
+     {
+      "k": "meal",
+      "name": "Lunch near Kolhapur",
+      "mins": 60
+     }
+    ]
+   }
+  ]
  },
  {
   "brief": {
@@ -104,6 +719,101 @@
   "prepDone": [],
   "review": null,
   "status": "idea",
-  "id": "weekend-reset"
+  "id": "weekend-reset",
+  "itinerary": [
+   {
+    "start": "07:30",
+    "place": "Pune → Pawna",
+    "stay": "Pawna lake tent",
+    "items": [
+     {
+      "k": "drive",
+      "name": "Pune → Lohagad via Expressway",
+      "km": 55,
+      "mins": 90
+     },
+     {
+      "k": "stop",
+      "ref": "pawna-lohagad-fort"
+     },
+     {
+      "k": "meal",
+      "name": "Lunch",
+      "mins": 60
+     },
+     {
+      "k": "rest",
+      "name": "Check in and rest",
+      "mins": 120
+     },
+     {
+      "k": "stop",
+      "ref": "pawna-pawna-lake-tent-site"
+     },
+     {
+      "k": "stop",
+      "ref": "pawna-campfire-veg-bbq-and-board-games"
+     }
+    ]
+   },
+   {
+    "start": "06:00",
+    "place": "Pawna → Mulshi",
+    "stay": "Mulshi lake resort",
+    "items": [
+     {
+      "k": "stop",
+      "ref": "pawna-tikona-fort-trek"
+     },
+     {
+      "k": "meal",
+      "name": "Breakfast",
+      "mins": 45
+     },
+     {
+      "k": "drive",
+      "name": "Pawna → Mulshi",
+      "km": 45,
+      "mins": 75
+     },
+     {
+      "k": "meal",
+      "name": "Lunch",
+      "mins": 60
+     },
+     {
+      "k": "stop",
+      "ref": "mulshi-tamhini-lakeside-resort-time-kayak-yoga"
+     },
+     {
+      "k": "rest",
+      "name": "Phones away after 8 PM",
+      "mins": 60
+     }
+    ]
+   },
+   {
+    "start": "07:00",
+    "place": "Mulshi → Pune",
+    "stay": "Home",
+    "items": [
+     {
+      "k": "stop",
+      "ref": "mulshi-tamhini-mulshi-dam-viewpoint"
+     },
+     {
+      "k": "meal",
+      "name": "Slow breakfast",
+      "mins": 60
+     },
+     {
+      "k": "drive",
+      "name": "Mulshi → Pune",
+      "km": 50,
+      "mins": 90
+     }
+    ]
+   }
+  ]
  }
 ]

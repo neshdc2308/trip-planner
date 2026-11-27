@@ -11,9 +11,9 @@ A road-trip planner for a vegetarian family travelling by car from Pune. It foll
 
 | Tab | What it does |
 | --- | --- |
-| Explore | 29 places around Pune with experience tags, best months, veg rating, local tips, risks, a Maps route link and a 7-day forecast |
+| Explore | 29 places around Pune with 139 small spots (viewpoints, temples, forts, walks, food) showing best time of day, duration and photos, plus tips, risks, Maps links and a 7-day forecast |
 | Plan | Trip brief, then a Claude prompt you copy into Claude; paste the answer back to see and save the plan |
-| Trips | Saved trips with spending log and after-trip review |
+| Trips | Hour-by-hour timelines with sunrise and sunset. Delay, reorder, move to next day, remove, add a place or rain plan, add or remove days. Warnings for driving after dark or wrong-time viewpoints. Spending log and review |
 | Stays | Saved stays plus compare links for today's prices |
 | Prep | Countdown checklist for 30 days, 7 days and 1 day before leaving |
 | Road watch | Road news and closures with sources and the date checked |
@@ -32,3 +32,9 @@ GitHub Pages hosts the site. The workflow in `.github/workflows/deploy.yml` runs
 To run it on your computer: `python3 -m http.server` in this folder, then open http://localhost:8000.
 
 Distances and drive times are approximate. Always check road news 7 days before you leave.
+
+## Changing a plan on the road
+
+Open the trip in **Trips**. Each item has buttons: **+15m** (running late), **↑ ↓** (reorder), **Next day** (didn't fit today), **Remove**. Use **Add a place to see** or type your own item to fill a gap, and **Rain plan** to add an indoor option. All times after the change move automatically, and sunset spots wait for the sunset slot.
+
+`tools/build_pages.py` (kept in the project files) builds this page from the Claude app version.

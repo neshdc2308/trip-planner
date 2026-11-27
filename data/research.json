@@ -43,5 +43,16 @@
   "summary": "Saved as Road watch items: NH66 still under work, Expressway missing link open since 1 May 2026, NH48 works and holiday jams, Bopdev, Malshej, Varandha and Dive ghat closures.",
   "title": "Road news around Pune",
   "id": "roads-2026-11-27"
+ },
+ {
+  "id": "gaps-2026-11-27",
+  "title": "Gap review of the planner",
+  "query": "Review of what the planner still misses",
+  "date": "2026-11-27",
+  "summary": "Fixed now:\n• Each place lists its small spots (139 in total): viewpoints, temples, forts, walks, food. Each has a best time of day, how long it takes, rain-safe flag and closed days.\n• Photos for every small spot from Wikimedia Commons.\n• Concrete hour-by-hour timelines for all 4 trips, with sunrise and sunset for each day and place.\n• Editing: delay 15 min, move up or down, move to next day, remove, add a place, add your own item, rain plan, add or remove a day. Times recalculate automatically.\n• Warnings: driving after sunset, sunset or sunrise spots at the wrong time, places closed that weekday.\n\nStill open:\n1. Who travels (ages, seniors, kids) and budget per trip type.\n2. Live hotel prices (Booking.com and Tripadvisor connectors, on request).\n3. Fuel pumps, EV chargers, hospitals and toilets along each route.\n4. Entry fees, timings and ticket links per small spot.\n5. Tide times for Kolaba fort, Harihareshwar and beach walks.\n6. Sharing one trip between family phones (this site keeps edits per browser).\n7. Offline use on the road.\n8. Packing list by trip type.\n9. Drive times are estimates; check Google Maps on the day.",
+  "sources": [
+   "https://commons.wikimedia.org/",
+   "https://open-meteo.com/"
+  ]
  }
 ]
