@@ -105,6 +105,10 @@ details>summary{cursor:pointer;font-weight:600}
 .tl.now .t{font-weight:700}
 .meter{height:8px;border-radius:99px;background:var(--line);overflow:hidden}.meter>i{display:block;height:100%;background:var(--teal)}
 .score{font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--teal);min-width:3ch;display:inline-block}
+.fcard{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:start;border-top:1px solid var(--line);padding-top:8px}
+.wx{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:6px}
+.wx>div{border:1px solid var(--line);border-radius:10px;padding:6px 8px;font-size:.8rem}
+.wx>div.on{border-color:var(--teal);border-width:2px}
 </style>
 </head>
 <body>
@@ -153,6 +157,8 @@ details>summary{cursor:pointer;font-weight:600}
 
 <!-- PLAN -->
 <section id="v-plan" class="view" hidden style="display:flex;flex-direction:column;gap:14px">
+  <div class="card" id="fam-card"></div>
+  <div class="card" id="learn-card"></div>
   <div class="card">
     <h2>Trip brief</h2>
     <form id="brief" class="two">
@@ -257,13 +263,13 @@ details>summary{cursor:pointer;font-weight:600}
 "use strict";
 var TAGS=["wellness","nature","sea","mountains","water","river","greenery","treks","jungle","tents","adventure","food","craft","spiritual","fun"];
 var MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-var S={spots:[],routes:[],alerts:[],research:[],requests:[],trips:[],stays:[],prep:[],notes:[],kit:[],photos:[]};
+var S={spots:[],routes:[],alerts:[],research:[],requests:[],trips:[],stays:[],prep:[],notes:[],kit:[],photos:[],family:[],watch:[]};
 var STOPS_ALL=[];Object.defineProperty(S,"stops",{enumerable:false,get:function(){return STOPS_ALL}});
 function deriveStops(){STOPS_ALL=[];S.spots.forEach(function(sp){(sp.stops||[]).forEach(function(x){var v=Object.assign({},x);v.spotId=sp.id;STOPS_ALL.push(v)})})}
 var openTrips=new Set();
 var db=null, sample=null, picked=new Set(), tagFilter=new Set(), mood=new Set(["sea","wellness","food"]), lastPlan=null;
 function $(id){return document.getElementById(id)}
-function el(tag,attrs,kids){var e=document.createElement(tag);if(attrs)for(var k in attrs){if(k==="text")e.textContent=attrs[k];else if(k==="class")e.className=attrs[k];else if(k.slice(0,2)==="on")e.addEventListener(k.slice(2),attrs[k]);else e.setAttribute(k,attrs[k]);}(kids||[]).forEach(function(c){if(c!=null)e.appendChild(typeof c==="string"?document.createTextNode(c):c)});return e}
+function el(tag,attrs,kids){var e=document.createElement(tag);if(attrs)for(var k in attrs){if(attrs[k]==null||attrs[k]===false)continue;if(k==="text")e.textContent=attrs[k];else if(k==="class")e.className=attrs[k];else if(k.slice(0,2)==="on")e.addEventListener(k.slice(2),attrs[k]);else e.setAttribute(k,attrs[k]);}(kids||[]).forEach(function(c){if(c!=null)e.appendChild(typeof c==="string"?document.createTextNode(c):c)});return e}
 function safeUrl(u){return typeof u==="string"&&u.indexOf("https://")===0?u:null}
 function link(u,t){var s=safeUrl(u);return s?el("a",{href:s,target:"_blank",rel:"noopener",text:t||hostOf(s)}):null}
 function hostOf(u){try{return new URL(u).hostname.replace(/^www\./,"")}catch(e){return u}}
@@ -326,6 +332,7 @@ function renderSpots(){
       s.checked?el("p",{class:"small muted",text:"Last checked "+s.checked}):null,
       weatherLine(s.id),
       extra.length?el("div",{style:"display:flex;flex-direction:column;gap:4px"},extra):null,
+      liveBox(s),
       socialRow(s),
       notesBox(s),
       el("a",{href:"#stays",class:"small",text:nStays?nStays+" saved stays":"No stays saved yet",onclick:function(){$("st-spot").value=s.id;renderStays()}}),
@@ -651,6 +658,7 @@ function renderTimeline(t,box){
       if(sun&&st&&st.best==="sunrise"&&s0>sun.rise+60)warn.push("Best at sunrise, "+hm(sun.rise)+".");
       if(st&&st.closed&&wd===st.closed)warn.push("Closed on "+st.closed+"days. Move it.");
       if(e0>23*60)warn.push("Runs late into the night.");
+      famWarn(x,st,name,mins).forEach(function(w){warn.push(w)});
       function mv(fn){return function(){fn();save()}}
       var ctr=el("div",{class:"row ctl"},[
         el("button",{type:"button",title:"Delay 15 minutes",text:"+15m",onclick:mv(function(){it[di].items[ii].delay=(+it[di].items[ii].delay||0)+15})}),
@@ -666,6 +674,7 @@ function renderTimeline(t,box){
           warn.length?el("span",{class:"small warn",text:warn.join(" ")}):null,ctr])]));
     });
     card.appendChild(el("p",{class:"small muted",text:"Day ends about "+hm(cur)+(d.stay?" · Night: "+d.stay:"")}));
+    famDayNotes(d,cur).forEach(function(w){card.appendChild(el("p",{class:"small warn",text:w}))});
     // add controls
     var pool=S.stops.slice().sort(function(a,b){var pa=places.indexOf(a.spotId),pb=places.indexOf(b.spotId);pa=pa<0?99:pa;pb=pb<0?99:pb;return pa-pb||a.name.localeCompare(b.name)});
     var sel=el("select",{id:"tl-add-"+t.id+"-"+di,style:"max-width:100%"},[el("option",{value:"",text:"Add a place to see…"})].concat(pool.map(function(x){var s=spotById(x.spotId);return el("option",{value:x.id,text:(s?s.name+": ":"")+x.name})})));
@@ -775,7 +784,7 @@ function renderPrep(){var box=$("prep");box.textContent="";
 }
 var KIT_TAGS=["beach","hills","jungle","temple","monsoon","camping","kids","seniors"],kitSel=new Set(["beach"]);
 KIT_TAGS.forEach(function(k){var b=el("button",{type:"button",text:k,class:kitSel.has(k)?"on":"",onclick:function(){if(kitSel.has(k))kitSel.delete(k);else kitSel.add(k);b.classList.toggle("on");renderKit()}});$("kit-tags").appendChild(b)});
-function renderKit(){var box=$("kit");box.textContent="";
+function renderKit(){famKit();var box=$("kit");box.textContent="";
   var trip=S.trips.find(function(t){return t.id===$("pp-trip").value}),done=(trip&&trip.kitDone)||[];
   var list=S.kit.filter(function(x){var tg=x.tags||[];if(tg.indexOf("all")>=0)return true;for(var i=0;i<tg.length;i++)if(kitSel.has(tg[i]))return true;return false}).sort(function(a,b){return(a.order||0)-(b.order||0)});
   if(!list.length){box.appendChild(el("div",{class:"empty",text:loaded?"No kit items yet.":"Loading…"}));return}
@@ -843,6 +852,7 @@ function scoreSpot(s,b){var why=[],sc=0,m=b.start?+b.start.slice(5,7):(new Date(
   var W=(typeof WX!=="undefined"&&WX&&WX.places)?WX.places[s.id]:null;
   if(W&&W.days){var rain=W.days.slice(0,4).reduce(function(a,d){return a+(+d.rain||0)},0);if(rain<5){sc+=5;why.push("dry forecast")}else why.push("rain forecast "+Math.round(rain)+" mm")}
   var nm=s.name.split(/[ (,&]/)[0].toLowerCase();S.alerts.forEach(function(a){if(a.status==="closed"&&((a.area||"")+" "+(a.title||"")).toLowerCase().indexOf(nm)>=0){sc-=15;why.push("road alert: "+a.title)}});
+  sc+=famAdjust(s,why)+learnAdjust(s,why);
   return{s:s,score:Math.max(0,Math.min(100,sc)),why:why}}
 function renderRank(){var b=brief(),box=$("rank-out");box.textContent="";
   var list=S.spots.map(function(s){return scoreSpot(s,b)}).filter(function(r){return !(b.veg&&+r.s.veg===1)}).sort(function(a,c){return c.score-a.score}).slice(0,10);
@@ -892,7 +902,7 @@ function toolsCard(t){var it=t.itinerary||[],b=t.brief||{},c=t.costs||{};
     FILES.canIcs()?el("button",{type:"button",text:"Calendar (.ics)",onclick:function(){FILES.save(t.name.replace(/[^\w-]+/g,"-")+".ics",icsText(t),"text/calendar")}}):null,msg]);
   var cal=b.start?el("div",{class:"row small"},[el("b",{text:"Google Calendar: "})].concat(it.map(function(d,di){var sc=daySchedule(t,di);if(!sc.date||!sc.rows.length)return null;
     return el("a",{href:gcalUrl(t.name+" · Day "+(di+1)+(sc.place?" · "+sc.place:""),sc.date,sc.rows[0].s,sc.end,sc.rows.map(function(r){return hm(r.s)+" "+r.name}).join("\n"),sc.stay||sc.place),target:"_blank",rel:"noopener",text:"Day "+(di+1)})}))):null;
-  return el("div",{class:"card"},[head,meter,list,it.length?routes:null,cost,share,cal])}
+  return el("div",{class:"card"},[head,meter,watchNote(t),list,it.length?routes:null,tripWeatherBox(t),cost,share,cal])}
 function tripSheet(t){var b=t.brief||{};var L=["# "+t.name,"",(b.start?"From "+b.start+" · ":"")+(b.nights?b.nights+" nights · ":"")+(b.people||""),b.goal?"Goal: "+b.goal:"",""];
   L.push("```",tripText(t),"```","","## Emergency","- 112 all emergencies · 108 ambulance · 1033 highway helpline · 1091 women's helpline","");
   var ex=t.expenses||[];if(ex.length){L.push("## Spending so far","Total "+rs(ex.reduce(function(a,x){return a+(+x.amount||0)},0)),"")}
@@ -975,6 +985,7 @@ function renderToday(){var box=$("today-box");if(!box)return;box.textContent="";
   var behind=isToday&&cur?nm-cur.s:0;
   if(behind>=10)hd.push(el("div",{class:"row"},[el("span",{class:"small warn",text:"You're about "+fmtDur(behind)+" behind plan."}),
     el("button",{type:"button",class:"primary",text:"Shift the rest of today by "+fmtDur(behind),onclick:function(){updItin(t,function(a){var x=a[di].items[cur.ii];x.delay=(+x.delay||0)+behind})}})]));
+  var wn=watchNote(t);if(wn)hd.push(wn);
   box.appendChild(el("div",{class:"card"},hd));
   // current
   if(cur){var q=rowQuery(cur),nav=q?el("a",{class:"btnbig",href:dirUrl(null,q),target:"_blank",rel:"noopener",text:"Navigate"}):null;
@@ -1017,7 +1028,144 @@ $("td-trip").addEventListener("change",function(){TD.trip=$("td-trip").value;TD.
 $("td-day").addEventListener("change",function(){TD.day=+$("td-day").value;renderToday()});
 setInterval(function(){if(location.hash==="#today"&&document.activeElement&&document.activeElement.id!=="td-q")renderToday()},60000);
 
-function renderAll(){renderToday();renderKit();renderMap();renderSpots();renderPicked();renderTrips();renderRoad();renderLog();spotOptions();renderStays();tripOptions();renderPrep()}
+
+/* ---------- v6: family profiles ---------- */
+var NEEDS=[["motion","Motion sickness on ghats"],["knees","Knees or back: few steps"],["nap","Afternoon nap"],["early","Early to bed"],["heat","Feels the heat"],["swim","Can't swim"],["jain","Jain food"],["meds","Daily medicines"]];
+function famInfo(){var F={adults:0,kids:0,toddlers:0,seniors:0,childAges:[],needs:{},who:{},n:S.family.length};
+  S.family.forEach(function(m){var a=+m.age;if(a>=18)F.adults++;else{F.childAges.push(a);F.kids+=a<12?1:0}if(a<5)F.toddlers++;if(a>=60)F.seniors++;
+    (m.needs||[]).forEach(function(k){F.needs[k]=true;F.who[k]=(F.who[k]?F.who[k]+", ":"")+(m.name||"someone")})});
+  return F}
+function famText(){var F=famInfo();if(!F.n)return"";var p=[F.adults+" adult"+(F.adults===1?"":"s")];if(F.childAges.length)p.push(F.childAges.length+" child"+(F.childAges.length===1?"":"ren")+" ("+F.childAges.join(", ")+")");if(F.seniors)p.push("incl. "+F.seniors+" senior"+(F.seniors===1?"":"s"));return p.join(", ")}
+function renderFamily(){var box=$("fam-card");if(!box)return;box.textContent="";
+  box.appendChild(el("div",{class:"row between"},[el("h2",{text:"Who travels"}),S.family.length?el("button",{type:"button",text:"Use for this brief",onclick:function(){$("b-people").value=famText()}}):null]));
+  box.appendChild(el("p",{class:"small muted",text:"Add each person once. Ages and needs set the daily pace, walking, rest breaks, kit and hotel searches, and show warnings in the timelines."}));
+  S.family.slice().sort(function(a,b){return(+b.age||0)-(+a.age||0)}).forEach(function(m){
+    box.appendChild(el("div",{class:"fcard"},[el("div",{},[el("b",{text:(m.name||"Someone")+" · "+(m.age!=null&&m.age!==""?m.age:"?")}),
+      el("div",{class:"row"},(m.needs||[]).map(function(k){var n=NEEDS.find(function(x){return x[0]===k});return el("span",{class:"chip",text:n?n[1]:k})})),m.notes?el("span",{class:"small muted",text:m.notes}):null]),
+      el("button",{type:"button",text:"Remove",onclick:function(){if(db)db.collection("family").doc(m.id).delete?db.collection("family").doc(m.id).delete():db.collection("family").doc(m.id).set(null)}})]))});
+  var nm=el("input",{id:"fm-n",placeholder:"Name or role, e.g. Aai"}),ag=el("input",{id:"fm-a",type:"number",min:"0",max:"110",placeholder:"Age",style:"width:80px"}),nt=el("input",{id:"fm-x",placeholder:"Other notes (optional)"});
+  var cbs=NEEDS.map(function(x){var c=el("input",{type:"checkbox",id:"fm-k-"+x[0]});return[x[0],c,el("label",{class:"check small",for:c.id},[c," "+x[1]])]});
+  var msg=el("span",{class:"small muted"});
+  box.appendChild(el("details",{},[el("summary",{class:"small",text:"Add a person"}),el("div",{style:"display:flex;flex-direction:column;gap:6px;margin-top:6px"},[
+    el("div",{class:"row"},[nm,ag]),el("div",{class:"row"},cbs.map(function(x){return x[2]})),nt,
+    el("div",{class:"row"},[el("button",{type:"button",class:"primary",text:"Save person",onclick:function(){var n=nm.value.trim();if(!n||ag.value===""){msg.textContent="Add a name and age.";return}if(!db)return;
+      db.collection("family").add({name:n,age:+ag.value,needs:cbs.filter(function(x){return x[1].checked}).map(function(x){return x[0]}),notes:nt.value.trim()}).then(function(){msg.textContent="Saved"})}}),msg])])]))}
+function famWarn(x,st,name,mins){var F=famInfo(),w=[];if(!F.n)return w;
+  if(x.k==="drive"&&mins>120&&(F.kids||F.seniors))w.push("With "+(F.kids?"kids":"seniors")+", stop every 2 hours: add a tea break.");
+  if(x.k==="drive"&&F.needs.motion&&/ghat/i.test(name))w.push("Ghat road: motion-sickness tablet 30 min before and a front seat for "+F.who.motion+".");
+  if(st&&F.needs.knees&&/(fort|trek|steps|climb|hike|stair)/i.test(name+" "+(st.note||"")))w.push("Steps or climbing: "+F.who.knees+" may prefer a shorter version or to wait below.");
+  if(st&&F.needs.swim&&/(beach|swim|water|river|lake|kayak|boat)/i.test(name))w.push("Water: life jackets, and keep "+F.who.swim+" close.");
+  if(st&&F.needs.heat&&st.best!=="sunrise"&&st.best!=="sunset"&&st.best!=="evening"&&!st.indoor&&/(fort|trek|beach|climb|walk)/i.test(name))w.push("Hot at midday for "+F.who.heat+": go early or late.");
+  return w}
+function famDayNotes(d,end){var F=famInfo(),w=[];if(!F.n)return w;
+  if((F.needs.nap||F.toddlers)&&!(d.items||[]).some(function(x){return x.k==="rest"||/rest|nap/i.test(x.name||"")}))w.push("Nap time: add a rest after lunch"+(F.who.nap?" for "+F.who.nap:"")+".");
+  if(F.needs.early&&end>21*60)w.push("This day ends after 9 PM; "+F.who.early+" sleeps early.");
+  return w}
+function famAdjust(s,why){var F=famInfo();if(!F.n)return 0;var a=0,tg=s.tags||[];
+  if((F.needs.knees||F.seniors)&&(tg.indexOf("treks")>=0)){a-=8;why.push("trek-heavy for "+(F.who.knees||"seniors"))}
+  if(F.needs.motion&&(+s.hours||0)>=3&&tg.indexOf("mountains")>=0){a-=4;why.push("ghat roads (motion sickness)")}
+  if(F.toddlers&&(+s.hours||0)>5){a-=6;why.push("long drive for a toddler")}
+  if(F.kids&&(tg.indexOf("fun")>=0||tg.indexOf("sea")>=0||tg.indexOf("water")>=0)){a+=5;why.push("kids will enjoy it")}
+  if(F.needs.jain&&+s.veg<3){a-=4;why.push("Jain food may be hard")}
+  return a}
+var kitAuto=false;
+function famKit(){if(kitAuto||!S.family.length)return;var F=famInfo();kitAuto=true;
+  if(F.kids||F.toddlers)kitSel.add("kids");if(F.seniors||F.needs.meds)kitSel.add("seniors");
+  Array.prototype.forEach.call($("kit-tags").children,function(b){b.classList.toggle("on",kitSel.has(b.textContent))})}
+
+/* ---------- v6: learn from trip ratings ---------- */
+function learned(){var rows=[];S.trips.forEach(function(t){var h=t.review&&+t.review.happiness;if(!h)return;var tags={};
+  tripSpotIds(t.itinerary||[]).forEach(function(id){var sp=spotById(id);(sp&&sp.tags||[]).forEach(function(g){tags[g]=1})});
+  if(!Object.keys(tags).length&&t.plan&&t.plan.days)(t.plan.days||[]).forEach(function(d){var sp=S.spots.find(function(x){return x.name===d.place});(sp&&sp.tags||[]).forEach(function(g){tags[g]=1})});
+  rows.push({h:h,tags:Object.keys(tags),name:t.name})});
+  if(!rows.length)return null;var mean=rows.reduce(function(a,r){return a+r.h},0)/rows.length,by={};
+  rows.forEach(function(r){r.tags.forEach(function(g){(by[g]=by[g]||[]).push(r.h)})});
+  var out={};Object.keys(by).forEach(function(g){var v=by[g],m=v.reduce(function(a,b){return a+b},0)/v.length;out[g]={avg:m,n:v.length,delta:m-mean}});
+  return{mean:mean,n:rows.length,tags:out}}
+function learnAdjust(s,why){var L=learned();if(!L)return 0;var a=0,best=null;
+  (s.tags||[]).forEach(function(g){var x=L.tags[g];if(!x)return;a+=x.delta*3;if(!best||Math.abs(x.delta)>Math.abs(best[1].delta))best=[g,x]});
+  a=Math.max(-8,Math.min(8,Math.round(a)));if(a&&best)why.push("your "+best[0]+" trips averaged "+best[1].avg.toFixed(1)+"/5");return a}
+function renderLearn(){var box=$("learn-card");if(!box)return;box.textContent="";var L=learned();
+  box.appendChild(el("h3",{text:"What your family enjoys"}));
+  if(!L){box.appendChild(el("p",{class:"small muted",text:"After each trip, rate it in Trips → After the trip. The place rankings then learn which kinds of places make your family happiest."}));return}
+  var arr=Object.keys(L.tags).map(function(g){return[g,L.tags[g]]}).sort(function(a,b){return b[1].avg-a[1].avg});
+  box.appendChild(el("p",{class:"small muted",text:"From "+L.n+" rated trip"+(L.n===1?"":"s")+", average "+L.mean.toFixed(1)+"/5. Rankings add or remove up to 8 points from this."}));
+  box.appendChild(el("div",{class:"row"},arr.map(function(x){return el("span",{class:"pill "+(x[1].delta>0.2?"veg3":x[1].delta<-0.2?"veg1":"veg2"),text:x[0]+" "+x[1].avg.toFixed(1)})})))}
+
+/* ---------- v6: live stays and weather (viewer's Booking.com and AccuWeather connectors) ---------- */
+var LIVE={mcp:null,wx:{},st:{},keys:{},BK:"Booking.com",AW:"AccuWeather"};
+try{LIVE.keys=JSON.parse(localStorage.getItem("tp-accu-keys")||"{}")}catch(e){}
+function shortName(s){return s.name.split(/ \(|,| & /)[0].trim()}
+function liveErr(e,server){var c=e&&e.code;
+  if(c==="server_not_connected"||c==="server_not_found")return"Add "+server+" in claude.ai Settings → Connectors to see this.";
+  if(c==="needs_reauth")return"Reconnect "+server+" in claude.ai Settings → Connectors.";
+  if(c==="not_in_manifest"||c==="approval_required"||c==="consent_required")return server+" isn't allowed for this page yet. Tap again and choose Allow.";
+  if(c==="blocked_by_policy")return"Your organisation blocks "+server+" here.";
+  if(c==="selection_required")return"Choose which "+server+" connection to use in the prompt, then try again.";
+  if(c==="tool_error")return server+" couldn't answer: "+String(e.message||"").slice(0,140);
+  if(c==="server_unavailable"||c==="rate_limited")return server+" is busy. Try again in a minute.";
+  return server+" didn't answer ("+(c||"error")+"). Try again.";}
+function nextSat(){var d=new Date();d.setDate(d.getDate()+((6-d.getDay()+7)%7||7));return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function liveDates(){var b=brief(),st=b.start&&b.start>=todayStr()?b.start:nextSat(),n=Math.max(1,Math.min(4,b.nights||2));return{ci:st,co:addDays(st,n),n:n}}
+var WXP={};function liveWeather(s){if(LIVE.wx[s.id])return Promise.resolve(LIVE.wx[s.id]);if(WXP[s.id])return WXP[s.id];var m=LIVE.mcp;WXP[s.id]=liveWeather0(s,m).then(function(o){delete WXP[s.id];return o},function(e){delete WXP[s.id];throw e});return WXP[s.id]}
+function liveWeather0(s,m){
+  var key=LIVE.keys[s.id]?Promise.resolve(LIVE.keys[s.id]):m.callTool(LIVE.AW,"widgets-search-claude",{queryParams:{query:s.weatherQuery||shortName(s)}},{cache:{staleTime:6048e5,gcTime:6048e5}}).then(function(r){
+    var p=r.payload||{},hit=(p.results||[])[0];if(!hit)throw{code:"tool_error",message:"no match for "+shortName(s)};var k={key:String(hit.locationKey),name:hit.name};LIVE.keys[s.id]=k;try{localStorage.setItem("tp-accu-keys",JSON.stringify(LIVE.keys))}catch(e){}return k});
+  return key.then(function(k){return m.callTool(LIVE.AW,"widgets-daily-claude",{queryParams:{locationKey:k.key,unit:"metric",lang:"en"}},{cache:{staleTime:36e5,gcTime:216e5}}).then(function(r){
+    var days=((r.payload||{}).dailyForecast||[]).map(function(d){var dy=d.day||{},nt=d.night||{};return{date:String(d.date||"").slice(0,10),label:(d.dayOfWeek||"")+" "+(d.displayDate||""),hi:Math.round(+dy.temperature),lo:Math.round(+nt.temperature),phrase:dy.iconPhrase||dy.phrase||"",rain:Math.max(+dy.rainProbabilityValue||0,+nt.rainProbabilityValue||0),mm:(+((dy.extended||{}).rainValue)||0)+(+((nt.extended||{}).rainValue)||0),alerts:(d.alerts||[]).length}});
+    var out={name:k.name,days:days,at:r.cache&&r.cache.storedAt?r.cache.storedAt:Date.now()};LIVE.wx[s.id]=out;return out})})}
+function vegHotel(h){var t=(h.name+" "+(h.facilities||[]).join(" ")).toLowerCase();return/pure veg|pure-veg|jain/.test(t)?2:/veg|special diet/.test(t)?1:0}
+function liveStays(s){var d=liveDates(),F=famInfo(),key=s.id+"|"+d.ci+"|"+d.n;if(LIVE.st[key])return Promise.resolve(LIVE.st[key]);
+  var input={destination:shortName(s)+", India",checkin_date:d.ci,checkout_date:d.co,user_country_code:"in",user_locale:"en",result_count:20,number_of_adults:Math.max(1,F.adults||2),user_query:"Family stay in "+shortName(s)+" with vegetarian food"};
+  if(F.childAges.length)input.children_ages=F.childAges.map(function(a){return Math.max(0,Math.min(17,Math.round(a)))});
+  if(F.n&&F.adults+F.childAges.length>4)input.number_of_rooms=Math.ceil((F.adults+F.childAges.length)/4);
+  return LIVE.mcp.callTool(LIVE.BK,"accommodations_search_headless",input,{cache:{staleTime:18e5,gcTime:216e5}}).then(function(r){
+    var list=((r.payload||{}).accommodations||[]).map(function(h){var rt=h.rating||{},pr=h.price||{},fac=h.facilities||[];
+      return{id:h.id,name:h.name,type:h.accommodationType||"",url:safeUrl(h.url)||"",total:+pr.book||0,cur:pr.currency||"INR",score:+rt.review_score||0,reviews:+rt.number_of_reviews||0,stars:rt.stars||null,
+        veg:vegHotel(h),family:fac.indexOf("Family rooms")>=0,pool:fac.some(function(f){return/pool/i.test(f)}),parking:fac.indexOf("Free parking")>=0,kids:fac.some(function(f){return/children's playground|kids' club|kids' pool|indoor play/i.test(f)}),city:(h.location||{}).city_name||""}});
+    list.sort(function(a,b){return(b.veg-a.veg)||((b.score+(b.family?.5:0))-(a.score+(a.family?.5:0)))});
+    var out={d:d,list:list,at:r.cache&&r.cache.storedAt?r.cache.storedAt:Date.now()};LIVE.st[key]=out;return out})}
+function wxGrid(w,dates){return el("div",{class:"wx"},w.days.slice(0,10).map(function(x){var on=dates&&dates.indexOf(x.date)>=0;
+  return el("div",{class:on?"on":""},[el("b",{text:x.label}),el("div",{text:x.hi+"° / "+x.lo+"°"}),el("div",{class:"muted",text:x.phrase}),el("div",{class:x.rain>=40?"warn":"muted",text:"Rain "+x.rain+"%"+(x.mm>=1?" · "+Math.round(x.mm)+" mm":"")}),x.alerts?el("div",{class:"warn",text:"Weather alert"}):null])}))}
+function fmtAt(ms){var d=new Date(ms);return d.toLocaleString("en-IN",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit"})}
+function liveBox(s){if(!LIVE.mcp)return null;
+  var body=el("div",{style:"display:flex;flex-direction:column;gap:8px;margin-top:6px"});
+  var det=el("details",{},[el("summary",{class:"small",text:"Live: weather and stays"}),body]);
+  function load(){body.textContent="";var d=liveDates(),dates=[];for(var i=0;i<=d.n;i++)dates.push(addDays(d.ci,i));
+    var wbox=el("div",{},[el("span",{class:"small muted",text:"Loading forecast…"})]),sbox=el("div",{},[el("span",{class:"small muted",text:"Searching stays for "+d.ci+" → "+d.co+"…"})]);
+    body.appendChild(el("b",{class:"small",text:"Weather (AccuWeather)"}));body.appendChild(wbox);
+    body.appendChild(el("b",{class:"small",text:"Stays for "+d.ci+" to "+d.co+" ("+d.n+" night"+(d.n===1?"":"s")+(famText()?", "+famText():"")+") · Booking.com"}));body.appendChild(sbox);
+    liveWeather(s).then(function(w){wbox.textContent="";wbox.appendChild(wxGrid(w,dates));wbox.appendChild(el("span",{class:"small muted",text:w.name+" · updated "+fmtAt(w.at)}))},
+      function(e){wbox.textContent="";wbox.appendChild(el("span",{class:"small warn",text:liveErr(e,"AccuWeather")}))});
+    liveStays(s).then(function(r){sbox.textContent="";if(!r.list.length){sbox.appendChild(el("span",{class:"small muted",text:"No stays found for these dates."}));return}
+      r.list.slice(0,8).forEach(function(h){var night=h.total&&r.d.n?h.total/r.d.n:0,saved=S.stays.some(function(x){return x.url&&h.url&&x.url.split("?")[0]===h.url.split("?")[0]});
+        var chips=[h.veg===2?el("span",{class:"pill veg3",text:"Pure veg"}):h.veg===1?el("span",{class:"pill veg2",text:"Veg on request"}):null,h.family?el("span",{class:"chip",text:"Family rooms"}):null,h.kids?el("span",{class:"chip",text:"Kids' play"}):null,h.pool?el("span",{class:"chip",text:"Pool"}):null,h.parking?el("span",{class:"chip",text:"Free parking"}):null];
+        var sv=el("button",{type:"button",text:saved?"Saved":"Save to stays",disabled:saved?"disabled":null,onclick:function(){if(!db)return;sv.disabled=true;
+          db.collection("stays").add({name:h.name,spotId:s.id,type:/resort/i.test(h.type)?"resort":/guest|home|villa|country/i.test(h.type)?"homestay":"hotel",price:night?rs(night)+" per night ("+r.d.ci+", "+r.d.n+" nights, Booking.com)":"see link",url:h.url,pureVeg:h.veg===2,family:h.family,
+            notes:(h.score?"Rated "+h.score+"/10 from "+h.reviews+" reviews. ":"")+(h.pool?"Pool. ":"")+(h.kids?"Kids' play area. ":""),source:"Booking.com live search",checked:todayStr()}).then(function(){sv.textContent="Saved"})}});
+        sbox.appendChild(el("div",{class:"fcard"},[el("div",{style:"display:flex;flex-direction:column;gap:2px;min-width:0"},[el("b",{text:h.name}),
+          el("span",{class:"small",text:(h.total?rs(h.total)+" total · about "+rs(night)+" a night":"Price on request")+(h.score?" · "+h.score+"/10 ("+h.reviews+")":"")+(h.type?" · "+h.type:"")}),el("div",{class:"row"},chips)]),
+          el("div",{style:"display:flex;flex-direction:column;gap:4px;align-items:flex-end"},[h.url?link(h.url,"Book"):null,sv])]))});
+      sbox.appendChild(el("span",{class:"small muted",text:"Prices change often. Checked "+fmtAt(r.at)+". Change dates in Plan → Start date and Length."}))},
+      function(e){sbox.textContent="";sbox.appendChild(el("span",{class:"small warn",text:liveErr(e,"Booking.com")}))});
+    body.appendChild(el("div",{class:"row"},[el("button",{type:"button",text:"Refresh",onclick:function(){delete LIVE.wx[s.id];Object.keys(LIVE.st).forEach(function(k){if(k.indexOf(s.id+"|")===0)delete LIVE.st[k]});load()}})]))}
+  det.addEventListener("toggle",function(){if(det.open&&!body.childNodes.length)load()});
+  return det}
+function tripWeatherBox(t){if(!LIVE.mcp||!(t.brief&&t.brief.start)||!(t.itinerary||[]).length)return null;
+  var st=t.brief.start,last=addDays(st,t.itinerary.length-1),td=todayStr();if(last<td||daysBetween(td,st)>9)return null;
+  var box=el("div",{style:"display:flex;flex-direction:column;gap:4px"});
+  var btn=el("button",{type:"button",text:"Live weather for each day",onclick:function(){btn.remove();t.itinerary.forEach(function(d,di){var sc=daySchedule(t,di),line=el("span",{class:"small",text:"Day "+(di+1)+" · loading…"});box.appendChild(line);
+    if(!sc.sp){line.textContent="Day "+(di+1)+": no place on this day yet.";return}
+    liveWeather(sc.sp).then(function(w){var x=w.days.find(function(y){return y.date===sc.date});line.textContent="Day "+(di+1)+" · "+sc.date+" · "+shortName(sc.sp)+": "+(x?x.hi+"°/"+x.lo+"°, "+x.phrase+", rain "+x.rain+"%":"forecast not out yet");if(x&&x.rain>=40)line.className="small warn"},
+      function(e){line.textContent="Day "+(di+1)+": "+liveErr(e,"AccuWeather");line.className="small warn"})})}});
+  box.appendChild(el("div",{class:"row"},[btn]));return box}
+
+/* ---------- v6: daily watch notes (written by Claude's morning check) ---------- */
+function watchNote(t){var w=S.watch.filter(function(x){return x.tripId===t.id}).sort(function(a,b){return(b.date||"").localeCompare(a.date||"")})[0];if(!w)return null;
+  var bad=(w.items||[]).some(function(x){return x.level==="act"});
+  return el("div",{class:"note small"},[el("b",{text:"Morning check "+(w.date||"")+": "}),el("span",{text:w.summary||""}),(w.items||[]).length?el("ul",{class:"acts"},w.items.map(function(x){return el("li",{class:x.level==="act"?"warn":"",text:x.text})})):null])}
+
+function renderAll(){renderFamily();renderLearn();renderToday();renderKit();renderMap();renderSpots();renderPicked();renderTrips();renderRoad();renderLog();spotOptions();renderStays();tripOptions();renderPrep()}
 var loaded=false;renderAll();
 
 /* ---------- local database: data/*.json from the repo + your changes saved in this browser ---------- */
