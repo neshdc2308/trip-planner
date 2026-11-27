@@ -124,6 +124,10 @@ details>summary{cursor:pointer;font-weight:600}
 .drow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;border-top:1px solid var(--line);padding:6px 0;cursor:pointer}
 .drow:hover{background:var(--soft,rgba(0,0,0,.03))}
 .wins{display:flex;flex-wrap:wrap;gap:6px}
+.nb-cats{display:flex;flex-wrap:wrap;gap:6px}
+.nb-cats button.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+.nb-item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;border-top:1px solid var(--line);padding:6px 0}
+.nb-item b{overflow-wrap:anywhere}
 </style>
 </head>
 <body>
@@ -1242,6 +1246,7 @@ function renderSheet(){var box=$("place-sheet");if(!box)return;box.textContent="
     (s.tips||[]).length?el("details",{open:"open"},[el("summary",{class:"small",text:"Local knowledge ("+s.tips.length+")"}),el("ul",{class:"acts"},s.tips.map(function(t){return el("li",{class:"small",text:t})}))]):null,
     liveBox(s),
     el("h3",{text:"Best stay deals"}),dealsBox(s),
+    el("h3",{text:"Nearby essentials"}),nearbyBox({lat:s.lat,lon:s.lon,label:shortName(s)}),
     el("p",{class:"small"},[el("b",{text:"Saved stays: "}),nStays.length?nStays.map(function(x){return x.name}).join(", "):"none yet",el("a",{href:"#stays",text:" · open Stays",onclick:function(){$("st-spot").value=s.id;renderStays()}})]),
     socialRow(s),notesBox(s),
     el("div",{class:"row"},[el("button",{type:"button",class:on?"primary":"",text:on?"Picked for plan ✓":"Pick for plan",onclick:function(){if(picked.has(s.id))picked.delete(s.id);else picked.add(s.id);renderPicked();renderSpots();renderSheet()}}),
@@ -1356,6 +1361,79 @@ function renderDeals(){var box=$("deals-all");if(!box)return;box.textContent="";
       el("div",{style:"display:flex;flex-direction:column;gap:1px;min-width:0"},[el("b",{text:r.s.name})].concat(parts.map(function(t){return el("span",{class:"small",text:t})}))),
       el("span",{class:"small muted",text:doc.ci+" · "+doc.n+"n · checked "+doc.checked})]))})}
 $("st-spot").addEventListener("input",renderDeals);
+
+/* ---------- v9: nearby essentials (OpenStreetMap) ---------- */
+var NB_CATS=[
+ {k:"veg",label:"Veg food",q:'nwr["amenity"~"^(restaurant|cafe|fast_food)$"]["diet:vegetarian"~"^(yes|only)$"]',g:"pure veg restaurant"},
+ {k:"food",label:"All restaurants",q:'nwr["amenity"~"^(restaurant|cafe|fast_food|food_court)$"]',g:"restaurant"},
+ {k:"hosp",label:"Hospitals",q:'nwr["amenity"="hospital"]',g:"hospital"},
+ {k:"clinic",label:"Clinics & doctors",q:'nwr["amenity"~"^(clinic|doctors|dentist)$"]',g:"clinic doctor"},
+ {k:"pharm",label:"Pharmacies",q:'nwr["amenity"="pharmacy"]',g:"medical store pharmacy"},
+ {k:"atm",label:"ATMs & banks",q:'nwr["amenity"~"^(atm|bank)$"]',g:"ATM"},
+ {k:"fuel",label:"Fuel & EV",q:'nwr["amenity"~"^(fuel|charging_station)$"]',g:"petrol pump"},
+ {k:"shop",label:"Groceries",q:'nwr["shop"~"^(supermarket|convenience|grocery|greengrocer|dairy|bakery)$"]',g:"grocery store"},
+ {k:"car",label:"Car repair & tyres",q:'nwr["shop"~"^(car_repair|tyres|car_parts)$"]',g:"car repair puncture"},
+ {k:"safe",label:"Police & toilets",q:'nwr["amenity"~"^(police|toilets)$"]',g:"police station"}];
+var NB={cache:{}};try{NB.cache=JSON.parse(localStorage.getItem("tp-nearby")||"{}")}catch(e){}
+function nbSave(){try{var ks=Object.keys(NB.cache);if(ks.length>120)ks.sort(function(a,b){return NB.cache[a].at-NB.cache[b].at}).slice(0,ks.length-120).forEach(function(k){delete NB.cache[k]});localStorage.setItem("tp-nearby",JSON.stringify(NB.cache))}catch(e){}}
+function kmBetween(a,b,c,d){var R=6371,r=Math.PI/180,x=Math.sin((c-a)*r/2),y=Math.sin((d-b)*r/2),h=x*x+Math.cos(a*r)*Math.cos(c*r)*y*y;return 2*R*Math.asin(Math.sqrt(h))}
+function gmSearch(what,c){return "https://www.google.com/maps/search/"+encodeURIComponent(what+(c.label?" near "+c.label:""))+(c.lat!=null?"/@"+c.lat+","+c.lon+",13z":"")}
+function overpass(q){var urls=["https://overpass-api.de/api/interpreter","https://overpass.kumi.systems/api/interpreter"];
+  function go(i){var ctl=typeof AbortController!=="undefined"?new AbortController():null,t=setTimeout(function(){if(ctl)ctl.abort()},20000);
+    return fetch(urls[i]+"?data="+encodeURIComponent(q),ctl?{signal:ctl.signal}:{}).then(function(r){clearTimeout(t);if(!r.ok)throw new Error("HTTP "+r.status);return r.json()})
+      .catch(function(e){clearTimeout(t);if(i+1<urls.length)return go(i+1);throw e})}
+  return go(0)}
+function nbQuery(c,cat,rad,term){var key=[cat.k,(+c.lat).toFixed(3),(+c.lon).toFixed(3),rad,term||""].join("|"),hit=NB.cache[key];
+  if(hit&&Date.now()-hit.at<7*864e5)return Promise.resolve(hit);
+  var sel=cat.k==="find"?'nwr["shop"]["name"~"'+term+'",i];nwr["shop"~"'+term+'",i];nwr["amenity"]["name"~"'+term+'",i]':cat.q;
+  var q='[out:json][timeout:20];('+sel.split(";").map(function(x){return x+"(around:"+(rad*1000)+","+c.lat+","+c.lon+");"}).join("")+');out center tags 60;';
+  return overpass(q).then(function(j){var seen={},list=(j.elements||[]).map(function(e){var t=e.tags||{},la=e.lat!=null?e.lat:(e.center||{}).lat,lo=e.lon!=null?e.lon:(e.center||{}).lon;
+      return{name:String(t.name||t["name:en"]||t.brand||"").slice(0,90),kind:String(t.amenity||t.shop||t.healthcare||"").replace(/_/g," "),lat:la,lon:lo,km:la!=null?kmBetween(c.lat,c.lon,la,lo):99,
+        phone:String(t.phone||t["contact:phone"]||"").split(";")[0].replace(/[^0-9+ ]/g,"").trim().slice(0,20),hours:String(t.opening_hours||"").slice(0,80),
+        veg:t["diet:vegetarian"]==="only"?2:t["diet:vegetarian"]==="yes"?1:/pure veg|jain|udupi|vegetarian/i.test(t.name||"")?2:0,
+        emerg:t.emergency==="yes",web:safeUrl(t.website||t["contact:website"]||"")||""}})
+      .filter(function(x){if(x.lat==null)return false;var k=(x.name||x.kind)+"|"+x.lat.toFixed(3);if(seen[k])return false;seen[k]=1;return true})
+      .sort(function(a,b){return(b.veg-a.veg)*(cat.k==="food"?1:0)||(!!b.name-!!a.name)||(a.km-b.km)}).slice(0,25);
+    var out={list:list,at:Date.now()};NB.cache[key]=out;nbSave();return out})}
+function nbRow(x,cat){var dir=x.lat!=null?"https://www.google.com/maps/dir/?api=1&destination="+x.lat+","+x.lon:null;
+  return el("div",{class:"nb-item"},[el("div",{style:"display:flex;flex-direction:column;gap:1px;min-width:0"},[el("b",{text:x.name||("Unnamed "+(x.kind||"place"))}),
+    el("span",{class:"small muted",text:[x.km<99?x.km.toFixed(1)+" km":"",x.kind,x.veg===2?"pure veg":x.veg===1?"veg options":"",x.emerg?"24h emergency":"",x.hours].filter(Boolean).join(" · ")})]),
+    el("div",{style:"display:flex;flex-direction:column;align-items:flex-end;gap:2px"},[dir?el("a",{href:dir,target:"_blank",rel:"noopener",text:"Directions"}):null,
+      x.phone?el("a",{href:"tel:"+x.phone.replace(/ /g,""),text:"Call"}):null,x.web?link(x.web,"Website"):null])])}
+function nearbyBox(c0){var c=Object.assign({},c0),wrap=el("div",{style:"display:flex;flex-direction:column;gap:8px"});
+  if(c.lat==null){wrap.appendChild(el("p",{class:"small muted",text:"No map point for this place yet."}));return wrap}
+  var cur=NB_CATS[0],rad=10,res=el("div",{}),hdr=el("p",{class:"small muted"});
+  var cats=el("div",{class:"nb-cats"}),btns={};
+  NB_CATS.forEach(function(cat){btns[cat.k]=el("button",{type:"button",text:cat.label,class:cat===cur?"on":"",onclick:function(){cur=cat;mark();load()}});cats.appendChild(btns[cat.k])});
+  function mark(){Object.keys(btns).forEach(function(k){btns[k].className=cur.k===k?"on":""})}
+  var rsel=el("select",{"aria-label":"Distance"},[5,10,25].map(function(r){var o=el("option",{value:String(r),text:"within "+r+" km"});if(r===rad)o.selected=true;return o}));
+  rsel.addEventListener("input",function(){rad=+rsel.value;load()});
+  var fin=el("input",{placeholder:"Find a shop: chikki, baby, medical, tyre…","aria-label":"Find a shop",style:"min-width:0;flex:1"});
+  var fbt=el("button",{type:"button",text:"Find",onclick:function(){var t=fin.value.trim().replace(/[^\p{L}\p{N} ]/gu,"").slice(0,30);if(!t)return;cur={k:"find",label:t,g:t,term:t};mark();load()}});
+  fin.addEventListener("keydown",function(e){if(e.key==="Enter")fbt.click()});
+  var me=el("button",{type:"button",text:"Near me now",onclick:function(){if(!navigator.geolocation){hdr.textContent="This device can't share location here.";return}
+    hdr.textContent="Finding you…";navigator.geolocation.getCurrentPosition(function(pos){c={lat:+pos.coords.latitude.toFixed(5),lon:+pos.coords.longitude.toFixed(5),label:""};load()},
+      function(){hdr.textContent="Location is blocked here. Showing around "+(c0.label||"the place")+".";},{timeout:10000,maximumAge:3e5})}});
+  wrap.appendChild(cats);wrap.appendChild(el("div",{class:"row"},[rsel,me]));wrap.appendChild(el("div",{class:"row",style:"flex-wrap:nowrap"},[fin,fbt]));wrap.appendChild(hdr);wrap.appendChild(res);
+  function load(){res.textContent="";var where=c.label?c.label:"you",g=gmSearch(cur.g,c);
+    hdr.textContent=cur.label+" within "+rad+" km of "+where+" · loading…";
+    nbQuery(c,cur,rad,cur.term).then(function(o){hdr.textContent=cur.label+" within "+rad+" km of "+where+" · "+o.list.length+" found · OpenStreetMap, "+fmtAt(o.at);
+      if(!o.list.length)res.appendChild(el("p",{class:"small muted",text:"Nothing mapped here yet. Small towns are often missing from the map."}));
+      o.list.forEach(function(x){res.appendChild(nbRow(x,cur))});
+      res.appendChild(el("p",{class:"small"},[el("a",{href:g,target:"_blank",rel:"noopener",text:"Also search Google Maps (ratings, photos, open now)"})]))},
+      function(){hdr.textContent="Live map search isn't available here. Use Google Maps:";
+        res.appendChild(el("div",{class:"row small"},NB_CATS.map(function(k){return el("a",{href:gmSearch(k.g,c),target:"_blank",rel:"noopener",text:k.label})}).concat(cur.k==="find"?[el("a",{href:g,target:"_blank",rel:"noopener",text:cur.label})]:[])))})}
+  res.appendChild(el("p",{class:"small muted",text:"Pick what you need. Tap Directions or Call on any result."}));
+  var started=false;function start(){if(!started){started=true;load()}}
+  if("IntersectionObserver" in window){var io=new IntersectionObserver(function(es){if(es.some(function(e){return e.isIntersecting})){io.disconnect();start()}});setTimeout(function(){io.observe(wrap)},0)}else start();
+  return wrap}
+function spotForPlace(txt){txt=String(txt||"").toLowerCase();if(!txt)return null;return spotById(txt)||S.spots.find(function(s){return txt.indexOf(shortName(s).toLowerCase())>=0})||S.spots.find(function(s){return s.name.toLowerCase().indexOf(txt)>=0})}
+var _renderToday0=renderToday;renderToday=function(){_renderToday0();var box=$("today-box");if(!box)return;
+  var t=S.trips.find(function(x){return x.id===TD.trip});if(!t||!t.itinerary)return;var d=t.itinerary[TD.day]||t.itinerary[0],s=spotForPlace(d&&d.place);
+  var c=s?{lat:s.lat,lon:s.lon,label:shortName(s)}:null;
+  box.appendChild(el("div",{class:"card"},[el("h3",{text:"Nearby essentials"+(s?" · "+shortName(s):"")}),
+    el("p",{class:"small"},[el("b",{text:"Emergency: "}),el("a",{href:"tel:112",text:"112"})," all · ",el("a",{href:"tel:108",text:"108"})," ambulance · ",el("a",{href:"tel:1033",text:"1033"})," highway"]),
+    c&&c.lat!=null?nearbyBox(c):el("p",{class:"small muted",text:"Open a place page to see what's around it."})]))};
 
 function renderAll(){renderSheet();renderFamily();renderLearn();renderToday();renderKit();renderMap();renderSpots();renderPicked();renderTrips();renderRoad();renderLog();spotOptions();renderStays();renderDeals();tripOptions();renderPrep()}
 var loaded=false;renderAll();
