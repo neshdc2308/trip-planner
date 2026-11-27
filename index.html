@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0f6b63">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -95,6 +98,13 @@ details>summary{cursor:pointer;font-weight:600}
 #lmap{height:420px;border-radius:12px;border:1px solid var(--line)}
 #ringmap text{pointer-events:none}
 @media (max-width:700px){.two{grid-template-columns:1fr}}
+.live{border-color:var(--teal);border-width:2px}
+.big{font-size:1.25rem;font-weight:700}
+.btnbig{padding:10px 16px;font-size:1rem}
+.tl.done{opacity:.55}
+.tl.now .t{font-weight:700}
+.meter{height:8px;border-radius:99px;background:var(--line);overflow:hidden}.meter>i{display:block;height:100%;background:var(--teal)}
+.score{font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--teal);min-width:3ch;display:inline-block}
 </style>
 </head>
 <body>
@@ -102,7 +112,7 @@ details>summary{cursor:pointer;font-weight:600}
 <div class="top"><div class="in">
   <div class="row"><h1>Pune Trip Planner</h1><span class="status" id="status">Connecting…</span></div>
   <nav id="nav">
-    <a href="#explore">Explore</a><a href="#map">Map</a><a href="#plan">Plan</a><a href="#trips">Trips</a><a href="#stays">Stays</a><a href="#prep">Prep</a><a href="#road">Road watch</a><a href="#log">Research log</a>
+    <a href="#explore">Explore</a><a href="#map">Map</a><a href="#plan">Plan</a><a href="#today">Today</a><a href="#trips">Trips</a><a href="#stays">Stays</a><a href="#prep">Prep</a><a href="#road">Road watch</a><a href="#log">Research log</a>
   </nav>
 </div></div>
 
@@ -158,8 +168,9 @@ details>summary{cursor:pointer;font-weight:600}
       <label class="check" for="b-veg"><input type="checkbox" id="b-veg" checked> Pure veg meals</label>
     </form>
     <div class="row"><span class="small muted">Places picked from Explore:</span><span id="b-picked" class="row"></span></div>
-    <div class="row"><button class="primary" id="b-go">Plan with Claude</button><button id="b-save-brief">Save as idea without planning</button><span class="small muted" id="b-msg"></span></div>
+    <div class="row"><button class="primary" id="b-go">Plan with Claude</button><button id="b-save-brief">Save as idea without planning</button><button id="b-rank" type="button">Rank places for these dates</button><span class="small muted" id="b-msg"></span></div>
   </div>
+  <div id="rank-out"></div>
   <div id="plan-out"></div>
 </section>
 
@@ -167,6 +178,13 @@ details>summary{cursor:pointer;font-weight:600}
 <section id="v-trips" class="view" hidden style="display:flex;flex-direction:column;gap:14px">
   <p class="muted">Saved trips, from ideas to done. Log spending on the trip and review it afterwards so the next plan gets better.</p>
   <div id="trips" style="display:flex;flex-direction:column;gap:12px"></div>
+</section>
+
+<!-- TODAY -->
+<section id="v-today" class="view" hidden style="display:flex;flex-direction:column;gap:14px">
+  <p class="muted">Use this on the road. It shows what's now and next, how far behind plan you are and when to leave to beat the dark. Tap Done as you go; if you run late, shift the rest of the day in one tap.</p>
+  <div class="filters"><label for="td-trip">Trip<select id="td-trip"></select></label><label for="td-day">Day<select id="td-day"></select></label></div>
+  <div id="today-box" style="display:flex;flex-direction:column;gap:12px"></div>
 </section>
 
 <!-- STAYS -->
@@ -255,11 +273,11 @@ function vegPill(v){v=+v||2;return el("span",{class:"pill veg"+v,text:v===3?"Eas
 function setStatus(t){$("status").textContent=t}
 
 /* ---------- routing ---------- */
-var VIEWS=["explore","map","plan","trips","stays","prep","road","log"];
+var VIEWS=["explore","map","plan","today","trips","stays","prep","road","log"];
 function show(){var h=(location.hash||"#explore").slice(1);if(VIEWS.indexOf(h)<0)h="explore";
   VIEWS.forEach(function(v){$("v-"+v).hidden=v!==h});
   Array.prototype.forEach.call($("nav").children,function(a){if(a.getAttribute("href")==="#"+h)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});}
-window.addEventListener("hashchange",function(){show();if(location.hash==="#map")renderMap()});show();
+window.addEventListener("hashchange",function(){show();if(location.hash==="#map")renderMap();if(location.hash==="#today")renderToday()});show();
 
 /* ---------- explore ---------- */
 var now=new Date();
@@ -444,7 +462,10 @@ function renderTrips(){var box=$("trips");box.textContent="";
     if(t.plan){var pb=el("details",{},[el("summary",{class:"small",text:"Claude's plan summary, budget and risks"})]);var pbi=el("div");renderPlan(pbi,b,t.plan,false);pb.appendChild(pbi);body.appendChild(pb)}
     else if(t.outline&&!(t.itinerary&&t.itinerary.length)){body.appendChild(el("ul",{class:"acts"},t.outline.map(function(x){return el("li",{text:x})})))}
     // expenses
+    body.appendChild(toolsCard(t));
+    body.appendChild(bookingCard(t));
     body.appendChild(expenseCard(t,b,spent));
+    body.appendChild(splitCard(t));
     body.appendChild(photoCard(t));
     // review + status
     var hp=el("select",{id:"rv-h-"+t.id},[1,2,3,4,5].map(function(n){var o=el("option",{value:String(n),text:n+" / 5"});if(t.review&&+t.review.happiness===n)o.selected=true;return o}));
@@ -763,7 +784,240 @@ function renderKit(){var box=$("kit");box.textContent="";
     cb.addEventListener("change",function(){if(!db||!trip)return;var nd=done.filter(function(y){return y!==x.id});if(cb.checked)nd.push(x.id);db.collection("trips").doc(trip.id).update({kitDone:nd})});
     return el("label",{class:"check",for:"kt-"+x.id},[cb,el("span",{text:x.item})])}))))});}
 $("pp-trip").addEventListener("input",renderKit);
-function renderAll(){renderKit();renderMap();renderSpots();renderPicked();renderTrips();renderRoad();renderLog();spotOptions();renderStays();tripOptions();renderPrep()}
+
+/* ---------- v5: shared helpers ---------- */
+var FILES={dl:null,save:function(name,text,type){
+  if(this.dl)return this.dl.save({filename:name,data:new Blob([text],{type:type||"text/plain"})});
+  try{var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([text],{type:type||"text/plain"}));a.download=name;document.body.appendChild(a);a.click();a.remove();return Promise.resolve()}catch(e){return Promise.reject({code:"unavailable"})}},
+  canIcs:function(){return !this.dl&&!(window.claude&&window.claude.use)}};
+function todayStr(){var d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function nowMins(){var d=new Date();return d.getHours()*60+d.getMinutes()}
+function daysBetween(a,b){return Math.round((new Date(b+"T00:00:00Z")-new Date(a+"T00:00:00Z"))/864e5)}
+function updItin(t,fn){if(!db)return;var it=JSON.parse(JSON.stringify(t.itinerary||[]));var extra=fn(it)||{};db.collection("trips").doc(t.id).update(Object.assign({itinerary:it},extra))}
+function dirUrl(origin,dest,wps){var u="https://www.google.com/maps/dir/?api=1&travelmode=driving";if(origin)u+="&origin="+encodeURIComponent(origin);u+="&destination="+encodeURIComponent(dest);
+  if(wps&&wps.length)u+="&waypoints="+encodeURIComponent(wps.slice(0,9).join("|"));return u}
+function daySchedule(t,di){
+  var it=t.itinerary||[],d=it[di],start=(t.brief&&t.brief.start)||"",date=start?addDays(start,di):null,wd=date?WD[new Date(date+"T00:00:00Z").getUTCDay()]:null;
+  var sp=null;for(var k=0;k<=di;k++){(it[k].items||[]).some(function(x){var st=x.k==="stop"&&stopById(x.ref);if(st){sp=spotById(st.spotId)||sp;return true}})}
+  var sun=(date&&sp&&sp.lat)?sunTimes(date,sp.lat,sp.lon):null, cur=parseHM(d.start), rows=[];
+  (d.items||[]).forEach(function(x,ii){var st=x.k==="stop"?stopById(x.ref):null,name=st?st.name:(x.name||"Stop"),mins=+(x.mins||(st&&st.mins)||60);
+    cur+=+(x.delay||0);var overnight=st&&st.kind==="stay";if(overnight)mins=0;
+    if(sun&&st&&st.best==="sunset"&&cur<sun.set+15-mins){var free=sun.set+15-mins-cur;cur+=free}
+    var s0=cur,e0=cur+mins;cur=e0+(x.k==="stop"&&!overnight?15:0);
+    rows.push({ii:ii,x:x,st:st,spot:st?spotById(st.spotId):null,name:name,s:s0,e:e0,mins:mins,overnight:overnight})});
+  return{date:date,wd:wd,sun:sun,sp:sp,rows:rows,end:cur,place:d.place||"",stay:d.stay||""}}
+function rowQuery(r){if(r.st)return r.name+", "+(r.spot?r.spot.name.split(" (")[0]:"");if(r.x.k==="drive")return(r.name||"").replace(/^Drive to /i,"");return null}
+function dayRoute(t,di){var it=t.itinerary,sc=daySchedule(t,di),prev=di>0?it[di-1]:null;
+  var wps=sc.rows.filter(function(r){return r.st&&!r.overnight}).map(rowQuery);
+  var origin=di===0?"Pune, Maharashtra":(prev.stay||prev.place||"");
+  var dest=sc.stay||sc.place||wps[wps.length-1];
+  if(!dest)return null;if(!sc.stay&&wps.length&&wps[wps.length-1]===dest)wps=wps.slice(0,-1);
+  return dirUrl(origin,dest,wps)}
+function tripKm(t){var km=0;(t.itinerary||[]).forEach(function(d){(d.items||[]).forEach(function(x){km+=+(x.km||0)})});
+  if(!km){var ids=tripSpotIds(t.itinerary||[]),s=ids.length&&spotById(ids[0]);if(s)km=2*(+s.km||0)}return km}
+function peopleCount(t){var p=(t.brief&&t.brief.people)||"",n=0;(p.match(/\d+/g)||[]).forEach(function(x){n+=+x});return n||0}
+function tripText(t){var b=t.brief||{},out=["🚗 "+t.name+(b.start?" · from "+b.start:"")+(b.people?" · "+b.people:"")];
+  (t.itinerary||[]).forEach(function(d,di){var sc=daySchedule(t,di);out.push("");out.push("Day "+(di+1)+(sc.date?" · "+sc.wd+" "+sc.date.slice(8)+"/"+sc.date.slice(5,7):"")+(sc.place?" · "+sc.place:""));
+    if(sc.sun)out.push("(Sunrise "+hm(sc.sun.rise)+", sunset "+hm(sc.sun.set)+")");
+    sc.rows.forEach(function(r){out.push(hm(r.s)+"  "+r.name+(r.x.km?" ("+r.x.km+" km)":""))});
+    if(sc.stay)out.push("Night: "+sc.stay)});
+  var bk=(t.bookings||[]);if(bk.length){out.push("");out.push("Bookings:");bk.forEach(function(x){out.push("- "+(x.date||"")+" "+x.type+": "+x.name+(x.ref?" · ref "+x.ref:"")+(x.paid?" · paid":" · to pay "+rs(x.amount)))})}
+  return out.join("\n")}
+function calDates(date,a,b){function f(m){m=Math.min(Math.max(m,0),23*60+59);return date.replace(/-/g,"")+"T"+String(Math.floor(m/60)).padStart(2,"0")+String(m%60).padStart(2,"0")+"00"}return f(a)+"/"+f(b)}
+function gcalUrl(title,date,a,b,details,loc){return "https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent(title)+"&dates="+calDates(date,a,b)+"&ctz=Asia%2FKolkata&details="+encodeURIComponent(details.slice(0,1500))+(loc?"&location="+encodeURIComponent(loc):"")}
+function icsText(t){var L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Pune Trip Planner//EN"],n=0;
+  function esc(x){return String(x).replace(/[\\,;]/g,function(c){return"\\"+c}).replace(/\n/g,"\\n")}
+  (t.itinerary||[]).forEach(function(d,di){var sc=daySchedule(t,di);if(!sc.date)return;sc.rows.forEach(function(r){if(r.overnight)return;var dt=calDates(sc.date,r.s,Math.max(r.e,r.s+15)).split("/");
+    L.push("BEGIN:VEVENT","UID:"+t.id+"-"+di+"-"+(n++)+"@pune-trip-planner","DTSTAMP:"+new Date().toISOString().replace(/[-:]/g,"").slice(0,15)+"Z","DTSTART;TZID=Asia/Kolkata:"+dt[0],"DTEND;TZID=Asia/Kolkata:"+dt[1],"SUMMARY:"+esc(r.name),rowQuery(r)?"LOCATION:"+esc(rowQuery(r)):"DESCRIPTION:"+esc(t.name),"END:VEVENT")})});
+  L.push("END:VCALENDAR");return L.join("\r\n")}
+
+/* ---------- v5: rank places for the brief's dates ---------- */
+function scoreSpot(s,b){var why=[],sc=0,m=b.start?+b.start.slice(5,7):(new Date().getMonth()+1),mo=s.months||[];
+  if(!mo.length){sc+=15}else if(mo.indexOf(m)>=0){sc+=30;why.push("good season")}else if(mo.indexOf(m%12+1)>=0||mo.indexOf((m+10)%12+1)>=0){sc+=12;why.push("edge of season")}else why.push("off season");
+  var mood=b.mood||[],hit=(s.tags||[]).filter(function(x){return mood.indexOf(x)>=0});if(mood.length){sc+=Math.round(25*Math.min(1,hit.length/Math.min(2,mood.length)));if(hit.length)why.push(hit.join(", "))}else sc+=12;
+  var maxKm=b.nights<=2?280:b.nights<=3?360:b.nights<=5?460:560,km=+s.km||0;
+  if(km<=maxKm*.6){sc+=20;why.push(km+" km, easy for "+b.nights+" nights")}else if(km<=maxKm){sc+=12;why.push(km+" km")}else why.push(km+" km is far for "+b.nights+" nights");
+  if((+s.hours||0)>(b.maxDrive||7)){sc-=10;why.push("drive over "+(b.maxDrive||7)+" h")}
+  var v=+s.veg||2;sc+=b.veg?(v===3?10:v===2?6:0):8;if(b.veg&&v===3)why.push("easy veg");
+  var c=(s.cost||"₹₹").length;sc+=c<=1?10:c===2?6:3;
+  var W=(typeof WX!=="undefined"&&WX&&WX.places)?WX.places[s.id]:null;
+  if(W&&W.days){var rain=W.days.slice(0,4).reduce(function(a,d){return a+(+d.rain||0)},0);if(rain<5){sc+=5;why.push("dry forecast")}else why.push("rain forecast "+Math.round(rain)+" mm")}
+  var nm=s.name.split(/[ (,&]/)[0].toLowerCase();S.alerts.forEach(function(a){if(a.status==="closed"&&((a.area||"")+" "+(a.title||"")).toLowerCase().indexOf(nm)>=0){sc-=15;why.push("road alert: "+a.title)}});
+  return{s:s,score:Math.max(0,Math.min(100,sc)),why:why}}
+function renderRank(){var b=brief(),box=$("rank-out");box.textContent="";
+  var list=S.spots.map(function(s){return scoreSpot(s,b)}).filter(function(r){return !(b.veg&&+r.s.veg===1)}).sort(function(a,c){return c.score-a.score}).slice(0,10);
+  box.appendChild(el("div",{class:"card"},[el("h3",{text:"Best places for "+(b.start||"this month")+" · "+b.nights+" nights · mood "+(b.mood.join(", ")||"any")}),
+    el("p",{class:"small muted",text:"Score out of 100: season 30, mood 25, distance 20, veg 10, cost 10, weather 5 (website only), minus road closures. Pick a few, then plan with Claude."}),
+    el("div",{style:"display:flex;flex-direction:column;gap:8px"},list.map(function(r){var on=picked.has(r.s.id);
+      var btn=el("button",{type:"button",text:on?"Picked":"Pick",class:on?"primary":"",onclick:function(){if(picked.has(r.s.id))picked.delete(r.s.id);else picked.add(r.s.id);renderPicked();renderRank();renderSpots()}});
+      return el("div",{class:"row between",style:"border-top:1px solid var(--line);padding-top:6px"},[el("div",{style:"display:flex;flex-direction:column;gap:2px;min-width:0;flex:1"},[el("div",{class:"row"},[el("span",{class:"score",text:String(r.score)}),el("b",{text:r.s.name}),vegPill(r.s.veg)]),el("span",{class:"small muted",text:r.why.join(" · ")})]),btn])}))]))}
+$("b-rank").addEventListener("click",renderRank);
+
+/* ---------- v5: trip tools: readiness, routes, cost, share ---------- */
+function readiness(t){var it=t.itinerary||[],b=t.brief||{},bk=t.bookings||[],items=[];
+  items.push([!!b.start,"Start date set"]);
+  var nights=Math.max(0,it.length-1),stays=bk.filter(function(x){return x.type==="Stay"}).length;
+  if(nights)items.push([stays>=nights,"Stays booked ("+stays+" of "+nights+" nights)"]);
+  if(bk.length)items.push([bk.every(function(x){return x.paid||x.payAtVenue}),"Bookings paid or marked pay at venue"]);
+  var dark=0;it.forEach(function(d,di){var sc=daySchedule(t,di);sc.rows.forEach(function(r){if(sc.sun&&r.x.k==="drive"&&r.e>sc.sun.set)dark++})});
+  if(it.length)items.push([dark===0,dark?dark+" drive(s) end after dark":"No driving after dark"]);
+  if(S.prep.length)items.push([(t.prepDone||[]).length>=S.prep.length*.8,"Prep checklist "+(t.prepDone||[]).length+" of "+S.prep.length]);
+  var must=S.kit.filter(function(x){return(x.tags||[]).indexOf("all")>=0}).length;if(must)items.push([(t.kitDone||[]).length>=must,"Kit packed ("+(t.kitDone||[]).length+" ticked)"]);
+  var c=t.costs||{};items.push([!!(c.fuel&&c.tolls!==undefined&&c.tolls!==""),"Fuel and toll estimate filled"]);
+  var ok=items.filter(function(x){return x[0]}).length;return{pct:items.length?Math.round(ok/items.length*100):0,items:items}}
+function toolsCard(t){var it=t.itinerary||[],b=t.brief||{},c=t.costs||{};
+  var r=readiness(t),cd=b.start?daysBetween(todayStr(),b.start):null;
+  var head=el("div",{class:"row between"},[el("h3",{text:"Ready to go: "+r.pct+"%"}),cd!=null?el("span",{class:"chip",text:cd>0?"Starts in "+cd+" day"+(cd===1?"":"s"):cd===0?"Starts today":cd>-it.length?"On the trip now":"Finished"}):null]);
+  var meter=el("div",{class:"meter"},[el("i",{style:"width:"+r.pct+"%"})]);
+  var list=el("ul",{class:"acts"},r.items.map(function(x){return el("li",{class:"small",text:(x[0]?"✓ ":"○ ")+x[1]})}));
+  // routes
+  var routes=el("div",{class:"row small"},[el("b",{text:"Routes: "})].concat(it.map(function(d,di){var u=dayRoute(t,di);return u?el("a",{href:u,target:"_blank",rel:"noopener",text:"Day "+(di+1)}):null})));
+  // cost
+  var km=tripKm(t),mil=el("input",{id:"cs-m-"+t.id,type:"number",min:"5",step:"0.5",value:String(c.mileage||14),style:"width:80px"}),
+    fuel=el("input",{id:"cs-f-"+t.id,type:"number",min:"50",step:"0.1",value:c.fuel?String(c.fuel):"",placeholder:"today's ₹/l",style:"width:110px"}),
+    toll=el("input",{id:"cs-t-"+t.id,type:"number",min:"0",step:"10",value:c.tolls!=null?String(c.tolls):"",placeholder:"₹",style:"width:90px"}),out=el("p",{class:"small"});
+  function calc(){var f=+fuel.value,m=+mil.value||14,tl=+toll.value||0,fc=f?km/m*f:0,bk=(t.bookings||[]).reduce(function(a,x){return a+(+x.amount||0)},0),pc=peopleCount(t);
+    out.textContent="About "+km+" km of driving → fuel "+(f?rs(fc):"(add today's price)")+" · tolls "+rs(tl)+" · bookings "+rs(bk)+" · so far "+rs(fc+tl+bk)+(pc?" · "+rs((fc+tl+bk)/pc)+" per person":"")+(b.budget?" · budget "+rs(b.budget):"")}
+  [mil,fuel,toll].forEach(function(x){x.addEventListener("input",calc)});calc();
+  var cost=el("div",{style:"display:flex;flex-direction:column;gap:6px"},[el("b",{class:"small",text:"Driving cost"}),
+    el("div",{class:"row small"},[el("label",{for:mil.id},["Car km/l ",mil]),el("label",{for:fuel.id},["Petrol ₹/l ",fuel]),el("label",{for:toll.id},["Tolls ₹ ",toll]),
+      el("button",{type:"button",text:"Save",onclick:function(){if(db)db.collection("trips").doc(t.id).update({costs:{mileage:+mil.value||14,fuel:+fuel.value||0,tolls:toll.value===""?"":+toll.value}})}})]),out,
+    el("span",{class:"small"},[el("a",{href:"https://tollguru.com/toll-calculator-india",target:"_blank",rel:"noopener",text:"Toll calculator (TollGuru)"})," · ",el("a",{href:"https://www.google.com/search?q=petrol+price+pune+today",target:"_blank",rel:"noopener",text:"Petrol price today"})])]);
+  // share
+  var msg=el("span",{class:"small muted"}),txt=tripText(t);
+  var share=el("div",{class:"row small"},[el("b",{text:"Share: "}),
+    el("a",{href:"https://wa.me/?text="+encodeURIComponent(txt.slice(0,3500)),target:"_blank",rel:"noopener",text:"WhatsApp"}),
+    el("button",{type:"button",text:"Copy plan",onclick:function(){if(navigator.clipboard)navigator.clipboard.writeText(txt).then(function(){msg.textContent="Copied"},function(){msg.textContent="Couldn't copy"})}}),
+    el("button",{type:"button",text:"Trip sheet (.md)",onclick:function(){FILES.save(t.name.replace(/[^\w-]+/g,"-")+".md",tripSheet(t),"text/markdown").then(function(){msg.textContent="Saved"},function(e){msg.textContent=e&&e.code==="declined"?"":"Download isn't available here"})}}),
+    FILES.canIcs()?el("button",{type:"button",text:"Calendar (.ics)",onclick:function(){FILES.save(t.name.replace(/[^\w-]+/g,"-")+".ics",icsText(t),"text/calendar")}}):null,msg]);
+  var cal=b.start?el("div",{class:"row small"},[el("b",{text:"Google Calendar: "})].concat(it.map(function(d,di){var sc=daySchedule(t,di);if(!sc.date||!sc.rows.length)return null;
+    return el("a",{href:gcalUrl(t.name+" · Day "+(di+1)+(sc.place?" · "+sc.place:""),sc.date,sc.rows[0].s,sc.end,sc.rows.map(function(r){return hm(r.s)+" "+r.name}).join("\n"),sc.stay||sc.place),target:"_blank",rel:"noopener",text:"Day "+(di+1)})}))):null;
+  return el("div",{class:"card"},[head,meter,list,it.length?routes:null,cost,share,cal])}
+function tripSheet(t){var b=t.brief||{};var L=["# "+t.name,"",(b.start?"From "+b.start+" · ":"")+(b.nights?b.nights+" nights · ":"")+(b.people||""),b.goal?"Goal: "+b.goal:"",""];
+  L.push("```",tripText(t),"```","","## Emergency","- 112 all emergencies · 108 ambulance · 1033 highway helpline · 1091 women's helpline","");
+  var ex=t.expenses||[];if(ex.length){L.push("## Spending so far","Total "+rs(ex.reduce(function(a,x){return a+(+x.amount||0)},0)),"")}
+  return L.join("\n")}
+
+/* ---------- v5: bookings ---------- */
+var BK_TYPES=["Stay","Entry ticket","Safari or activity","Train or bus","Car or driver","Other"];
+function bkCat(ty){return ty==="Stay"?"Stays":ty==="Entry ticket"||ty==="Safari or activity"?"Activities":"Other"}
+function bookingCard(t){var bk=(t.bookings||[]).slice(),id=t.id,today=todayStr();
+  function save(n){if(db)return db.collection("trips").doc(id).update({bookings:n})}
+  var f={type:el("select",{id:"bk-ty-"+id},BK_TYPES.map(function(x){return el("option",{text:x})})),name:el("input",{id:"bk-n-"+id,placeholder:"Name, e.g. MTDC Tarkarli"}),
+    date:el("input",{id:"bk-d-"+id,type:"date"}),time:el("input",{id:"bk-tm-"+id,type:"time"}),ref:el("input",{id:"bk-r-"+id,placeholder:"Confirmation no."}),
+    amount:el("input",{id:"bk-a-"+id,type:"number",min:"0",step:"50",placeholder:"₹"}),cancel:el("input",{id:"bk-c-"+id,type:"date"}),link:el("input",{id:"bk-l-"+id,placeholder:"https:// booking link"}),
+    paid:el("input",{id:"bk-p-"+id,type:"checkbox"}),pav:el("input",{id:"bk-pv-"+id,type:"checkbox"})};
+  var msg=el("span",{class:"small muted"});
+  function add(){var n=f.name.value.trim();if(!n){msg.textContent="Add a name.";return}
+    var row={type:f.type.value,name:n,date:f.date.value,time:f.time.value,ref:f.ref.value.trim(),amount:+f.amount.value||0,cancelBy:f.cancel.value,link:safeUrl(f.link.value.trim())||"",paid:f.paid.checked,payAtVenue:f.pav.checked,added:today};
+    var extra={bookings:bk.concat([row])};if(row.paid&&row.amount)extra.expenses=(t.expenses||[]).concat([{amount:row.amount,cat:bkCat(row.type),note:"Booking: "+n,date:today}]);
+    if(db)db.collection("trips").doc(id).update(extra)}
+  var rows=bk.map(function(x,i){return{x:x,i:i}}).sort(function(a,b){return((a.x.date||"9")+(a.x.time||"")).localeCompare((b.x.date||"9")+(b.x.time||""))});
+  var list=el("div",{style:"display:flex;flex-direction:column;gap:6px"},rows.map(function(r){var x=r.x,pills=[];
+    pills.push(el("span",{class:"pill "+(x.paid?"veg3":x.payAtVenue?"veg2":"veg1"),text:x.paid?"Paid":x.payAtVenue?"Pay at venue":"To pay"}));
+    if(x.cancelBy){var dl=daysBetween(today,x.cancelBy);if(dl>=0)pills.push(el("span",{class:"pill "+(dl<=3?"veg1":"veg2"),text:"Free cancel "+(dl===0?"ends today":"for "+dl+" more day"+(dl===1?"":"s"))}))}
+    return el("div",{class:"tl"},[el("span",{class:"t km",text:(x.date?x.date.slice(8)+"/"+x.date.slice(5,7):"—")+(x.time?" "+x.time:"")}),el("div",{class:"b"},[
+      el("div",{class:"row"},[el("b",{text:x.name}),el("span",{class:"small muted",text:x.type+(x.amount?" · "+rs(x.amount):"")+(x.ref?" · ref "+x.ref:"")})].concat(pills)),
+      el("div",{class:"row ctl"},[x.link?link(x.link,"Open booking"):null,
+        !x.paid?el("button",{type:"button",text:"Mark paid",onclick:function(){var n=bk.slice();n[r.i]=Object.assign({},x,{paid:true});var e={bookings:n};if(x.amount)e.expenses=(t.expenses||[]).concat([{amount:x.amount,cat:bkCat(x.type),note:"Booking: "+x.name,date:today}]);if(db)db.collection("trips").doc(id).update(e)}}):null,
+        el("button",{type:"button",text:"Remove",onclick:function(){var n=bk.slice();n.splice(r.i,1);save(n)}})])])])}));
+  return el("div",{class:"card"},[el("h3",{text:"Bookings"+(bk.length?" ("+bk.length+")":"")}),
+    bk.length?list:el("p",{class:"small muted",text:"Stays, tickets, safaris and drivers in one place, with confirmation numbers and free-cancellation deadlines. Marking one paid adds it to spending."}),
+    el("details",{},[el("summary",{class:"small",text:"Add a booking"}),el("div",{class:"two",style:"margin-top:8px"},[
+      el("label",{for:f.type.id},["Type",f.type]),el("label",{for:f.name.id},["Name",f.name]),el("label",{for:f.date.id},["Date",f.date]),el("label",{for:f.time.id},["Check-in or start time",f.time]),
+      el("label",{for:f.ref.id},["Confirmation",f.ref]),el("label",{for:f.amount.id},["Amount ₹",f.amount]),el("label",{for:f.cancel.id},["Free cancellation until",f.cancel]),el("label",{for:f.link.id},["Link",f.link]),
+      el("label",{class:"check",for:f.paid.id},[f.paid," Already paid"]),el("label",{class:"check",for:f.pav.id},[f.pav," Pay at venue"]),
+      el("div",{class:"row"},[el("button",{type:"button",class:"primary",text:"Save booking",onclick:add}),msg])])]),
+    el("p",{class:"small muted",text:"Confirmation emails in Gmail? Ask Claude in your project thread to add them here."})])}
+
+/* ---------- v5: group split ---------- */
+function parseGroup(s){return(s||"").split(",").map(function(p){p=p.trim();if(!p)return null;var m=p.match(/^(.*?)\s*[x×*]\s*(\d+(\.\d+)?)$/i);return m?{name:m[1].trim(),share:+m[2]}:{name:p,share:1}}).filter(Boolean)}
+function settle(group,ex){var tot=ex.reduce(function(a,x){return a+(+x.amount||0)},0),sh=group.reduce(function(a,g){return a+g.share},0)||1,bal={};
+  group.forEach(function(g){bal[g.name]=-tot*g.share/sh});ex.forEach(function(x){var p=x.paidBy&&bal[x.paidBy]!==undefined?x.paidBy:group[0].name;bal[p]+=+x.amount||0});
+  var cr=[],de=[];Object.keys(bal).forEach(function(k){if(bal[k]>0.5)cr.push([k,bal[k]]);else if(bal[k]<-0.5)de.push([k,-bal[k]])});
+  var tr=[];cr.sort(function(a,b){return b[1]-a[1]});de.sort(function(a,b){return b[1]-a[1]});
+  while(cr.length&&de.length){var a=Math.min(cr[0][1],de[0][1]);tr.push(de[0][0]+" pays "+cr[0][0]+" "+rs(a));cr[0][1]-=a;de[0][1]-=a;if(cr[0][1]<0.5)cr.shift();if(de[0][1]<0.5)de.shift()}
+  return{tot:tot,bal:bal,tr:tr}}
+function splitCard(t){var g=parseGroup(t.group),ex=t.expenses||[];
+  var inp=el("input",{id:"sp-g-"+t.id,placeholder:"Who shares costs, e.g. Our family x4, Rahul's family x3"});inp.value=t.group||"";
+  var kids=[el("h3",{text:"Split with others"}),el("div",{class:"row"},[inp,el("button",{type:"button",text:"Save",onclick:function(){if(db)db.collection("trips").doc(t.id).update({group:inp.value.trim()})}})]),
+    el("p",{class:"small muted",text:"“x4” means that family carries 4 shares. Pick who paid for each entry below."})];
+  if(g.length>1&&ex.length){var r=settle(g,ex);
+    kids.push(el("p",{class:"small",text:"Total "+rs(r.tot)+" · "+g.map(function(x){var v=r.bal[x.name];return x.name+(v>=0?" gets back ":" owes ")+rs(Math.abs(v))}).join(" · ")}));
+    kids.push(r.tr.length?el("ul",{class:"acts"},r.tr.map(function(x){return el("li",{},[el("b",{text:x})])})):el("p",{class:"small",text:"All square."}));
+    kids.push(el("details",{},[el("summary",{class:"small",text:"Who paid what"}),el("div",{style:"display:flex;flex-direction:column;gap:4px;margin-top:6px"},ex.map(function(x,i){
+      var sel=el("select",{id:"sp-p-"+t.id+"-"+i,style:"width:auto"},g.map(function(p){var o=el("option",{text:p.name});if((x.paidBy||g[0].name)===p.name)o.selected=true;return o}));
+      sel.addEventListener("change",function(){var n=JSON.parse(JSON.stringify(ex));n[i].paidBy=sel.value;if(db)db.collection("trips").doc(t.id).update({expenses:n})});
+      return el("div",{class:"row small"},[el("span",{text:(x.date||"")+" · "+(x.note||x.cat)+" · "+rs(x.amount)}),sel])}))]))}
+  return el("div",{class:"card"},kids)}
+
+/* ---------- v5: Today (live trip mode) ---------- */
+var TD={trip:"",day:-1};
+function pickTodayTrip(){var ts=S.trips.filter(function(t){return t.itinerary&&t.itinerary.length}),td=todayStr();
+  var on=ts.find(function(t){var s=t.brief&&t.brief.start;if(!s)return false;var k=daysBetween(s,td);return k>=0&&k<t.itinerary.length});if(on)return on;
+  var up=ts.filter(function(t){return t.brief&&t.brief.start&&t.brief.start>=td}).sort(function(a,b){return a.brief.start.localeCompare(b.brief.start)})[0];return up||ts[0]||null}
+function renderToday(){var box=$("today-box");if(!box)return;box.textContent="";
+  var ts=S.trips.filter(function(t){return t.itinerary&&t.itinerary.length});
+  var ts_=$("td-trip");ts_.textContent="";
+  if(!ts.length){box.appendChild(el("div",{class:"empty",text:loaded?"No trip with a timeline yet. Make one in Trips.":"Loading…"}));return}
+  if(!TD.trip||!ts.some(function(t){return t.id===TD.trip})){var d=pickTodayTrip();TD.trip=d?d.id:ts[0].id;TD.day=-1}
+  ts.forEach(function(t){var o=el("option",{value:t.id,text:t.name+(t.brief&&t.brief.start?" · "+t.brief.start:"")});if(t.id===TD.trip)o.selected=true;ts_.appendChild(o)});
+  var t=ts.find(function(x){return x.id===TD.trip}),it=t.itinerary,st=t.brief&&t.brief.start,td=todayStr();
+  if(TD.day<0||TD.day>=it.length){var k=st?daysBetween(st,td):0;TD.day=k>=0&&k<it.length?k:0}
+  var ds=$("td-day");ds.textContent="";it.forEach(function(d,di){var o=el("option",{value:String(di),text:"Day "+(di+1)+(st?" · "+addDays(st,di):"")+(d.place?" · "+d.place:"")});if(di===TD.day)o.selected=true;ds.appendChild(o)});
+  var di=TD.day,sc=daySchedule(t,di),isToday=sc.date===td,nm=isToday?nowMins():null;
+  var live=sc.rows.filter(function(r){return !r.overnight});
+  var cur=live.find(function(r){return !r.x.done});
+  // header
+  var hd=[el("div",{class:"row between"},[el("span",{class:"big",text:isToday?"Now "+hm(nm):(sc.date?"Plan for "+sc.wd+" "+sc.date:"Day "+(di+1))}),sc.sun?el("span",{class:"chip",text:"Sunrise "+hm(sc.sun.rise)+" · Sunset "+hm(sc.sun.set)}):null])];
+  if(isToday&&sc.sun){var left=sc.sun.set-nm;hd.push(el("p",{class:"small",text:left>0?"Daylight left: "+fmtDur(left)+".":"It's after sunset. Avoid ghat roads and unfamiliar highways now."}))}
+  if(!st)hd.push(el("p",{class:"small warn",text:"Set the trip's start date in Trips to see real dates and sunset times."}));
+  var behind=isToday&&cur?nm-cur.s:0;
+  if(behind>=10)hd.push(el("div",{class:"row"},[el("span",{class:"small warn",text:"You're about "+fmtDur(behind)+" behind plan."}),
+    el("button",{type:"button",class:"primary",text:"Shift the rest of today by "+fmtDur(behind),onclick:function(){updItin(t,function(a){var x=a[di].items[cur.ii];x.delay=(+x.delay||0)+behind})}})]));
+  box.appendChild(el("div",{class:"card"},hd));
+  // current
+  if(cur){var q=rowQuery(cur),nav=q?el("a",{class:"btnbig",href:dirUrl(null,q),target:"_blank",rel:"noopener",text:"Navigate"}):null;
+    var nxt=live[live.indexOf(cur)+1];
+    var drv=live.slice(live.indexOf(cur)).find(function(r){return r.x.k==="drive"}),lb=null;
+    if(sc.sun&&drv){var by=sc.sun.set-drv.mins;lb=el("p",{class:"small "+(drv.s>by?"warn":"muted"),text:"To finish “"+drv.name+"” before dark, leave by "+hm(by)+(drv.s>by?". The plan has you leaving at "+hm(drv.s)+", so trim something before it.":".")})}
+    box.appendChild(el("div",{class:"card live"},[el("span",{class:"small muted",text:isToday&&nm>=cur.s?"Now":"Next up"}),
+      el("div",{class:"big",text:cur.name}),el("span",{class:"small",text:hm(cur.s)+" to "+hm(cur.e)+" · "+fmtDur(cur.mins)+(cur.x.km?" · "+cur.x.km+" km":"")+(cur.x.delay?" · includes "+cur.x.delay+" min delay":"")}),
+      cur.st&&cur.st.note?el("span",{class:"small muted",text:cur.st.note}):null,lb,
+      el("div",{class:"row"},[el("button",{type:"button",class:"primary btnbig",text:"Done",onclick:function(){updItin(t,function(a){a[di].items[cur.ii].done=isToday?hm(nowMins()):"yes"})}}),
+        el("button",{type:"button",class:"btnbig",text:"+15 min",title:"Push this and everything after by 15 minutes",onclick:function(){updItin(t,function(a){var x=a[di].items[cur.ii];x.delay=(+x.delay||0)+15})}}),
+        el("button",{type:"button",class:"btnbig",text:"Skip",onclick:function(){updItin(t,function(a){var x=a[di].items.splice(cur.ii,1)[0];return{skipped:(t.skipped||[]).concat([{day:di,item:x}])}})}}),
+        nav,AUDIO.tts||window.speechSynthesis?el("button",{type:"button",class:"btnbig",text:"Listen",onclick:function(){speakText("Now: "+cur.name+", until "+hm(cur.e)+". "+(cur.st&&cur.st.note?cur.st.note+". ":"")+(nxt?"After that: "+nxt.name+" at "+hm(nxt.s)+".":"That's the last thing today."))}}):null])]))}
+  else box.appendChild(el("div",{class:"card live"},[el("div",{class:"big",text:"All done for today"}),el("span",{class:"small muted",text:sc.stay?"Night: "+sc.stay:"Rest well."})]));
+  // full day
+  var dayCard=el("div",{class:"card dayc"},[el("h3",{text:"Day "+(di+1)+(sc.place?" · "+sc.place:"")})]);
+  sc.rows.forEach(function(r){var isCur=cur&&r.ii===cur.ii;
+    dayCard.appendChild(el("div",{class:"tl k-"+r.x.k+(r.x.done?" done":"")+(isCur?" now":"")},[el("span",{class:"t km",text:hm(r.s)}),el("div",{class:"b"},[
+      el("div",{class:"row"},[el("b",{text:(r.x.done?"✓ ":isCur?"▶ ":"")+r.name}),el("span",{class:"small muted",text:r.overnight?"overnight":fmtDur(r.mins)+(r.x.done&&r.x.done!=="yes"?" · done "+r.x.done:"")})]),
+      r.x.done?el("div",{class:"row ctl"},[el("button",{type:"button",text:"Undo",onclick:function(){updItin(t,function(a){delete a[di].items[r.ii].done})}})]):null])]))});
+  dayCard.appendChild(el("p",{class:"small muted",text:"Day ends about "+hm(sc.end)+(sc.stay?" · Night: "+sc.stay:"")}));
+  var u=dayRoute(t,di);if(u)dayCard.appendChild(el("div",{class:"row small"},[el("a",{href:u,target:"_blank",rel:"noopener",text:"Whole day's route in Google Maps"})]));
+  box.appendChild(dayCard);
+  var sk=(t.skipped||[]).map(function(x,i){return{x:x,i:i}}).filter(function(o){return o.x.day===di});
+  if(sk.length)box.appendChild(el("div",{class:"card"},[el("h3",{text:"Skipped today"})].concat(sk.map(function(o){var s2=o.x.item.k==="stop"&&stopById(o.x.item.ref);
+    return el("div",{class:"row between small"},[el("span",{text:s2?s2.name:(o.x.item.name||"Stop")}),el("button",{type:"button",text:"Put back",onclick:function(){updItin(t,function(a){a[di].items.push(o.x.item);var n=(t.skipped||[]).slice();n.splice(o.i,1);return{skipped:n}})}})])}))));
+  // quick spend + help
+  var qs=el("input",{id:"td-q",placeholder:"Spent: “petrol 2500” or “lunch 640”"}),qm=el("span",{class:"small muted"});
+  function addQ(){var v=qs.value.trim(),m=v.match(/(\d[\d,]*(\.\d+)?)/);if(!m){qm.textContent="Include an amount.";return}if(!db)return;
+    db.collection("trips").doc(t.id).update({expenses:(t.expenses||[]).concat([{amount:+m[1].replace(/,/g,""),cat:guessCat(v),note:v.replace(m[0],"").replace(/₹|rs\.?|rupees/ig,"").trim(),date:td}])}).then(function(){qs.value="";qm.textContent="Added"})}
+  qs.addEventListener("keydown",function(e){if(e.key==="Enter")addQ()});
+  var spent=(t.expenses||[]).reduce(function(a,x){return a+(+x.amount||0)},0);
+  box.appendChild(el("div",{class:"card"},[el("h3",{text:"Spent so far: "+rs(spent)+(t.brief&&t.brief.budget?" of "+rs(t.brief.budget):"")}),
+    el("div",{class:"row"},[qs,el("button",{type:"button",class:"primary",text:"Add",onclick:addQ}),AUDIO.dict||window.webkitSpeechRecognition?el("button",{type:"button",text:"Speak",onclick:function(ev){dictateInto(qs,ev.target)}}):null,qm])]));
+  box.appendChild(el("div",{class:"card"},[el("h3",{text:"Help nearby"}),el("div",{class:"row small"},[el("a",{href:"tel:112",text:"Call 112"}),el("a",{href:"tel:108",text:"Ambulance 108"}),el("a",{href:"tel:1033",text:"Highway 1033"}),
+    el("a",{href:"https://www.google.com/maps/search/hospital+near+me",target:"_blank",rel:"noopener",text:"Hospital"}),el("a",{href:"https://www.google.com/maps/search/petrol+pump+near+me",target:"_blank",rel:"noopener",text:"Petrol"}),
+    el("a",{href:"https://www.google.com/maps/search/pure+veg+restaurant+near+me",target:"_blank",rel:"noopener",text:"Pure veg food"}),el("a",{href:"https://www.google.com/maps/search/public+toilet+near+me",target:"_blank",rel:"noopener",text:"Toilets"})])]));
+}
+$("td-trip").addEventListener("change",function(){TD.trip=$("td-trip").value;TD.day=-1;renderToday()});
+$("td-day").addEventListener("change",function(){TD.day=+$("td-day").value;renderToday()});
+setInterval(function(){if(location.hash==="#today"&&document.activeElement&&document.activeElement.id!=="td-q")renderToday()},60000);
+
+function renderAll(){renderToday();renderKit();renderMap();renderSpots();renderPicked();renderTrips();renderRoad();renderLog();spotOptions();renderStays();tripOptions();renderPrep()}
 var loaded=false;renderAll();
 
 /* ---------- local database: data/*.json from the repo + your changes saved in this browser ---------- */
@@ -797,5 +1051,6 @@ $("bk-import").addEventListener("change",function(ev){var f=ev.target.files[0];i
 })();
 </script>
 
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(function(){});</script>
 </body>
 </html>

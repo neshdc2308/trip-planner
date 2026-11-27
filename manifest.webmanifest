@@ -1,0 +1,16 @@
+{
+ "name": "Pune Trip Planner",
+ "short_name": "Trips",
+ "start_url": "./#today",
+ "display": "standalone",
+ "background_color": "#f3f5f4",
+ "theme_color": "#0f6b63",
+ "icons": [
+  {
+   "src": "icon.svg",
+   "sizes": "any",
+   "type": "image/svg+xml",
+   "purpose": "any maskable"
+  }
+ ]
+}

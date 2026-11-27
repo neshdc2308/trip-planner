@@ -54,5 +54,20 @@
    "https://commons.wikimedia.org/",
    "https://open-meteo.com/"
   ]
+ },
+ {
+  "title": "What makes a planner advanced: gaps and what was added (v5)",
+  "date": "2026-11-27",
+  "query": "Compared with Wanderlog, Roadtrippers, TripIt, Splitwise and TollGuru feature sets; Indian road-trip needs (tolls, ghats after dark, veg food, signal gaps)",
+  "summary": "Most of the gap was in running the trip, not planning it. Added in v5: (1) Today tab for the road: now and next, Done, Skip, +15 min, a one-tap 'shift the rest of today' when behind plan, leave-by time to finish drives before sunset, navigate to the next stop, listen, quick spending, help nearby (112/108/1033, hospital, petrol, pure veg, toilets). (2) Rank places for a brief's dates: season 30, mood 25, distance 20, veg 10, cost 10, weather 5 (website), minus road closures. (3) Per-trip readiness score and countdown (dates, stays booked per night, bookings paid, no after-dark drives, prep, kit, cost estimate). (4) Day routes as Google Maps links with waypoints. (5) Driving cost: km from the timeline x your car's km/l x today's petrol price, plus your toll estimate (TollGuru link). No prices are invented. (6) Bookings tracker with confirmation numbers, check-in time, free-cancellation countdown, paid or pay-at-venue; marking paid adds to spending. (7) Group split with family shares (x4, x2), who paid each entry, and who pays whom. (8) Share as WhatsApp text, copy, trip sheet (.md), Google Calendar per day, .ics on the website. (9) Website is now an installable offline app (service worker caches app, data, map tiles viewed and photos). Still open, needs connectors or APIs: true route optimisation and live traffic (Google Routes or TomTom key), automatic booking import from Gmail (Claude can do it from the thread), live hotel prices inside the page (Booking.com connector via the mcp capability), fuel price feed, shared live editing with the other family (user and room capabilities), push reminders before cancellation deadlines (a scheduled Claude task).",
+  "sources": [
+   "https://wanderlog.com/blog/2020/08/18/best-travel-planner-apps-for-each-type-of-traveler",
+   "https://roadtrippers.com/magazine/travel-planning-apps/",
+   "https://www.upperinc.com/alternatives/roadtrippers/",
+   "https://autio.com/here-and-there/best-road-trip-apps-2026",
+   "https://tollguru.com/toll-calculator-india",
+   "https://tollguru.com/india-toll"
+  ],
+  "id": "advanced-2026-11-27"
  }
 ]
