@@ -1,0 +1,534 @@
+[
+{
+"spotId": "alibaug",
+"ci": "2026-12-19",
+"co": "2026-12-21",
+"n": 2,
+"guests": "2 adults",
+"checked": "2026-11-27",
+"by": "Claude's first check (Booking.com + Tripadvisor)",
+"bk": [
+{
+"name": "Spring Farm Ville",
+"total": 5400,
+"cur": "INR",
+"score": null,
+"reviews": 0,
+"type": "Villa",
+"url": "https://www.booking.com/hotel/in/spring-farm-ville.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-7c5c5f4ea1acd761",
+"veg": 0
+},
+{
+"name": "Indraprastha Cottage",
+"total": 8000,
+"cur": "INR",
+"score": null,
+"reviews": 0,
+"type": "Hotel",
+"url": "https://www.booking.com/hotel/in/indraprastha-cottage-alibag.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-7c5c5f4ea1acd761",
+"veg": 0
+},
+{
+"name": "Cocorico Stay Ya! Cottages",
+"total": 11219,
+"cur": "INR",
+"score": 8.5,
+"reviews": 0,
+"type": "Country house",
+"url": "https://www.booking.com/hotel/in/mantris-homestay.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-7c5c5f4ea1acd761",
+"veg": 0
+},
+{
+"name": "Neville's Villa",
+"total": 22950,
+"cur": "INR",
+"score": 8.4,
+"reviews": 0,
+"type": "Villa",
+"url": "https://www.booking.com/hotel/in/neville-39-s-villa.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-7c5c5f4ea1acd761",
+"veg": 0
+},
+{
+"name": "Taj Alibaug Resort & Spa",
+"total": 62000,
+"cur": "INR",
+"score": 8.6,
+"reviews": 0,
+"type": "Resort",
+"url": "https://www.booking.com/hotel/in/radisson-blu-resort-and-spa-alibaug.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-7c5c5f4ea1acd761",
+"veg": 0
+}
+],
+"ta": [
+{
+"name": "PrivyStays St. Ricky's",
+"total": 67,
+"cur": "USD",
+"rating": 3.0,
+"reviews": 2,
+"platform": "Agoda",
+"url": "https://www.tripadvisor.com/Hotel_Review-g1010231-d26814594-Reviews-PrivyStays_St_Ricky_s_Apartment_Hotel-Alibaug_Raigad_District_Maharashtra.html",
+"offer": ""
+},
+{
+"name": "Acons Palm Beach",
+"total": 71,
+"cur": "USD",
+"rating": 4.2,
+"reviews": 172,
+"platform": "Agoda",
+"url": "https://www.tripadvisor.com/Hotel_Review-g1010231-d12432027-Reviews-Acons_Palm_Beach-Alibaug_Raigad_District_Maharashtra.html",
+"offer": ""
+},
+{
+"name": "The Blue Sky",
+"total": 79,
+"cur": "USD",
+"rating": 4.1,
+"reviews": 12,
+"platform": "Priceline",
+"url": "https://www.tripadvisor.com/Hotel_Review-g1010231-d21330078-Reviews-The_Blue_Sky-Alibaug_Raigad_District_Maharashtra.html",
+"offer": ""
+},
+{
+"name": "Jogalekar Cottage",
+"total": 105,
+"cur": "USD",
+"rating": 4.3,
+"reviews": 200,
+"platform": "Booking.com",
+"url": "https://www.tripadvisor.com/Hotel_Review-g1010231-d1973225-Reviews-Jogalekar_Cottage-Alibaug_Raigad_District_Maharashtra.html",
+"offer": ""
+},
+{
+"name": "Hotel Maple IVY",
+"total": 107,
+"cur": "USD",
+"rating": 4.0,
+"reviews": 185,
+"platform": "Hotels.com",
+"url": "https://www.tripadvisor.com/Hotel_Review-g1010231-d8593717-Reviews-Hotel_Maple_IVY-Alibaug_Raigad_District_Maharashtra.html",
+"offer": ""
+},
+{
+"name": "Hotel Ravikiran",
+"total": 114,
+"cur": "USD",
+"rating": 3.7,
+"reviews": 167,
+"platform": "Booking.com",
+"url": "https://www.tripadvisor.com/Hotel_Review-g1010231-d1169886-Reviews-Hotel_Ravikiran-Alibaug_Raigad_District_Maharashtra.html",
+"offer": ""
+},
+{
+"name": "Vaarsa by Bay Hotels",
+"total": 122,
+"cur": "USD",
+"rating": 4.7,
+"reviews": 69,
+"platform": "Expedia",
+"url": "https://www.tripadvisor.com/Hotel_Review-g20808377-d25226544-Reviews-Vaarsa_by_Bay_Hotels-Nagaon_Alibaug_Raigad_District_Maharashtra.html",
+"offer": ""
+},
+{
+"name": "Sidz Cottage",
+"total": 139,
+"cur": "USD",
+"rating": 4.7,
+"reviews": 273,
+"platform": "Vio",
+"url": "https://www.tripadvisor.com/Hotel_Review-g1010231-d2479139-Reviews-Sidz_Cottage-Alibaug_Raigad_District_Maharashtra.html",
+"offer": ""
+},
+{
+"name": "The Fern Silvanus Resort",
+"total": 150,
+"cur": "USD",
+"rating": 4.0,
+"reviews": 156,
+"platform": "Expedia",
+"url": "https://www.tripadvisor.com/Hotel_Review-g1010231-d12218037-Reviews-The_Fern_Silvanus_Resort-Alibaug_Raigad_District_Maharashtra.html",
+"offer": ""
+},
+{
+"name": "Taj Alibaug Resort & Spa",
+"total": 681,
+"cur": "USD",
+"rating": 4.6,
+"reviews": 479,
+"platform": "ZenHotels",
+"url": "https://www.tripadvisor.com/Hotel_Review-g1010231-d33130209-Reviews-Taj_Alibaug_Resort_Spa-Alibaug_Raigad_District_Maharashtra.html",
+"offer": ""
+}
+],
+"errs": {},
+"id": "alibaug"
+},
+{
+"spotId": "lonavala",
+"ci": "2026-12-19",
+"co": "2026-12-21",
+"n": 2,
+"guests": "2 adults",
+"checked": "2026-11-27",
+"by": "Claude's first check (Booking.com)",
+"bk": [
+{
+"name": "Hashtag Travellers By Mody Stays",
+"total": 4265.8,
+"cur": "INR",
+"score": 7.7,
+"reviews": 0,
+"type": "Hostel",
+"url": "https://www.booking.com/hotel/in/hashtag-travellers-by-mody-stays.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-66bb1be8d6d804d7",
+"veg": 0
+},
+{
+"name": "Hotel Vanvira",
+"total": 5356,
+"cur": "INR",
+"score": 8.4,
+"reviews": 0,
+"type": "Hotel",
+"url": "https://www.booking.com/hotel/in/vanvira.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-66bb1be8d6d804d7",
+"veg": 0
+},
+{
+"name": "Hill Berry - A SoVo Hotel",
+"total": 6050,
+"cur": "INR",
+"score": 7.9,
+"reviews": 0,
+"type": "Hotel",
+"url": "https://www.booking.com/hotel/in/hillberry.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-66bb1be8d6d804d7",
+"veg": 0
+},
+{
+"name": "Treebo Five Elements",
+"total": 6163.08,
+"cur": "INR",
+"score": 7.1,
+"reviews": 0,
+"type": "Hotel",
+"url": "https://www.booking.com/hotel/in/five-elements-lonavala.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-66bb1be8d6d804d7",
+"veg": 0
+},
+{
+"name": "Captans Stay",
+"total": 8800,
+"cur": "INR",
+"score": 8.5,
+"reviews": 0,
+"type": "Country house",
+"url": "https://www.booking.com/hotel/in/captans-stay.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-66bb1be8d6d804d7",
+"veg": 0
+},
+{
+"name": "Girivihar Pure Veg Family Resort",
+"total": 9832.5,
+"cur": "INR",
+"score": 8.7,
+"reviews": 0,
+"type": "Resort",
+"url": "https://www.booking.com/hotel/in/girivihar-resort.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-66bb1be8d6d804d7",
+"veg": 2
+},
+{
+"name": "Misty Meadows",
+"total": 10450,
+"cur": "INR",
+"score": 8.2,
+"reviews": 0,
+"type": "Resort",
+"url": "https://www.booking.com/hotel/in/misty-meadows-lonavala.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-66bb1be8d6d804d7",
+"veg": 0
+},
+{
+"name": "Mayur Retreat & Spa",
+"total": 11098,
+"cur": "INR",
+"score": 7.6,
+"reviews": 0,
+"type": "Resort",
+"url": "https://www.booking.com/hotel/in/mayur-retreat.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-66bb1be8d6d804d7",
+"veg": 0
+},
+{
+"name": "Radisson Resort and Spa Lonavala",
+"total": 35150,
+"cur": "INR",
+"score": 8.4,
+"reviews": 0,
+"type": "Resort",
+"url": "https://www.booking.com/hotel/in/radisson-resort-and-spa-lonavala.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-66bb1be8d6d804d7",
+"veg": 0
+}
+],
+"ta": [],
+"errs": {
+"ta": "Tripadvisor was busy during this check. Tap Check again in the Claude app."
+},
+"id": "lonavala"
+},
+{
+"spotId": "mahabaleshwar",
+"ci": "2026-12-19",
+"co": "2026-12-21",
+"n": 2,
+"guests": "2 adults",
+"checked": "2026-11-27",
+"by": "Claude's first check (Booking.com)",
+"bk": [
+{
+"name": "Townhouse Mahabaleshwar (Shiva's Valley)",
+"total": 3746.25,
+"cur": "INR",
+"score": 7.4,
+"reviews": 0,
+"type": "Hotel",
+"url": "https://www.booking.com/hotel/in/fabhotel-shiva-39-s-valley-mahabaleshwar.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-57f0f99a0ce61985",
+"veg": 0
+},
+{
+"name": "Hotel Mahabaleshwar Mount View",
+"total": 6254.91,
+"cur": "INR",
+"score": 7.6,
+"reviews": 0,
+"type": "Hotel",
+"url": "https://www.booking.com/hotel/in/mount-view-mahabaleshwar3.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-57f0f99a0ce61985",
+"veg": 0
+},
+{
+"name": "Serene pool resorts",
+"total": 6730.47,
+"cur": "INR",
+"score": 8.5,
+"reviews": 0,
+"type": "Hotel",
+"url": "https://www.booking.com/hotel/in/serene-pool-resorts.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-57f0f99a0ce61985",
+"veg": 0
+},
+{
+"name": "Wonder Mist Resort",
+"total": 6840,
+"cur": "INR",
+"score": null,
+"reviews": 0,
+"type": "Resort",
+"url": "https://www.booking.com/hotel/in/wonder-mist-resort.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-57f0f99a0ce61985",
+"veg": 0
+},
+{
+"name": "Strawberry King Resort",
+"total": 8330,
+"cur": "INR",
+"score": 7.8,
+"reviews": 0,
+"type": "Resort",
+"url": "https://www.booking.com/hotel/in/strawberry-king-villa.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-57f0f99a0ce61985",
+"veg": 0
+},
+{
+"name": "Ritz Valley Resort",
+"total": 18400,
+"cur": "INR",
+"score": 8.8,
+"reviews": 0,
+"type": "Hotel",
+"url": "https://www.booking.com/hotel/in/ritz-valley-resort.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-57f0f99a0ce61985",
+"veg": 0
+},
+{
+"name": "Brightland Resort & Spa",
+"total": 29196.33,
+"cur": "INR",
+"score": 8.8,
+"reviews": 0,
+"type": "Resort",
+"url": "https://www.booking.com/hotel/in/brightland-resort.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-57f0f99a0ce61985",
+"veg": 0
+},
+{
+"name": "Le Meridien Mahabaleshwar",
+"total": 47000,
+"cur": "INR",
+"score": 8.5,
+"reviews": 0,
+"type": "Resort",
+"url": "https://www.booking.com/hotel/in/le-ma-c-ridien-mahabaleshwar-resort-amp-spa.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-57f0f99a0ce61985",
+"veg": 0
+}
+],
+"ta": [],
+"errs": {
+"ta": "Tripadvisor was busy during this check. Tap Check again in the Claude app."
+},
+"id": "mahabaleshwar"
+},
+{
+"spotId": "tarkarli",
+"ci": "2026-12-19",
+"co": "2026-12-21",
+"n": 2,
+"guests": "2 adults",
+"checked": "2026-11-27",
+"by": "Claude's first check (Booking.com + Tripadvisor)",
+"bk": [
+{
+"name": "Soumitra Guest House Bungalow",
+"total": 3000,
+"cur": "INR",
+"score": 7.8,
+"reviews": 0,
+"type": "Holiday home",
+"url": "https://www.booking.com/hotel/in/soumitra-niwas.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-71557425963ac1a5",
+"veg": 0
+},
+{
+"name": "Holiday Tarkarli Beach Homestay",
+"total": 3600,
+"cur": "INR",
+"score": null,
+"reviews": 0,
+"type": "Homestay",
+"url": "https://www.booking.com/hotel/in/tarkarli-beach-homestay-tarkarli.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-71557425963ac1a5",
+"veg": 0
+},
+{
+"name": "Swami Nivas",
+"total": 4000,
+"cur": "INR",
+"score": 8.2,
+"reviews": 0,
+"type": "Guest house",
+"url": "https://www.booking.com/hotel/in/swami-nivas.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-71557425963ac1a5",
+"veg": 0
+},
+{
+"name": "Anand Nivas Homestay",
+"total": 4400,
+"cur": "INR",
+"score": null,
+"reviews": 0,
+"type": "Guest house",
+"url": "https://www.booking.com/hotel/in/anand-nivas-malvan1.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-71557425963ac1a5",
+"veg": 0
+},
+{
+"name": "Matruchaya Family Homestay",
+"total": 5000,
+"cur": "INR",
+"score": null,
+"reviews": 0,
+"type": "Homestay",
+"url": "https://www.booking.com/hotel/in/matruchaya-homestay-malvan.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-71557425963ac1a5",
+"veg": 0
+},
+{
+"name": "3 Wonders Tarkarli Hotel",
+"total": 7600,
+"cur": "INR",
+"score": 8.6,
+"reviews": 0,
+"type": "Hotel",
+"url": "https://www.booking.com/hotel/in/3-wonders-tarkarli-and-restaurent.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-71557425963ac1a5",
+"veg": 0
+},
+{
+"name": "Classic Anand Bungalow, Tarkarli Beach",
+"total": 7600,
+"cur": "INR",
+"score": null,
+"reviews": 0,
+"type": "Holiday home",
+"url": "https://www.booking.com/hotel/in/classic-anand-home-stay-at-tarkarli-beach-malvan.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-71557425963ac1a5",
+"veg": 0
+},
+{
+"name": "Baywatch Resort Bhogave Beach",
+"total": 16647.3,
+"cur": "INR",
+"score": null,
+"reviews": 0,
+"type": "Hotel",
+"url": "https://www.booking.com/hotel/in/baywatch-resort-bhogave-beach.html?aid=8132308&checkin=2026-12-19&checkout=2026-12-21&no_rooms=1&group_adults=2&selected_currency=INR&label=mcp_rid-71557425963ac1a5",
+"veg": 0
+}
+],
+"ta": [
+{
+"name": "Krupasagar Homestay",
+"total": 39,
+"cur": "USD",
+"rating": 5,
+"reviews": 1,
+"platform": "MakeMyTrip",
+"url": "https://www.tripadvisor.com/Hotel_Review-g641716-d13126035-Reviews-Krupasagar_Homestay-Tarkarli_Sindhudurg_District_Maharashtra.html",
+"offer": ""
+},
+{
+"name": "Tarkarli Resort Ganpat Prasad",
+"total": 52,
+"cur": "USD",
+"rating": 0,
+"reviews": 0,
+"platform": "MakeMyTrip",
+"url": "https://www.tripadvisor.com/Hotel_Review-g641716-d10295990-Reviews-Tarkarli_Resort_Ganpat_Prasad-Tarkarli_Sindhudurg_District_Maharashtra.html",
+"offer": ""
+},
+{
+"name": "Dhanish Resort",
+"total": 58,
+"cur": "USD",
+"rating": 5,
+"reviews": 1,
+"platform": "MakeMyTrip",
+"url": "https://www.tripadvisor.com/Hotel_Review-g641716-d10185620-Reviews-Dhanish_Resort-Tarkarli_Sindhudurg_District_Maharashtra.html",
+"offer": ""
+},
+{
+"name": "Ghar Malvankaranche",
+"total": 60,
+"cur": "USD",
+"rating": 3.3,
+"reviews": 3,
+"platform": "MakeMyTrip",
+"url": "https://www.tripadvisor.com/Hotel_Review-g641716-d13796791-Reviews-Ghar_Malvankaranche-Tarkarli_Sindhudurg_District_Maharashtra.html",
+"offer": ""
+},
+{
+"name": "Tarkarli Cottage",
+"total": 71,
+"cur": "USD",
+"rating": 5,
+"reviews": 2,
+"platform": "MakeMyTrip",
+"url": "https://www.tripadvisor.com/Hotel_Review-g641716-d19917228-Reviews-Tarkarli_Cottage-Tarkarli_Sindhudurg_District_Maharashtra.html",
+"offer": ""
+},
+{
+"name": "Marine Oasis Resort",
+"total": 124,
+"cur": "USD",
+"rating": 4.3,
+"reviews": 36,
+"platform": "MakeMyTrip",
+"url": "https://www.tripadvisor.com/Hotel_Review-g641716-d5943892-Reviews-Marine_Oasis_Resort-Tarkarli_Sindhudurg_District_Maharashtra.html",
+"offer": ""
+},
+{
+"name": "MTDC Tarkarli Resort",
+"total": 141,
+"cur": "USD",
+"rating": 3.5,
+"reviews": 400,
+"platform": "MakeMyTrip",
+"url": "https://www.tripadvisor.com/Hotel_Review-g641716-d636575-Reviews-MTDC_Tarkarli_Resort-Tarkarli_Sindhudurg_District_Maharashtra.html",
+"offer": ""
+}
+],
+"errs": {},
+"id": "tarkarli"
+}
+]

@@ -117,6 +117,13 @@ details>summary{cursor:pointer;font-weight:600}
 .pgal{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px}
 .pgal img{width:100%;height:110px;object-fit:cover;border-radius:8px;display:block}
 #sheet-map{height:240px;border-radius:10px}
+.picks{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px}
+.pick{border:1px solid var(--line);border-radius:10px;padding:8px 10px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.pick b{overflow-wrap:anywhere}
+.pick .lab{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+.drow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;border-top:1px solid var(--line);padding:6px 0;cursor:pointer}
+.drow:hover{background:var(--soft,rgba(0,0,0,.03))}
+.wins{display:flex;flex-wrap:wrap;gap:6px}
 </style>
 </head>
 <body>
@@ -204,12 +211,13 @@ details>summary{cursor:pointer;font-weight:600}
 
 <!-- STAYS -->
 <section id="v-stays" class="view" hidden style="display:flex;flex-direction:column;gap:14px">
-  <p class="muted">Hotels, homestays and camps saved for each place, with veg kitchen and family notes. Prices change daily, so each one shows when it was checked. Use the compare links for today's deals.</p>
+  <p class="muted">Best deals across booking sites for every place, plus the hotels, homestays and camps you saved. Prices change daily, so each one shows when it was checked.</p>
   <div class="filters">
     <label for="st-spot">Place<select id="st-spot"><option value="">All places</option></select></label>
     <label for="st-type">Type<select id="st-type"><option value="">Any</option><option>hotel</option><option>homestay</option><option>resort</option><option>camp</option></select></label>
     <label class="check" for="st-veg"><input type="checkbox" id="st-veg"> Pure veg kitchen only</label>
   </div>
+  <div id="deals-all" class="card"></div>
   <div id="st-compare" class="row small"></div>
   <div class="grid" id="stays"></div>
   <details class="card"><summary>Add a stay you found</summary>
@@ -272,7 +280,7 @@ details>summary{cursor:pointer;font-weight:600}
 "use strict";
 var TAGS=["wellness","nature","sea","mountains","water","river","greenery","treks","jungle","tents","adventure","food","craft","spiritual","fun"];
 var MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-var S={spots:[],routes:[],alerts:[],research:[],requests:[],trips:[],stays:[],prep:[],notes:[],kit:[],photos:[],family:[],watch:[]};
+var S={spots:[],routes:[],alerts:[],research:[],requests:[],trips:[],stays:[],prep:[],notes:[],kit:[],photos:[],family:[],watch:[],deals:[]};
 var STOPS_ALL=[];Object.defineProperty(S,"stops",{enumerable:false,get:function(){return STOPS_ALL}});
 function deriveStops(){STOPS_ALL=[];S.spots.forEach(function(sp){(sp.stops||[]).forEach(function(x){var v=Object.assign({},x);v.spotId=sp.id;STOPS_ALL.push(v)})})}
 var openTrips=new Set();
@@ -763,7 +771,7 @@ function renderStays(){
   var spot=S.spots.find(function(x){return x.id===sp});
   if(spot){var q=encodeURIComponent((spot.mapsQuery||spot.name));
     cmp.appendChild(el("span",{class:"muted",text:"Today's prices for "+spot.name+": "}));
-    [["Google Hotels","https://www.google.com/travel/search?q="+q],["Booking.com","https://www.booking.com/searchresults.html?ss="+q],["Airbnb homestays","https://www.airbnb.co.in/s/"+q+"/homes"],["MTDC resorts","https://www.mtdc.co/"]].forEach(function(l,i){cmp.appendChild(el("span",{},[i?" · ":"",el("a",{href:l[1],target:"_blank",rel:"noopener",text:l[0]})]))});}
+    [["Google Hotels","https://www.google.com/travel/search?q="+q],["Booking.com","https://www.booking.com/searchresults.html?ss="+q],["Agoda","https://www.agoda.com/search?textToSearch="+q],["Tripadvisor (MakeMyTrip, Goibibo, Expedia…)","https://www.tripadvisor.in/Search?q="+q],["Airbnb homestays","https://www.airbnb.co.in/s/"+q+"/homes"],["MTDC resorts","https://www.mtdc.co/"]].forEach(function(l,i){cmp.appendChild(el("span",{},[i?" · ":"",el("a",{href:l[1],target:"_blank",rel:"noopener",text:l[0]})]))});}
   else cmp.appendChild(el("span",{class:"muted",text:"Pick a place to get compare links for today's prices."}));
   var list=S.stays.filter(function(x){return(!sp||x.spotId===sp)&&(!ty||x.type===ty)&&(!vg||x.pureVeg)});
   if(!list.length){box.appendChild(el("div",{class:"empty",text:loaded?"No stays saved for this filter. Use “Find stay deals” on a place, or add one below.":"Loading…"}));return}
@@ -1233,6 +1241,7 @@ function renderSheet(){var box=$("place-sheet");if(!box)return;box.textContent="
     (s.activities||[]).length?el("ul",{class:"acts"},s.activities.map(function(a){return el("li",{class:"small",text:a.name})})):null,
     (s.tips||[]).length?el("details",{open:"open"},[el("summary",{class:"small",text:"Local knowledge ("+s.tips.length+")"}),el("ul",{class:"acts"},s.tips.map(function(t){return el("li",{class:"small",text:t})}))]):null,
     liveBox(s),
+    el("h3",{text:"Best stay deals"}),dealsBox(s),
     el("p",{class:"small"},[el("b",{text:"Saved stays: "}),nStays.length?nStays.map(function(x){return x.name}).join(", "):"none yet",el("a",{href:"#stays",text:" · open Stays",onclick:function(){$("st-spot").value=s.id;renderStays()}})]),
     socialRow(s),notesBox(s),
     el("div",{class:"row"},[el("button",{type:"button",class:on?"primary":"",text:on?"Picked for plan ✓":"Pick for plan",onclick:function(){if(picked.has(s.id))picked.delete(s.id);else picked.add(s.id);renderPicked();renderSpots();renderSheet()}}),
@@ -1245,7 +1254,110 @@ function renderSheet(){var box=$("place-sheet");if(!box)return;box.textContent="
     L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{maxZoom:18,attribution:"Imagery © Esri, Maxar, Earthstar Geographics"}).addTo(mm);
     L.circleMarker([s.lat,s.lon],{radius:8,color:"#fff",weight:2,fillColor:"#0f6b63",fillOpacity:1}).addTo(mm)}catch(e){}},30)}}
 
-function renderAll(){renderSheet();renderFamily();renderLearn();renderToday();renderKit();renderMap();renderSpots();renderPicked();renderTrips();renderRoad();renderLog();spotOptions();renderStays();tripOptions();renderPrep()}
+/* ---------- v8: best deals across platforms ---------- */
+LIVE.TA="Tripadvisor";
+var PLAT={BookingCom:"Booking.com",HotelsCom:"Hotels.com",HotelsCom2:"Hotels.com",MakeMyTrip:"MakeMyTrip",Goibibo:"Goibibo",Agoda:"Agoda",Expedia:"Expedia",Priceline:"Priceline",TripCom:"Trip.com",Vio:"Vio",ZenHotels:"ZenHotels",Yatra:"Yatra",Cleartrip:"Cleartrip",Trivago:"trivago"};
+function platName(p){p=String(p||"");return PLAT[p]||p.replace(/\d+$/,"").replace(/Com$/,".com")||"partner"}
+function money(v,cur){v=+v||0;return cur==="INR"?rs(v):(cur==="USD"?"US$":(cur||"")+" ")+Math.round(v).toLocaleString("en-IN")}
+function taSearch(s,d){var F=famInfo();
+  var input={location:(s.taQuery||shortName(s))+", Maharashtra, India",checkIn:d.ci,checkOut:d.co,guests:Math.max(1,F.adults||2),limit:20,sortBy:"BEST_VALUE",pricingMode:"QUICK",
+    mcpServerVersion:{version:"V2026_0327"},requestContext:{clientType:"DESKTOP",userAgent:"pune-trip-planner/1.0"}};
+  if(/goa|karnataka|gujarat/i.test(s.region||""))input.location=(s.taQuery||shortName(s))+", India";
+  if(F.childAges.length)input.childrenAges=F.childAges.map(function(a){return Math.max(0,Math.min(17,Math.round(a)))});
+  if(F.n&&F.adults+F.childAges.length>4)input.rooms=Math.ceil((F.adults+F.childAges.length)/4);
+  return LIVE.mcp.callTool(LIVE.TA,"search_hotels",input,{cache:{staleTime:18e5,gcTime:216e5}}).then(function(r){var pl=r.payload||{};
+    return(pl.hotels||[]).map(function(h){var o=((h.metaResult||{}).primaryOffers||[])[0]||h.priceInfo||{},dp=String(o.displayPrice||""),pm=/[?&]p=([^&]+)/.exec(o.commerceUrl||""),rv=h.reviewSummary||{};
+      return{name:String(h.hotelName||""),total:parseFloat(dp.replace(/[^0-9.]/g,""))||0,cur:/₹|INR/.test(dp)?"INR":/\$/.test(dp)?"USD":"",rating:+rv.rating||0,reviews:+rv.count||0,
+        platform:pm?platName(decodeURIComponent(pm[1])):"",lowest:!!o.isLowestPricedOffer,
+        url:/^\/[A-Za-z_]/.test(h.hotelReviewUrl||"")?"https://www.tripadvisor.com"+h.hotelReviewUrl:"",offer:/^\/Commerce\?/.test(o.commerceUrl||"")?"https://www.tripadvisor.com"+o.commerceUrl:"",
+        styles:((h.locationV2||{}).hotelStyleRankings||[]).map(function(x){return x.styleName}).filter(Boolean).slice(0,3)}}).filter(function(x){return x.total>0&&x.name})})}
+function dealScan(s){var d=liveDates();
+  var bk=liveStays(s).then(function(r){return{ok:r.list.filter(function(h){return h.total>0}).map(function(h){return{name:h.name,total:h.total,cur:h.cur||"INR",score:h.score||null,reviews:h.reviews||0,type:h.type,url:h.url,veg:h.veg,family:h.family,pool:h.pool}})}},function(e){return{err:liveErr(e,"Booking.com")}});
+  var ta=taSearch(s,d).then(function(l){return{ok:l}},function(e){return{err:liveErr(e,"Tripadvisor"),code:e&&e.code}});
+  return Promise.all([bk,ta]).then(function(x){
+    var doc={spotId:s.id,ci:d.ci,co:d.co,n:d.n,guests:famText()||"2 adults",checked:todayStr(),checkedAt:Date.now(),by:"live check in the app",
+      bk:(x[0].ok||[]).sort(function(a,b){return a.total-b.total}).slice(0,15),ta:(x[1].ok||[]).sort(function(a,b){return a.total-b.total}).slice(0,15),errs:{}};
+    if(x[0].err)doc.errs.bk=x[0].err;if(x[1].err)doc.errs.ta=x[1].err;
+    if(!doc.bk.length&&!doc.ta.length){var e=new Error(doc.errs.bk||doc.errs.ta||"No prices found");e.code=x[1].code;throw e}
+    var old=S.deals.find(function(z){return z.id===s.id});
+    if(old&&old.ci===doc.ci&&old.n===doc.n){if(!doc.bk.length&&old.bk)doc.bk=old.bk;if(!doc.ta.length&&old.ta)doc.ta=old.ta}
+    return(db?db.collection("deals").doc(s.id).set(doc):Promise.resolve()).then(function(){return doc})})}
+function dealPicks(doc){var bk=(doc.bk||[]).slice().sort(function(a,b){return a.total-b.total}),ta=(doc.ta||[]).slice().sort(function(a,b){return a.total-b.total}),P={};
+  P.bkCheap=bk[0];
+  P.bkTop=bk.filter(function(h){return h.score}).sort(function(a,b){return(b.score-a.score)||((b.reviews||0)-(a.reviews||0))})[0];
+  P.bkValue=bk.find(function(h){return h.score>=8&&(h.reviews==null||h.reviews>=10||h.reviews===0)&&h!==P.bkCheap})||bk.find(function(h){return h.score>=8});
+  P.bkVeg=bk.find(function(h){return h.veg===2})||bk.find(function(h){return/pure veg|jain/i.test(h.name)});
+  P.taCheap=ta[0];
+  P.taTop=ta.filter(function(h){return h.reviews>=20}).sort(function(a,b){return(b.rating-a.rating)||(b.reviews-a.reviews)})[0];
+  P.taValue=ta.find(function(h){return h.rating>=4.2&&h.reviews>=10});
+  var w={};ta.forEach(function(h){if(h.platform)w[h.platform]=(w[h.platform]||0)+1});P.wins=Object.keys(w).map(function(k){return[k,w[k]]}).sort(function(a,b){return b[1]-a[1]});
+  P.night=function(h){return doc.n?h.total/doc.n:h.total};return P}
+function pickCard(lab,h,doc,kind){if(!h)return null;var n=doc.n||1,isBk=kind==="bk";
+  var line=money(h.total,h.cur)+" for "+n+" night"+(n===1?"":"s")+" (≈ "+money(h.total/n,h.cur)+" a night)";
+  var meta=isBk?[(h.score?h.score+"/10":"new, no score")+(h.reviews?" from "+h.reviews+" reviews":""),h.type].filter(Boolean).join(" · "):[(h.rating?h.rating+"/5":"no rating")+(h.reviews?" from "+h.reviews+" reviews":""),h.platform?"lowest on "+h.platform:""].filter(Boolean).join(" · ");
+  return el("div",{class:"pick"},[el("span",{class:"lab",text:lab}),el("b",{text:h.name}),el("span",{class:"small",text:line}),el("span",{class:"small muted",text:meta}),
+    el("div",{class:"row small"},[isBk?link(h.url,"Book on Booking.com"):link(h.offer||h.url,h.platform?"Open "+h.platform+" offer":"See offer"),!isBk&&h.offer&&h.url?link(h.url,"Reviews"):null])])}
+function dealsView(doc,s){var P=dealPicks(doc),box=el("div",{style:"display:flex;flex-direction:column;gap:8px"});
+  box.appendChild(el("p",{class:"small muted",text:"For "+doc.ci+" → "+doc.co+" ("+doc.n+" night"+(doc.n===1?"":"s")+", "+(doc.guests||"2 adults")+"). Checked "+doc.checked+(doc.by?" · "+doc.by:"")+"."}));
+  var picks=[pickCard("Cheapest · Booking.com",P.bkCheap,doc,"bk"),P.bkValue&&P.bkValue!==P.bkCheap?pickCard("Best value · Booking.com (8+/10)",P.bkValue,doc,"bk"):null,
+    P.bkTop&&P.bkTop!==P.bkValue&&P.bkTop!==P.bkCheap?pickCard("Top rated · Booking.com",P.bkTop,doc,"bk"):null,P.bkVeg?pickCard("Pure veg · Booking.com",P.bkVeg,doc,"bk"):null,
+    pickCard("Cheapest · via Tripadvisor",P.taCheap,doc,"ta"),P.taValue&&P.taValue!==P.taCheap?pickCard("Best value · via Tripadvisor (4.2+/5)",P.taValue,doc,"ta"):null,
+    P.taTop&&P.taTop!==P.taValue&&P.taTop!==P.taCheap?pickCard("Most loved · via Tripadvisor",P.taTop,doc,"ta"):null].filter(Boolean);
+  if(picks.length)box.appendChild(el("div",{class:"picks"},picks));else box.appendChild(el("p",{class:"small muted",text:"No prices came back for these dates."}));
+  if(P.wins.length)box.appendChild(el("div",{class:"small"},[el("b",{text:"Which site had the lowest price here: "}),P.wins.map(function(w){return w[0]+" ("+w[1]+" hotel"+(w[1]===1?"":"s")+")"}).join(", ")]));
+  Object.keys(doc.errs||{}).forEach(function(k){box.appendChild(el("p",{class:"small warn",text:doc.errs[k]}))});
+  var all=[];(doc.bk||[]).forEach(function(h){all.push({h:h,k:"bk"})});(doc.ta||[]).forEach(function(h){all.push({h:h,k:"ta"})});
+  if(all.length){var body=el("div",{});all.forEach(function(x){var h=x.h,bk=x.k==="bk";
+      body.appendChild(el("div",{class:"fcard"},[el("div",{style:"display:flex;flex-direction:column;gap:1px;min-width:0"},[el("span",{text:h.name}),
+        el("span",{class:"small muted",text:(bk?"Booking.com":"Tripadvisor"+(h.platform?" → "+h.platform:""))+" · "+(bk?(h.score?h.score+"/10":"no score"):(h.rating?h.rating+"/5 ("+h.reviews+")":"no rating"))+(h.veg===2?" · pure veg":"")})]),
+        el("div",{style:"display:flex;flex-direction:column;align-items:flex-end;gap:2px"},[el("b",{class:"small",text:money(h.total,h.cur)}),link(bk?h.url:(h.offer||h.url),"Open")])]))});
+    box.appendChild(el("details",{},[el("summary",{class:"small",text:"All "+all.length+" prices"}),body]))}
+  box.appendChild(el("p",{class:"small muted",text:"Booking.com totals are in rupees. Tripadvisor shows each hotel's lowest partner price in US dollars before taxes, so compare hotels within each list. Final prices can change at checkout."}));
+  return box}
+function dealsBox(s){var wrap=el("div",{style:"display:flex;flex-direction:column;gap:8px"}),doc=S.deals.find(function(x){return x.id===s.id}),msg=el("span",{class:"small muted"});
+  if(doc)wrap.appendChild(dealsView(doc,s));else wrap.appendChild(el("p",{class:"small muted",text:LIVE.mcp?"Not checked yet. Check Booking.com and Tripadvisor (Agoda, MakeMyTrip, Expedia and more) for your dates.":"Not checked yet. Open the planner in the Claude app to check prices across booking sites."}));
+  if(LIVE.mcp){var d=liveDates();var b=el("button",{type:"button",class:doc?"":"primary",text:doc?"Check again for "+d.ci+" ("+d.n+" nights)":"Check deals for "+d.ci+" ("+d.n+" nights)",onclick:function(){b.disabled=true;msg.textContent="Checking Booking.com and Tripadvisor…";Object.keys(LIVE.st).forEach(function(k){if(k.indexOf(s.id+"|")===0)delete LIVE.st[k]});
+      DEALRUN.busy=true;dealScan(s).then(function(nd){DEALRUN.busy=false;var i=S.deals.findIndex(function(x){return x.id===s.id});nd.id=s.id;if(i>=0)S.deals[i]=nd;else S.deals.push(nd);renderSheet();renderDeals()},
+        function(e){DEALRUN.busy=false;b.disabled=false;msg.textContent=e&&e.message?String(e.message).slice(0,200):"Couldn't check prices. Try again."})}});
+    wrap.appendChild(el("div",{class:"row"},[b,msg]))}
+  return wrap}
+var DEALRUN={busy:false,stop:false,i:0,total:0,note:""};
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms)})}
+function scanAll(){if(DEALRUN.busy||!LIVE.mcp)return;var d=liveDates();
+  var todo=S.spots.filter(function(s){var x=S.deals.find(function(z){return z.id===s.id});return!(x&&x.checked===todayStr()&&x.ci===d.ci&&x.n===d.n&&(x.bk||[]).length&&(x.ta||[]).length)}).sort(function(a,b){return(a.km||0)-(b.km||0)});
+  DEALRUN={busy:true,stop:false,i:0,total:todo.length,note:"",fail:0};renderDeals();
+  (function next(k,wait){if(DEALRUN.stop||k>=todo.length){DEALRUN.busy=false;DEALRUN.note=DEALRUN.stop?"Stopped. "+k+" of "+todo.length+" checked.":"Done. "+todo.length+" place"+(todo.length===1?"":"s")+" checked"+(DEALRUN.fail?", "+DEALRUN.fail+" couldn't be checked":"")+".";renderDeals();renderSheet();return}
+    var s=todo[k];DEALRUN.i=k+1;DEALRUN.note="Checking "+s.name+"…";renderDeals();
+    sleep(wait).then(function(){return dealScan(s)}).then(function(nd){nd.id=s.id;var i=S.deals.findIndex(function(x){return x.id===s.id});if(i>=0)S.deals[i]=nd;else S.deals.push(nd);next(k+1,6000)},
+      function(e){var c=e&&e.code;if((c==="rate_limited"||c==="server_unavailable"||/busy|Too Many/i.test(String(e&&e.message)))&&!s._retried){s._retried=true;DEALRUN.note="Sites are busy. Waiting a minute…";renderDeals();next(k,60000);return}
+        DEALRUN.fail++;next(k+1,6000)})})(0,0)}
+function renderDeals(){var box=$("deals-all");if(!box)return;box.textContent="";
+  var sp=$("st-spot")?$("st-spot").value:"",docs=S.deals.filter(function(x){return!sp||x.id===sp}),W={},rows=[];
+  box.appendChild(el("h3",{text:"Best deals across booking sites"}));
+  box.appendChild(el("p",{class:"small muted",text:"Booking.com prices plus Tripadvisor, which compares Agoda, MakeMyTrip, Expedia, Booking.com, Hotels.com and others and shows the cheapest for each hotel. "+S.deals.length+" of "+S.spots.length+" places checked. Tap a place for its full list."}));
+  S.deals.forEach(function(doc){dealPicks(doc).wins.forEach(function(w){W[w[0]]=(W[w[0]]||0)+w[1]})});
+  var wl=Object.keys(W).map(function(k){return[k,W[k]]}).sort(function(a,b){return b[1]-a[1]});
+  if(wl.length)box.appendChild(el("div",{class:"small"},[el("b",{text:"Lowest price most often on: "}),el("span",{class:"wins"},wl.slice(0,8).map(function(w,i){return el("span",{class:"pill "+(i===0?"veg3":"veg2"),text:w[0]+" · "+w[1]})}))]));
+  if(LIVE.mcp){var d=liveDates(),ctl=el("div",{class:"row"});
+    if(DEALRUN.busy){ctl.appendChild(el("span",{class:"small",text:DEALRUN.i+" of "+DEALRUN.total+": "+DEALRUN.note}));ctl.appendChild(el("button",{type:"button",text:"Stop",onclick:function(){DEALRUN.stop=true}}))}
+    else{ctl.appendChild(el("button",{type:"button",class:"primary",text:"Check all places for "+d.ci+" ("+d.n+" nights)",onclick:scanAll}));if(DEALRUN.note)ctl.appendChild(el("span",{class:"small muted",text:DEALRUN.note}));
+      ctl.appendChild(el("span",{class:"small muted",text:"Takes about 10 minutes for all places. Change dates in Plan → Start date and Length."}))}
+    box.appendChild(ctl)}
+  else box.appendChild(el("p",{class:"small muted",text:"Live checks run in the Claude app with Booking.com and Tripadvisor connected. Below are the last saved results."}));
+  docs.forEach(function(doc){var s=spotById(doc.id||doc.spotId);if(!s)return;var P=dealPicks(doc);rows.push({s:s,doc:doc,P:P,key:P.bkCheap?P.night(P.bkCheap):1e9})});
+  rows.sort(function(a,b){return a.key-b.key});
+  if(!rows.length){box.appendChild(el("p",{class:"small muted",text:sp?"This place hasn't been checked yet.":"No places checked yet."}));return}
+  rows.forEach(function(r){var P=r.P,doc=r.doc,parts=[];
+    if(P.bkCheap)parts.push("From "+money(P.night(P.bkCheap),P.bkCheap.cur)+"/night on Booking.com ("+P.bkCheap.name+")");
+    if(P.bkValue&&P.bkValue!==P.bkCheap)parts.push("Best value "+money(P.night(P.bkValue),P.bkValue.cur)+"/night, "+P.bkValue.name+" "+P.bkValue.score+"/10");
+    if(P.taCheap)parts.push("Tripadvisor from "+money(P.night(P.taCheap),P.taCheap.cur)+"/night"+(P.taCheap.platform?" on "+P.taCheap.platform:""));
+    if(P.wins.length)parts.push("Cheapest site most often: "+P.wins[0][0]);
+    box.appendChild(el("div",{class:"drow",role:"button",tabindex:"0",onclick:function(){openSheet(r.s.id)},onkeydown:function(e){if(e.key==="Enter")openSheet(r.s.id)}},[
+      el("div",{style:"display:flex;flex-direction:column;gap:1px;min-width:0"},[el("b",{text:r.s.name})].concat(parts.map(function(t){return el("span",{class:"small",text:t})}))),
+      el("span",{class:"small muted",text:doc.ci+" · "+doc.n+"n · checked "+doc.checked})]))})}
+$("st-spot").addEventListener("input",renderDeals);
+
+function renderAll(){renderSheet();renderFamily();renderLearn();renderToday();renderKit();renderMap();renderSpots();renderPicked();renderTrips();renderRoad();renderLog();spotOptions();renderStays();renderDeals();tripOptions();renderPrep()}
 var loaded=false;renderAll();
 
 /* ---------- local database: data/*.json from the repo + your changes saved in this browser ---------- */
