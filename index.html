@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Pune Trip Planner</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: sticky tab bar over one working column; cards in wrapping grids; road-atlas palette shared with the playbook */
+:root{
+  --bg:#f3f6f5; --surface:#ffffff; --ink:#15302f; --muted:#56706d; --line:#d3dfdc;
+  --teal:#0f6b66; --teal-soft:#dcefed; --road:#e8a317; --road-soft:#fdf1d4;
+  --ok:#2f7d3a; --ok-soft:#e1f2e3; --warn:#a85d00; --warn-soft:#fbeedb; --bad:#b3261e; --bad-soft:#fbe4e2;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Inter",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e1a1a; --surface:#152525; --ink:#e3efec; --muted:#93aca8; --line:#284140;
+  --teal:#5cc5bb; --teal-soft:#16393a; --road:#f2b843; --road-soft:#3a2f14;
+  --ok:#7fd08a; --ok-soft:#173222; --warn:#f3b25e; --warn-soft:#3a2a12; --bad:#ff8a80; --bad-soft:#3d1b19; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1a1a; --surface:#152525; --ink:#e3efec; --muted:#93aca8; --line:#284140;
+  --teal:#5cc5bb; --teal-soft:#16393a; --road:#f2b843; --road-soft:#3a2f14;
+  --ok:#7fd08a; --ok-soft:#173222; --warn:#f3b25e; --warn-soft:#3a2a12; --bad:#ff8a80; --bad-soft:#3d1b19; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--body)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 64px;display:flex;flex-direction:column;gap:20px}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.2;text-wrap:balance}
+h1{font-size:1.5rem} h2{font-size:1.3rem} h3{font-size:1.05rem}
+p{margin:0;max-width:70ch}
+.muted{color:var(--muted)} .small{font-size:.84rem}
+.km{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.top .in{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between}
+nav{display:flex;gap:4px;overflow-x:auto;max-width:100%}
+nav a{padding:6px 12px;border-radius:999px;color:var(--ink);text-decoration:none;font-weight:500;white-space:nowrap;font-size:.92rem}
+nav a[aria-current="page"]{background:var(--teal);color:var(--surface)}
+.status{font-size:.8rem;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.between{justify-content:space-between}
+.chip{font-size:.78rem;border:1px solid var(--line);border-radius:999px;padding:1px 9px;white-space:nowrap}
+.pill{font-size:.75rem;font-weight:600;border-radius:5px;padding:1px 7px;white-space:nowrap}
+.veg3{background:var(--ok-soft);color:var(--ok)} .veg2{background:var(--warn-soft);color:var(--warn)} .veg1{background:var(--bad-soft);color:var(--bad)}
+.s-open{background:var(--ok-soft);color:var(--ok)} .s-watch{background:var(--warn-soft);color:var(--warn)} .s-closed{background:var(--bad-soft);color:var(--bad)}
+.filters{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;align-items:end}
+label{display:flex;flex-direction:column;gap:4px;font-size:.84rem;color:var(--muted)}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%}
+textarea{min-height:70px;resize:vertical}
+input[type=range]{padding:0;accent-color:var(--teal)}
+input[type=checkbox]{width:auto;accent-color:var(--teal)}
+.check{flex-direction:row;align-items:center;gap:8px;color:var(--ink)}
+button{font:600 .88rem var(--body);border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 12px;cursor:pointer}
+button.primary{background:var(--teal);border-color:var(--teal);color:var(--surface)}
+button.on{background:var(--teal-soft);border-color:var(--teal);color:var(--teal)}
+button:disabled{opacity:.5;cursor:default}
+:focus-visible{outline:2px solid var(--road);outline-offset:2px}
+a{color:var(--teal)}
+.tagbtns{display:flex;flex-wrap:wrap;gap:6px}
+.tagbtns button{padding:3px 10px;font-weight:500;font-size:.8rem;border-radius:999px}
+ul.acts{margin:0;padding-left:18px;font-size:.9rem}
+.empty{border:1px dashed var(--line);border-radius:12px;padding:24px;text-align:center;color:var(--muted)}
+.note{background:var(--road-soft);border-radius:10px;padding:10px 12px;font-size:.9rem}
+.err{background:var(--bad-soft);color:var(--bad);border-radius:10px;padding:10px 12px;font-size:.9rem}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 .72rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+details>summary{cursor:pointer;font-weight:600}
+.day{border-left:3px solid var(--road);padding:2px 0 2px 12px;display:flex;flex-direction:column;gap:2px}
+.big{font:700 1.8rem var(--display);color:var(--teal)}
+@media (max-width:700px){.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="in">
+  <div class="row"><h1>Pune Trip Planner</h1><span class="status" id="status">Connecting…</span></div>
+  <nav id="nav">
+    <a href="#explore">Explore</a><a href="#plan">Plan</a><a href="#trips">Trips</a><a href="#stays">Stays</a><a href="#prep">Prep</a><a href="#road">Road watch</a><a href="#log">Research log</a>
+  </nav>
+</div></div>
+
+<div class="wrap">
+
+<!-- EXPLORE -->
+<section id="v-explore" class="view" style="display:flex;flex-direction:column;gap:14px">
+  <p class="muted">Every place within a day's drive of Pune, tagged with your experience menu. Distances are approximate road km from Pune. Veg badge: <span class="pill veg3">Easy veg</span> <span class="pill veg2">Veg available</span> <span class="pill veg1">Mostly non-veg</span></p>
+  <div class="filters">
+    <label for="f-km">Max distance: <span class="km" id="f-km-v">500</span> km<input type="range" id="f-km" min="30" max="600" step="10" value="500"></label>
+    <label for="f-month">Travel month<select id="f-month"></select></label>
+    <label for="f-q">Search<input id="f-q" type="text" placeholder="Name or activity"></label>
+    <label class="check" for="f-veg"><input type="checkbox" id="f-veg"> Hide mostly non-veg places</label>
+    <div style="grid-column:1/-1" class="tagbtns" id="f-tags"></div>
+  </div>
+  <div class="row between"><span class="small muted" id="spot-count"></span><span class="small muted" id="picked-count"></span></div>
+  <div class="grid" id="spots"></div>
+  <details class="card"><summary>Add your own place</summary>
+    <form id="add-spot" class="two" style="margin-top:10px">
+      <label for="as-name">Name<input id="as-name" required></label>
+      <label for="as-km">Km from Pune<input id="as-km" type="number" min="0" required></label>
+      <label for="as-tags">Tags (comma separated)<input id="as-tags" placeholder="nature, sea, food"></label>
+      <label for="as-months">Good months (1–12, comma separated)<input id="as-months" placeholder="10,11,12,1,2"></label>
+      <label for="as-veg">Veg food<select id="as-veg"><option value="3">Easy veg</option><option value="2" selected>Veg available</option><option value="1">Mostly non-veg</option></select></label>
+      <label for="as-notes">Notes<input id="as-notes"></label>
+      <div><button class="primary" type="submit">Save place</button></div>
+    </form>
+  </details>
+</section>
+
+<!-- PLAN -->
+<section id="v-plan" class="view" hidden style="display:flex;flex-direction:column;gap:14px">
+  <div class="card">
+    <h2>Trip brief</h2>
+    <form id="brief" class="two">
+      <label for="b-name">Trip name<input id="b-name" value="Winter coast break"></label>
+      <label for="b-type">Length<select id="b-type"><option value="2">Weekend, 2 nights</option><option value="3">Long weekend, 3 nights</option><option value="5">5 nights</option><option value="7" selected>Week, 7 nights</option></select></label>
+      <label for="b-start">Start date<input id="b-start" type="date"></label>
+      <label for="b-budget">Budget cap (₹)<input id="b-budget" type="number" min="0" step="1000" value="60000"></label>
+      <label for="b-people">Who is coming<input id="b-people" value="2 adults, 2 kids"></label>
+      <label for="b-drive">Max driving per day (hours)<input id="b-drive" type="number" min="2" max="12" value="7"></label>
+      <label for="b-goal" style="grid-column:1/-1">Goal: this trip is a success if…<input id="b-goal" value="everyone comes back rested, and we stay under budget"></label>
+      <div style="grid-column:1/-1;display:flex;flex-direction:column;gap:6px"><span class="small muted">Mood (pick 2–3)</span><div class="tagbtns" id="b-mood"></div></div>
+      <label class="check" for="b-night"><input type="checkbox" id="b-night" checked> No driving after dark</label>
+      <label class="check" for="b-veg"><input type="checkbox" id="b-veg" checked> Pure veg meals</label>
+    </form>
+    <div class="row"><span class="small muted">Places picked from Explore:</span><span id="b-picked" class="row"></span></div>
+    <div class="row"><button class="primary" id="b-go">Plan with Claude</button><button id="b-save-brief">Save as idea without planning</button><span class="small muted" id="b-msg"></span></div>
+  </div>
+  <div id="plan-out"></div>
+</section>
+
+<!-- TRIPS -->
+<section id="v-trips" class="view" hidden style="display:flex;flex-direction:column;gap:14px">
+  <p class="muted">Saved trips, from ideas to done. Log spending on the trip and review it afterwards so the next plan gets better.</p>
+  <div id="trips" style="display:flex;flex-direction:column;gap:12px"></div>
+</section>
+
+<!-- STAYS -->
+<section id="v-stays" class="view" hidden style="display:flex;flex-direction:column;gap:14px">
+  <p class="muted">Hotels, homestays and camps saved for each place, with veg kitchen and family notes. Prices change daily, so each one shows when it was checked. Use the compare links for today's deals.</p>
+  <div class="filters">
+    <label for="st-spot">Place<select id="st-spot"><option value="">All places</option></select></label>
+    <label for="st-type">Type<select id="st-type"><option value="">Any</option><option>hotel</option><option>homestay</option><option>resort</option><option>camp</option></select></label>
+    <label class="check" for="st-veg"><input type="checkbox" id="st-veg"> Pure veg kitchen only</label>
+  </div>
+  <div id="st-compare" class="row small"></div>
+  <div class="grid" id="stays"></div>
+  <details class="card"><summary>Add a stay you found</summary>
+    <form id="add-stay" class="two" style="margin-top:10px">
+      <label for="ay-name">Name<input id="ay-name" required></label>
+      <label for="ay-spot">Place<select id="ay-spot"></select></label>
+      <label for="ay-type">Type<select id="ay-type"><option>hotel</option><option>homestay</option><option>resort</option><option>camp</option></select></label>
+      <label for="ay-price">Price per night (₹)<input id="ay-price" placeholder="3500–5000"></label>
+      <label for="ay-url">Booking link (https://)<input id="ay-url"></label>
+      <label for="ay-notes">Notes<input id="ay-notes" placeholder="Veg kitchen, parking, kids pool"></label>
+      <label class="check" for="ay-veg"><input type="checkbox" id="ay-veg"> Pure veg kitchen</label>
+      <div><button class="primary" type="submit">Save stay</button></div>
+    </form>
+  </details>
+</section>
+
+<!-- PREP -->
+<section id="v-prep" class="view" hidden style="display:flex;flex-direction:column;gap:14px">
+  <p class="muted">The countdown checklist. Pick a trip to tick items off for it; ticks are saved with that trip.</p>
+  <div class="filters"><label for="pp-trip">Trip<select id="pp-trip"><option value="">No trip, just read</option></select></label><div class="small muted" id="pp-count"></div></div>
+  <div class="grid" id="prep"></div>
+</section>
+
+<!-- ROAD -->
+<section id="v-road" class="view" hidden style="display:flex;flex-direction:column;gap:14px">
+  <p class="muted">Road news and closures found by web research, with the date each was checked. Always re-check 7 days before leaving.</p>
+  <div class="grid" id="alerts"></div>
+  <h2>Main routes out of Pune</h2>
+  <div class="tbl"><table><thead><tr><th>Route</th><th>Via</th><th>Watch for</th><th>Best months</th><th></th></tr></thead><tbody id="routes"></tbody></table></div>
+</section>
+
+<!-- LOG -->
+<section id="v-log" class="view" hidden style="display:flex;flex-direction:column;gap:14px">
+  <p class="muted">Every search Claude has done for this planner, saved with its sources. Requests you make from Explore are saved in this browser; mention them to Claude in your project thread.</p>
+  <div class="card"><h3>Your changes</h3><p class="small muted">Trips, spending, ticks and places you add are saved in this browser. Download a backup to move them to another device.</p>
+  <div class="row"><button id="bk-export" type="button">Download backup</button><label for="bk-import" class="check" style="color:var(--ink)">Restore backup <input id="bk-import" type="file" accept="application/json"></label></div></div>
+  <h2>Waiting requests</h2>
+  <div id="requests" style="display:flex;flex-direction:column;gap:8px"></div>
+  <h2>Past research</h2>
+  <div id="research" style="display:flex;flex-direction:column;gap:10px"></div>
+</section>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+var TAGS=["wellness","nature","sea","mountains","water","river","greenery","treks","jungle","tents","adventure","food","craft","spiritual","fun"];
+var MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+var S={spots:[],routes:[],alerts:[],research:[],requests:[],trips:[],stays:[],prep:[]};
+var db=null, sample=null, picked=new Set(), tagFilter=new Set(), mood=new Set(["sea","wellness","food"]), lastPlan=null;
+function $(id){return document.getElementById(id)}
+function el(tag,attrs,kids){var e=document.createElement(tag);if(attrs)for(var k in attrs){if(k==="text")e.textContent=attrs[k];else if(k==="class")e.className=attrs[k];else if(k.slice(0,2)==="on")e.addEventListener(k.slice(2),attrs[k]);else e.setAttribute(k,attrs[k]);}(kids||[]).forEach(function(c){if(c!=null)e.appendChild(typeof c==="string"?document.createTextNode(c):c)});return e}
+function safeUrl(u){return typeof u==="string"&&u.indexOf("https://")===0?u:null}
+function link(u,t){var s=safeUrl(u);return s?el("a",{href:s,target:"_blank",rel:"noopener",text:t||hostOf(s)}):null}
+function hostOf(u){try{return new URL(u).hostname.replace(/^www\./,"")}catch(e){return u}}
+function rs(n){return "₹"+Math.round(+n||0).toLocaleString("en-IN")}
+function mapsUrl(dest){return "https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent("Pune, Maharashtra")+"&destination="+encodeURIComponent(dest)+"&travelmode=driving"}
+function vegPill(v){v=+v||2;return el("span",{class:"pill veg"+v,text:v===3?"Easy veg":v===2?"Veg available":"Mostly non-veg"})}
+function setStatus(t){$("status").textContent=t}
+
+/* ---------- routing ---------- */
+var VIEWS=["explore","plan","trips","stays","prep","road","log"];
+function show(){var h=(location.hash||"#explore").slice(1);if(VIEWS.indexOf(h)<0)h="explore";
+  VIEWS.forEach(function(v){$("v-"+v).hidden=v!==h});
+  Array.prototype.forEach.call($("nav").children,function(a){if(a.getAttribute("href")==="#"+h)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});}
+window.addEventListener("hashchange",show);show();
+
+/* ---------- explore ---------- */
+var now=new Date();
+MONTHS.forEach(function(m,i){$("f-month").appendChild(el("option",{value:String(i+1),text:m}))});
+$("f-month").insertBefore(el("option",{value:"0",text:"Any month"}),$("f-month").firstChild);
+$("f-month").value=String(now.getMonth()+1);
+TAGS.forEach(function(t){var b=el("button",{type:"button",text:t,onclick:function(){if(tagFilter.has(t))tagFilter.delete(t);else tagFilter.add(t);b.classList.toggle("on");renderSpots()}});$("f-tags").appendChild(b)});
+["f-km","f-month","f-q","f-veg"].forEach(function(id){$(id).addEventListener("input",renderSpots)});
+
+function renderSpots(){
+  var max=+$("f-km").value, m=+$("f-month").value, q=$("f-q").value.trim().toLowerCase(), noNonVeg=$("f-veg").checked;
+  $("f-km-v").textContent=max;
+  var list=S.spots.filter(function(s){
+    if((+s.km||0)>max)return false;
+    if(m&&Array.isArray(s.months)&&s.months.length&&s.months.indexOf(m)<0)return false;
+    if(noNonVeg&&+s.veg===1)return false;
+    if(tagFilter.size){var tg=s.tags||[];var ok=false;tagFilter.forEach(function(t){if(tg.indexOf(t)>=0)ok=true});if(!ok)return false}
+    if(q){var hay=(s.name+" "+(s.region||"")+" "+(s.activities||[]).map(function(a){return a.name}).join(" ")+" "+(s.notes||"")).toLowerCase();if(hay.indexOf(q)<0)return false}
+    return true;
+  }).sort(function(a,b){return(+a.km||0)-(+b.km||0)});
+  var box=$("spots");box.textContent="";
+  $("spot-count").textContent=list.length+" of "+S.spots.length+" places match";
+  $("picked-count").textContent=picked.size?picked.size+" picked for the plan":"";
+  if(!S.spots.length){box.appendChild(el("div",{class:"empty",text:loaded?"No places yet. Add one below, or ask Claude in the project thread to research places.":"Loading places…"}));return}
+  if(!list.length){box.appendChild(el("div",{class:"empty",text:"Nothing matches. Try a wider distance or another month."}));return}
+  list.forEach(function(s){
+    var on=picked.has(s.id);
+    var months=(s.months||[]).map(function(n){return MONTHS[n-1]}).filter(Boolean);
+    var acts=el("ul",{class:"acts"},(s.activities||[]).slice(0,6).map(function(a){return el("li",{text:a.name})}));
+    var reqBtn=el("button",{type:"button",text:"Ask for fresh web check",onclick:function(){requestRefresh(s,reqBtn,"spot-refresh","Recent photos, reviews, closures, crowd and road issues for "+s.name)}});
+    var dealBtn=el("button",{type:"button",text:"Find stay deals",onclick:function(){requestRefresh(s,dealBtn,"stay-deals","Best current hotel, homestay and camp deals for a veg family at "+s.name)}});
+    var nStays=S.stays.filter(function(x){return x.spotId===s.id}).length;
+    var extra=[];
+    if((s.tips||[]).length)extra.push(el("details",{},[el("summary",{class:"small",text:"Local knowledge ("+s.tips.length+")"}),el("ul",{class:"acts"},s.tips.map(function(t){return el("li",{text:t})}))]));
+    if((s.risks||[]).length)extra.push(el("details",{},[el("summary",{class:"small",text:"Risks and plan B ("+s.risks.length+")"}),el("ul",{class:"acts"},s.risks.map(function(t){return el("li",{text:t})}))]));
+    box.appendChild(el("article",{class:"card"},[
+      el("div",{class:"row between"},[el("h3",{text:s.name}),vegPill(s.veg)]),
+      el("div",{class:"row small muted"},[el("span",{class:"km",text:(s.km||"?")+" km · ~"+(s.hours||"?")+" h"}),s.region?el("span",{text:"· "+s.region}):null,s.cost?el("span",{text:"· "+s.cost}):null]),
+      el("div",{class:"row"},(s.tags||[]).map(function(t){return el("span",{class:"chip",text:t})})),
+      acts,
+      months.length?el("p",{class:"small"},[el("b",{text:"Good months: "}),months.join(", ")]):null,
+      s.vegNote?el("p",{class:"small muted",text:"Food: "+s.vegNote}):null,
+      s.notes?el("p",{class:"small",text:s.notes}):null,
+      s.checked?el("p",{class:"small muted",text:"Last checked "+s.checked}):null,
+      weatherLine(s.id),
+      extra.length?el("div",{style:"display:flex;flex-direction:column;gap:4px"},extra):null,
+      el("a",{href:"#stays",class:"small",text:nStays?nStays+" saved stays":"No stays saved yet",onclick:function(){$("st-spot").value=s.id;renderStays()}}),
+      el("div",{class:"row"},[
+        dealBtn,
+        el("button",{type:"button",class:on?"on":"",text:on?"Picked ✓":"Pick for plan",onclick:function(){if(picked.has(s.id))picked.delete(s.id);else picked.add(s.id);renderSpots();renderPicked()}}),
+        el("a",{href:mapsUrl(s.mapsQuery||s.name),target:"_blank",rel:"noopener",text:"Route in Maps"}),
+        reqBtn
+      ])
+    ]));
+  });
+}
+function requestRefresh(s,btn,kind,ask){
+  if(!db){btn.textContent="Database not available here";return}
+  btn.disabled=true;
+  db.collection("requests").add({kind:kind,spotId:s.id,spotName:s.name,ask:ask,status:"waiting",createdAt:new Date().toISOString()})
+    .then(function(){btn.textContent="Requested. Ask Claude to run it"})
+    .catch(function(e){btn.disabled=false;btn.textContent="Couldn't save: "+(e&&e.code||"error")});
+}
+$("add-spot").addEventListener("submit",function(ev){ev.preventDefault();
+  if(!db)return;
+  var name=$("as-name").value.trim();if(!name)return;
+  var id=name.toLowerCase().replace(/[^a-z0-9]+/g,"-").slice(0,60)+"-"+Date.now().toString(36);
+  db.collection("spots").doc(id).set({name:name,km:+$("as-km").value||0,hours:Math.round((+$("as-km").value||0)/45*10)/10,
+    tags:$("as-tags").value.split(",").map(function(t){return t.trim().toLowerCase()}).filter(Boolean),
+    months:$("as-months").value.split(",").map(function(n){return +n}).filter(function(n){return n>=1&&n<=12}),
+    veg:+$("as-veg").value,notes:$("as-notes").value.trim(),activities:[],source:"added by you",checked:new Date().toISOString().slice(0,10)})
+  .then(function(){ev.target.reset()});
+});
+
+/* ---------- plan ---------- */
+TAGS.forEach(function(t){var b=el("button",{type:"button",text:t,class:mood.has(t)?"on":"",onclick:function(){if(mood.has(t))mood.delete(t);else mood.add(t);b.classList.toggle("on")}});$("b-mood").appendChild(b)});
+(function(){var d=new Date();d.setDate(d.getDate()+30);$("b-start").value=d.toISOString().slice(0,10)})();
+function renderPicked(){var box=$("b-picked");box.textContent="";
+  if(!picked.size){box.appendChild(el("span",{class:"small muted",text:"none, so Claude will choose from places that fit"}));return}
+  picked.forEach(function(id){var s=S.spots.find(function(x){return x.id===id});if(s)box.appendChild(el("span",{class:"chip",text:s.name}))});}
+function brief(){return{name:$("b-name").value.trim()||"Trip",nights:+$("b-type").value,start:$("b-start").value,budget:+$("b-budget").value||0,
+  people:$("b-people").value.trim(),maxDrive:+$("b-drive").value||7,goal:$("b-goal").value.trim(),mood:Array.from(mood),noNight:$("b-night").checked,veg:$("b-veg").checked}}
+function candidates(b){
+  var month=b.start?+b.start.slice(5,7):0, maxKm=b.nights<=3?320:b.nights<=5?450:560;
+  var list=picked.size?S.spots.filter(function(s){return picked.has(s.id)}):S.spots.filter(function(s){
+    if((+s.km||0)>maxKm)return false;
+    if(month&&Array.isArray(s.months)&&s.months.length&&s.months.indexOf(month)<0)return false;
+    if(b.veg&&+s.veg===1)return false;
+    return true;});
+  return list.slice(0,40).map(function(s){return{id:s.id,name:s.name,km:s.km,hours:s.hours,tags:s.tags,months:s.months,veg:s.veg,vegNote:s.vegNote,cost:s.cost,activities:(s.activities||[]).map(function(a){return a.name}),notes:s.notes,tips:s.tips,risks:s.risks,stays:S.stays.filter(function(x){return x.spotId===s.id}).map(function(x){return{name:x.name,type:x.type,price:x.price,pureVeg:x.pureVeg}})}});
+}
+$("b-go").addEventListener("click",function(){
+  var b=brief(), out=$("plan-out");
+  var cands=candidates(b);
+  if(!cands.length){$("b-msg").textContent="No places fit these dates and rules. Pick places in Explore or change the month.";return}
+  var alerts=S.alerts.map(function(a){return{title:a.title,area:a.area,status:a.status,detail:a.detail,checked:a.checked}});
+  var prompt=buildPrompt(b,cands,alerts);
+  if(!sample){showManual(out,b,prompt);return}
+  $("b-go").disabled=true;$("b-msg").textContent="Claude is planning. This takes about a minute…";out.textContent="";
+  sample.json(prompt,{modelTier:"complex",cache:false}).then(function(plan){
+    lastPlan={brief:b,plan:plan};$("b-msg").textContent="";renderPlan(out,b,plan,true);
+  }).catch(function(e){
+    var c=e&&e.code;$("b-msg").textContent="Planning failed ("+(c||"error")+"). Try again.";
+  }).finally(function(){$("b-go").disabled=false});
+});
+function showManual(out,b,prompt){
+  out.textContent="";
+  var ta=el("textarea",{id:"m-prompt",readonly:"readonly",style:"min-height:140px"});ta.value=prompt;
+  var paste=el("textarea",{id:"m-paste",placeholder:"Paste Claude's JSON answer here",style:"min-height:140px"});
+  var msg=el("span",{class:"small muted"});
+  out.appendChild(el("div",{class:"card"},[
+    el("h3",{text:"Plan with Claude in 3 steps"}),
+    el("p",{class:"small",text:"1. Copy this prompt. 2. Paste it into Claude (claude.ai or the app). 3. Paste Claude's answer below and press Show plan."}),
+    ta,el("div",{class:"row"},[el("button",{type:"button",class:"primary",text:"Copy prompt",onclick:function(){
+      var done=function(){msg.textContent="Copied."};
+      if(navigator.clipboard)navigator.clipboard.writeText(prompt).then(done,function(){ta.select();msg.textContent="Press Ctrl+C to copy."});else{ta.select();msg.textContent="Press Ctrl+C to copy."}}}),
+      el("a",{href:"https://claude.ai/new",target:"_blank",rel:"noopener",text:"Open Claude"}),msg]),
+    paste,el("div",{class:"row"},[el("button",{type:"button",text:"Show plan",onclick:function(){
+      var t=paste.value.trim().replace(/^```(json)?/,"").replace(/```$/,"");
+      try{var p=JSON.parse(t);var box=el("div");out.appendChild(box);renderPlan(box,b,p,true)}catch(e){msg.textContent="That isn't valid JSON. Paste only the JSON part."}}})])
+  ]));
+}
+function buildPrompt(b,cands,alerts){
+  return ["You plan family road trips by car from Pune, Maharashtra, India, for an Indian family. Follow this family's own method exactly.",
+  "PRIORITIES in order: 1 budget (INR), 2 happiness and mood, 3 health, 4 relaxing as well as experience, 5 time.",
+  "PASS/FAIL RULES: stay within the budget cap; no day with more driving than maxDrive hours; "+(b.noNight?"no driving after sunset (about 6:15 PM); ":"")+"every place must be in season for the travel month; "+(b.veg?"every meal must be pure vegetarian, so name veg-friendly food for each day; ":"")+"route shape is Pune → Place 1 → Place 2 (optional) → Pune.",
+  "RHYTHM: after a travel day plan at least one stay day. Each day has one relaxing slot and one experience slot. Start long drives at about 6 AM with a tea and breakfast stop.",
+  "COSTS: assume ₹8 per km for fuel plus tolls unless a route note says otherwise. Split budget roughly fuel+tolls 20%, stays 40%, food 20%, activities 10%, buffer 10%, and adjust to the real plan.",
+  "Use only places from CANDIDATES (use their ids). Use each place's tips (local knowledge) and risks. For each night name a stay: a saved stay from the place if one fits (prefer pure veg kitchen, family friendly), otherwise the kind of stay to look for and a price band. Consider ROAD ALERTS and add plan-B risks for them.",
+  "Return JSON only, no prose, shaped: {\"title\":str,\"summary\":str,\"goal\":str,\"spotIds\":[str],\"days\":[{\"day\":int,\"date\":\"YYYY-MM-DD\",\"type\":\"travel|arrive|stay|depart\",\"place\":str,\"driveKm\":int,\"driveHours\":num,\"morning\":str,\"afternoon\":str,\"evening\":str,\"food\":str,\"stay\":str}],\"budget\":{\"fuelTolls\":int,\"stays\":int,\"food\":int,\"activities\":int,\"buffer\":int,\"total\":int},\"risks\":[{\"risk\":str,\"planB\":str}],\"score\":{\"budget\":1-5,\"happiness\":1-5,\"health\":1-5,\"relaxExperience\":1-5,\"time\":1-5},\"checks\":[str]}. checks = what to verify 30, 7 and 1 days before.",
+  "BRIEF: "+JSON.stringify(b),"CANDIDATES: "+JSON.stringify(cands),"ROAD ALERTS: "+JSON.stringify(alerts)].join("\n");
+}
+function weighted(sc){if(!sc)return null;var t=(+sc.budget||0)*5+(+sc.happiness||0)*4+(+sc.health||0)*3+(+sc.relaxExperience||0)*2+(+sc.time||0)*1;return Math.round(t/75*100)}
+function renderPlan(box,b,p,unsaved){
+  box.textContent="";if(!p||typeof p!=="object"){box.appendChild(el("div",{class:"err",text:"Claude returned something unreadable. Try again."}));return}
+  var w=weighted(p.score), bud=p.budget||{};
+  var card=el("div",{class:"card"},[
+    el("div",{class:"row between"},[el("h2",{text:p.title||b.name}),w!=null?el("div",{},[el("span",{class:"big km",text:String(w)}),el("span",{class:"muted",text:" / 100"})]):null]),
+    p.summary?el("p",{text:p.summary}):null,
+    el("div",{class:"note"},[el("b",{text:"Goal: "}),p.goal||b.goal||""]),
+    el("div",{style:"display:flex;flex-direction:column;gap:10px"},(p.days||[]).map(function(d){return el("div",{class:"day"},[
+      el("div",{class:"row"},[el("b",{text:"Day "+d.day}),d.date?el("span",{class:"km small muted",text:d.date}):null,el("span",{class:"chip",text:d.type||""}),el("span",{text:d.place||""}),d.driveKm?el("span",{class:"km small muted",text:d.driveKm+" km · "+(d.driveHours||"?")+" h"}):null]),
+      d.morning?el("span",{class:"small",text:"Morning: "+d.morning}):null,
+      d.afternoon?el("span",{class:"small",text:"Afternoon: "+d.afternoon}):null,
+      d.evening?el("span",{class:"small",text:"Evening: "+d.evening}):null,
+      d.food?el("span",{class:"small muted",text:"Food: "+d.food}):null,
+      d.stay?el("span",{class:"small muted",text:"Stay: "+d.stay}):null])})),
+    el("div",{class:"two"},[
+      el("div",{},[el("h3",{text:"Budget"}),el("div",{class:"tbl"},[el("table",{},[el("tbody",{},[["Fuel + tolls",bud.fuelTolls],["Stays",bud.stays],["Food",bud.food],["Activities",bud.activities],["Buffer",bud.buffer],["Total",bud.total]].map(function(r){return el("tr",{},[el("td",{text:r[0]}),el("td",{class:"km",text:rs(r[1])})])}))])]),
+        b.budget&&bud.total>b.budget?el("p",{class:"err small",text:"Over your cap of "+rs(b.budget)}):null]),
+      el("div",{},[el("h3",{text:"Risks and plan B"}),el("ul",{class:"acts"},(p.risks||[]).map(function(r){return el("li",{},[el("b",{text:r.risk+": "}),r.planB||""])}))])
+    ]),
+    (p.checks&&p.checks.length)?el("div",{},[el("h3",{text:"Before you leave"}),el("ul",{class:"acts"},p.checks.map(function(c){return el("li",{text:String(c)})}))]):null
+  ]);
+  if(unsaved){var sb=el("button",{class:"primary",text:"Save this trip",onclick:function(){saveTrip(b,p,"planned",sb)}});card.appendChild(el("div",{class:"row"},[sb]))}
+  box.appendChild(card);
+}
+function saveTrip(b,p,status,btn){
+  if(!db){if(btn)btn.textContent="Database not available here";return}
+  var id=(b.name||"trip").toLowerCase().replace(/[^a-z0-9]+/g,"-").slice(0,50)+"-"+Date.now().toString(36);
+  if(btn)btn.disabled=true;
+  db.collection("trips").doc(id).set({name:(p&&p.title)||b.name,status:status,brief:b,plan:p||null,expenses:[],review:null,createdAt:new Date().toISOString()})
+   .then(function(){if(btn)btn.textContent="Saved to Trips";$("b-msg").textContent="Saved. See the Trips tab."})
+   .catch(function(e){if(btn){btn.disabled=false;btn.textContent="Couldn't save ("+(e&&e.code||"error")+")"}});
+}
+$("b-save-brief").addEventListener("click",function(){saveTrip(brief(),null,"idea",null)});
+
+/* ---------- trips ---------- */
+function renderTrips(){var box=$("trips");box.textContent="";
+  if(!S.trips.length){box.appendChild(el("div",{class:"empty",text:loaded?"No trips yet. Plan one in the Plan tab.":"Loading trips…"}));return}
+  var order={planned:0,idea:1,done:2};
+  S.trips.slice().sort(function(a,b){return(order[a.status]||0)-(order[b.status]||0)}).forEach(function(t){
+    var b=t.brief||{}, spent=(t.expenses||[]).reduce(function(s,x){return s+(+x.amount||0)},0);
+    var body=el("div",{style:"display:flex;flex-direction:column;gap:12px;margin-top:10px"});
+    if(t.plan){var pb=el("div");renderPlan(pb,b,t.plan,false);body.appendChild(pb)}
+    else if(t.outline){body.appendChild(el("ul",{class:"acts"},t.outline.map(function(x){return el("li",{text:x})})))}
+    // expenses
+    var amt=el("input",{type:"number",min:"0",placeholder:"₹",id:"ex-a-"+t.id}), cat=el("select",{id:"ex-c-"+t.id},["Fuel + tolls","Stays","Food","Activities","Other"].map(function(c){return el("option",{text:c})})), nt=el("input",{placeholder:"Note",id:"ex-n-"+t.id});
+    body.appendChild(el("div",{class:"card"},[el("h3",{text:"Spending"}),
+      el("p",{},[el("span",{class:"km",text:rs(spent)}),b.budget?" of "+rs(b.budget)+" budget":""]),
+      el("ul",{class:"acts"},(t.expenses||[]).map(function(x){return el("li",{text:x.date+" · "+x.cat+" · "+rs(x.amount)+(x.note?" · "+x.note:"")})})),
+      el("div",{class:"row"},[amt,cat,nt,el("button",{text:"Add",onclick:function(){var a=+amt.value;if(!a||!db)return;
+        db.collection("trips").doc(t.id).update({expenses:(t.expenses||[]).concat([{amount:a,cat:cat.value,note:nt.value.trim(),date:new Date().toISOString().slice(0,10)}])})}})])]));
+    // review + status
+    var hp=el("select",{id:"rv-h-"+t.id},[1,2,3,4,5].map(function(n){var o=el("option",{value:String(n),text:n+" / 5"});if(t.review&&+t.review.happiness===n)o.selected=true;return o}));
+    var rn=el("textarea",{id:"rv-n-"+t.id,placeholder:"Repeat, skip, lessons"});rn.value=(t.review&&t.review.notes)||"";
+    var st=el("select",{id:"st-"+t.id},["idea","planned","done"].map(function(s){var o=el("option",{text:s});if(t.status===s)o.selected=true;return o}));
+    body.appendChild(el("div",{class:"card"},[el("h3",{text:"After the trip"}),el("div",{class:"two"},[el("label",{},["Happiness",hp]),el("label",{},["Status",st])]),el("label",{},["Notes",rn]),
+      el("div",{class:"row"},[el("button",{text:"Save review",onclick:function(){if(db)db.collection("trips").doc(t.id).update({status:st.value,review:{happiness:+hp.value,notes:rn.value.trim(),spent:spent}})}})])]));
+    box.appendChild(el("details",{class:"card"},[el("summary",{},[el("span",{text:t.name+"  "}),el("span",{class:"chip",text:t.status||"idea"}),el("span",{class:"small muted",text:"  "+(b.nights?b.nights+" nights":"")+(b.start?" · from "+b.start:"")})]),body]));
+  });
+}
+
+/* ---------- road + log ---------- */
+function renderRoad(){var box=$("alerts");box.textContent="";
+  if(!S.alerts.length)box.appendChild(el("div",{class:"empty",text:loaded?"No road news saved yet.":"Loading…"}));
+  S.alerts.slice().sort(function(a,b){var o={closed:0,watch:1,open:2};return(o[a.status]||1)-(o[b.status]||1)}).forEach(function(a){
+    box.appendChild(el("article",{class:"card"},[el("div",{class:"row between"},[el("h3",{text:a.title}),el("span",{class:"pill s-"+(a.status||"watch"),text:a.status==="closed"?"Closure":a.status==="open"?"Good news":"Watch"})]),
+      a.area?el("p",{class:"small muted",text:a.area}):null,el("p",{class:"small",text:a.detail||""}),
+      el("p",{class:"small muted"},["Checked "+(a.checked||"?")+" · "].concat((a.sources||[]).map(function(u,i){var l=link(u);return l?el("span",{},[i?", ":"",l]):null})))]))});
+  var tb=$("routes");tb.textContent="";
+  S.routes.slice().sort(function(a,b){return(a.order||0)-(b.order||0)}).forEach(function(r){tb.appendChild(el("tr",{},[el("td",{},[el("b",{text:r.name})]),el("td",{text:r.via||""}),el("td",{text:r.watch||""}),el("td",{text:r.best||""}),el("td",{},[r.dest?el("a",{href:mapsUrl(r.dest),target:"_blank",rel:"noopener",text:"Maps"}):null])]))});
+}
+function renderLog(){var rq=$("requests");rq.textContent="";
+  var waiting=S.requests.filter(function(r){return r.status==="waiting"});
+  if(!waiting.length)rq.appendChild(el("p",{class:"small muted",text:"Nothing waiting."}));
+  waiting.forEach(function(r){rq.appendChild(el("div",{class:"note",text:r.ask+" · asked "+(r.createdAt||"").slice(0,10)}))});
+  if(waiting.length)rq.appendChild(el("p",{class:"small",text:"To run these, write “run the planner requests” in the project thread."}));
+  var box=$("research");box.textContent="";
+  if(!S.research.length)box.appendChild(el("div",{class:"empty",text:loaded?"No research saved yet.":"Loading…"}));
+  S.research.slice().sort(function(a,b){return(b.date||"").localeCompare(a.date||"")}).forEach(function(r){
+    box.appendChild(el("details",{class:"card"},[el("summary",{},[el("span",{text:r.title||r.query}),el("span",{class:"small muted",text:"  "+(r.date||"")})]),
+      el("p",{class:"small",style:"margin-top:8px;white-space:pre-line",text:r.summary||""}),
+      el("p",{class:"small muted"},["Sources: "].concat((r.sources||[]).map(function(u,i){var l=link(u);return l?el("span",{},[i?", ":"",l]):null})))]))});
+}
+var WX=null;
+fetch("data/weather.json").then(function(r){return r.ok?r.json():null}).then(function(j){WX=j;renderSpots()}).catch(function(){});
+function weatherLine(id){var w=WX&&WX.places&&WX.places[id];if(!w||!w.days)return null;
+  return el("p",{class:"small"},[el("b",{text:"Next days: "}),w.days.slice(0,4).map(function(d){return d.date.slice(5)+" "+Math.round(d.tmin)+"–"+Math.round(d.tmax)+"°C"+(d.rain>=5?" rain "+Math.round(d.rain)+"mm":"")}).join(" · "),el("span",{class:"muted",text:" (updated "+(WX.updated||"").slice(0,10)+")"})])}
+/* ---------- stays ---------- */
+function spotOptions(){[["st-spot",true],["ay-spot",false]].forEach(function(p){var sel=$(p[0]),cur=sel.value;sel.textContent="";
+  if(p[1])sel.appendChild(el("option",{value:"",text:"All places"}));
+  S.spots.slice().sort(function(a,b){return a.name.localeCompare(b.name)}).forEach(function(s){sel.appendChild(el("option",{value:s.id,text:s.name}))});sel.value=cur;});}
+["st-spot","st-type","st-veg"].forEach(function(id){$(id).addEventListener("input",renderStays)});
+function renderStays(){
+  var sp=$("st-spot").value, ty=$("st-type").value, vg=$("st-veg").checked, box=$("stays");box.textContent="";
+  var cmp=$("st-compare");cmp.textContent="";
+  var spot=S.spots.find(function(x){return x.id===sp});
+  if(spot){var q=encodeURIComponent((spot.mapsQuery||spot.name));
+    cmp.appendChild(el("span",{class:"muted",text:"Today's prices for "+spot.name+": "}));
+    [["Google Hotels","https://www.google.com/travel/search?q="+q],["Booking.com","https://www.booking.com/searchresults.html?ss="+q],["Airbnb homestays","https://www.airbnb.co.in/s/"+q+"/homes"],["MTDC resorts","https://www.mtdc.co/"]].forEach(function(l,i){cmp.appendChild(el("span",{},[i?" · ":"",el("a",{href:l[1],target:"_blank",rel:"noopener",text:l[0]})]))});}
+  else cmp.appendChild(el("span",{class:"muted",text:"Pick a place to get compare links for today's prices."}));
+  var list=S.stays.filter(function(x){return(!sp||x.spotId===sp)&&(!ty||x.type===ty)&&(!vg||x.pureVeg)});
+  if(!list.length){box.appendChild(el("div",{class:"empty",text:loaded?"No stays saved for this filter. Use “Find stay deals” on a place, or add one below.":"Loading…"}));return}
+  list.forEach(function(x){var s=S.spots.find(function(y){return y.id===x.spotId});
+    box.appendChild(el("article",{class:"card"},[el("div",{class:"row between"},[el("h3",{text:x.name}),el("span",{class:"chip",text:x.type||"stay"})]),
+      el("p",{class:"small muted",text:(s?s.name:"")+(x.price?" · "+x.price+" per night":"")}),
+      el("div",{class:"row"},[x.pureVeg?el("span",{class:"pill veg3",text:"Pure veg kitchen"}):null,x.family?el("span",{class:"pill veg2",text:"Family friendly"}):null]),
+      x.notes?el("p",{class:"small",text:x.notes}):null,
+      x.deal?el("div",{class:"note small",text:"Deal: "+x.deal}):null,
+      el("p",{class:"small muted"},["Checked "+(x.checked||"?")+" ",link(x.url,"· book or check price")])]))});
+}
+$("add-stay").addEventListener("submit",function(ev){ev.preventDefault();if(!db)return;var n=$("ay-name").value.trim();if(!n)return;
+  db.collection("stays").add({name:n,spotId:$("ay-spot").value,type:$("ay-type").value,price:$("ay-price").value.trim(),url:safeUrl($("ay-url").value.trim())||"",notes:$("ay-notes").value.trim(),pureVeg:$("ay-veg").checked,source:"added by you",checked:new Date().toISOString().slice(0,10)}).then(function(){ev.target.reset()});});
+
+/* ---------- prep ---------- */
+$("pp-trip").addEventListener("input",renderPrep);
+function tripOptions(){var sel=$("pp-trip"),cur=sel.value;sel.textContent="";sel.appendChild(el("option",{value:"",text:"No trip, just read"}));
+  S.trips.forEach(function(t){sel.appendChild(el("option",{value:t.id,text:t.name}))});sel.value=cur;}
+function renderPrep(){var box=$("prep");box.textContent="";
+  var trip=S.trips.find(function(t){return t.id===$("pp-trip").value}), done=(trip&&trip.prepDone)||[];
+  if(!S.prep.length){box.appendChild(el("div",{class:"empty",text:loaded?"No checklist items yet.":"Loading…"}));return}
+  var groups={};S.prep.slice().sort(function(a,b){return(a.order||0)-(b.order||0)}).forEach(function(p){(groups[p.when]=groups[p.when]||[]).push(p)});
+  var total=0,ticked=0;
+  Object.keys(groups).forEach(function(w){
+    box.appendChild(el("div",{class:"card"},[el("h3",{text:w})].concat(groups[w].map(function(p){total++;var on=done.indexOf(p.id)>=0;if(on)ticked++;
+      var cb=el("input",{type:"checkbox",id:"pp-"+p.id});cb.checked=on;cb.disabled=!trip;
+      cb.addEventListener("change",function(){if(!db||!trip)return;var nd=done.filter(function(x){return x!==p.id});if(cb.checked)nd.push(p.id);db.collection("trips").doc(trip.id).update({prepDone:nd})});
+      return el("label",{class:"check",for:"pp-"+p.id},[cb,el("span",{},[el("span",{text:p.item}),p.group?el("span",{class:"small muted",text:" · "+p.group}):null])])}))));
+  });
+  $("pp-count").textContent=trip?ticked+" of "+total+" done for "+trip.name:"Choose a trip to tick items.";
+}
+function renderAll(){renderSpots();renderPicked();renderTrips();renderRoad();renderLog();spotOptions();renderStays();tripOptions();renderPrep()}
+var loaded=false;renderAll();
+
+/* ---------- local database: data/*.json from the repo + your changes saved in this browser ---------- */
+var KEY="pune-trip-planner-v1";
+function loadLocal(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){return{}}}
+function saveLocal(o){try{localStorage.setItem(KEY,JSON.stringify(o))}catch(e){setStatus("Couldn't save in this browser")}}
+var LOCAL=loadLocal(), BASE={}, subs={};
+function merged(c){var m={};(BASE[c]||[]).forEach(function(d){m[d.id]=d});var l=LOCAL[c]||{};Object.keys(l).forEach(function(id){if(l[id]===null)delete m[id];else m[id]=l[id]});return Object.keys(m).map(function(id){var v=JSON.parse(JSON.stringify(m[id]));v.id=id;return v})}
+function emit(c){(subs[c]||[]).forEach(function(cb){cb({docs:merged(c).map(function(v){return{id:v.id,data:function(){return v}}})})})}
+function put(c,id,v){LOCAL[c]=LOCAL[c]||{};LOCAL[c][id]=v;saveLocal(LOCAL);emit(c);return Promise.resolve()}
+var localDb={collection:function(c){return{
+  onSnapshot:function(cb){(subs[c]=subs[c]||[]).push(cb);if(BASE[c])emit(c)},
+  add:function(v){var id="x"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);return put(c,id,v).then(function(){return{id:id}})},
+  doc:function(id){return{set:function(v){return put(c,id,v)},update:function(p){var cur=merged(c).find(function(d){return d.id===id})||{};delete cur.id;return put(c,id,Object.assign(cur,p))}}}
+}}};
+db=localDb;
+Promise.all(Object.keys(S).map(function(c){return fetch("data/"+c+".json").then(function(r){return r.ok?r.json():[]}).catch(function(){return[]}).then(function(a){BASE[c]=a})})).then(function(){
+  clearTimeout(timer);loaded=true;
+  Object.keys(S).forEach(function(c){localDb.collection(c).onSnapshot(function(snap){S[c]=snap.docs.map(function(x){return x.data()});renderAll();setStatus(S.spots.length+" places · "+S.trips.length+" trips · your changes stay in this browser")})});
+});
+var timer=setTimeout(function(){},0);
+$("bk-export").addEventListener("click",function(){var blob=new Blob([JSON.stringify(LOCAL,null,1)],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="trip-planner-backup.json";a.click()});
+$("bk-import").addEventListener("change",function(ev){var f=ev.target.files[0];if(!f)return;f.text().then(function(t){try{LOCAL=JSON.parse(t);saveLocal(LOCAL);Object.keys(S).forEach(emit);setStatus("Backup restored")}catch(e){setStatus("That file isn't a planner backup")}})});
+})();
+</script>
+
+</body>
+</html>

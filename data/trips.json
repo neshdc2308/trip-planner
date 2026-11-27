@@ -1,0 +1,109 @@
+[
+ {
+  "brief": {
+   "budget": 0,
+   "goal": "Come home rested: sunrise walk every day, one spa session, stay within budget.",
+   "mood": [
+    "sea",
+    "wellness",
+    "food"
+   ],
+   "nights": 7
+  },
+  "createdAt": "2026-11-27",
+  "expenses": [],
+  "name": "Coast and calm",
+  "outline": [
+   "Day 1: Pune → Diveagar via Tamhini ghat (170 km)",
+   "Days 2–3: Diveagar and Harihareshwar beaches, temple walk",
+   "Day 4: coast drive to Ganpatipule (about 200 km, NH66 works, daylight)",
+   "Days 5–7: Ganpatipule temple, beach, Ratnagiri day trip",
+   "Day 8: Ganpatipule → Pune (330 km, leave 6 AM)"
+  ],
+  "plan": null,
+  "prepDone": [],
+  "review": null,
+  "status": "idea",
+  "id": "coast-calm"
+ },
+ {
+  "brief": {
+   "budget": 0,
+   "goal": "Three treks, one tent night with campfire cooking, no day over 6 hours of driving.",
+   "mood": [
+    "mountains",
+    "treks",
+    "tents"
+   ],
+   "nights": 5
+  },
+  "createdAt": "2026-11-27",
+  "expenses": [],
+  "name": "Hills and trails",
+  "outline": [
+   "Day 1: Pune → Bhandardara (180 km)",
+   "Day 2: rest, Arthur lake, Randha falls",
+   "Day 3: Kalsubai trek",
+   "Day 4: lakeside tent night, campfire",
+   "Day 5: drive to Igatpuri, wellness afternoon",
+   "Day 6: Igatpuri → Pune"
+  ],
+  "plan": null,
+  "prepDone": [],
+  "review": null,
+  "status": "idea",
+  "id": "hills-trails"
+ },
+ {
+  "brief": {
+   "budget": 0,
+   "goal": "Two safaris, one riverside tent night, something new every day.",
+   "mood": [
+    "jungle",
+    "adventure",
+    "tents"
+   ],
+   "nights": 4
+  },
+  "createdAt": "2026-11-27",
+  "expenses": [],
+  "name": "Jungle and tents",
+  "outline": [
+   "Day 1: Pune → Dandeli (430 km, leave 6 AM)",
+   "Day 2: morning safari, rest",
+   "Day 3: Kali river rafting, riverside tents",
+   "Day 4: second safari, Syntheri rocks",
+   "Day 5: Dandeli → Pune"
+  ],
+  "plan": null,
+  "prepDone": [],
+  "review": null,
+  "status": "idea",
+  "id": "jungle-tents"
+ },
+ {
+  "brief": {
+   "budget": 0,
+   "goal": "Switch off: phones away after 8 PM, one yoga or spa session, local veg food.",
+   "mood": [
+    "wellness",
+    "water",
+    "fun"
+   ],
+   "nights": 2
+  },
+  "createdAt": "2026-11-27",
+  "expenses": [],
+  "name": "Weekend reset",
+  "outline": [
+   "Day 1: Pune → Pawna or Mulshi by lunch, rest",
+   "Day 2: lake walk, yoga, games night by the campfire",
+   "Day 3: slow breakfast, home"
+  ],
+  "plan": null,
+  "prepDone": [],
+  "review": null,
+  "status": "idea",
+  "id": "weekend-reset"
+ }
+]

@@ -1,0 +1,149 @@
+[
+ {
+  "when": "T-30 days",
+  "item": "Fix dates, budget cap and the goal line",
+  "group": "Plan",
+  "order": 0,
+  "id": "p00"
+ },
+ {
+  "when": "T-30 days",
+  "item": "Book stays (refundable where possible)",
+  "group": "Bookings",
+  "order": 1,
+  "id": "p01"
+ },
+ {
+  "when": "T-30 days",
+  "item": "Book safari, rafting or tent slots",
+  "group": "Bookings",
+  "order": 2,
+  "id": "p02"
+ },
+ {
+  "when": "T-30 days",
+  "item": "Book darshan or entry slots online if needed",
+  "group": "Bookings",
+  "order": 3,
+  "id": "p03"
+ },
+ {
+  "when": "T-7 days",
+  "item": "Check weather for each place",
+  "group": "Road",
+  "order": 4,
+  "id": "p04"
+ },
+ {
+  "when": "T-7 days",
+  "item": "Check Road watch and fresh road news for the route",
+  "group": "Road",
+  "order": 5,
+  "id": "p05"
+ },
+ {
+  "when": "T-7 days",
+  "item": "Confirm stays have a veg kitchen or veg restaurant nearby",
+  "group": "Food",
+  "order": 6,
+  "id": "p06"
+ },
+ {
+  "when": "T-7 days",
+  "item": "Car service: brakes, tyres, wipers, AC",
+  "group": "Car",
+  "order": 7,
+  "id": "p07"
+ },
+ {
+  "when": "T-7 days",
+  "item": "Check car insurance, PUC and FASTag balance",
+  "group": "Car",
+  "order": 8,
+  "id": "p08"
+ },
+ {
+  "when": "T-1 day",
+  "item": "Tyre pressure and spare tyre, jack, tool kit",
+  "group": "Car",
+  "order": 9,
+  "id": "p09"
+ },
+ {
+  "when": "T-1 day",
+  "item": "Fuel tank full",
+  "group": "Car",
+  "order": 10,
+  "id": "p10"
+ },
+ {
+  "when": "T-1 day",
+  "item": "Download offline Google Maps for the region",
+  "group": "Road",
+  "order": 11,
+  "id": "p11"
+ },
+ {
+  "when": "T-1 day",
+  "item": "Medicine kit: fever, motion sickness, ORS, band-aids, personal medicines",
+  "group": "Health",
+  "order": 12,
+  "id": "p12"
+ },
+ {
+  "when": "T-1 day",
+  "item": "Snacks and water for the drive (veg: thepla, chikki, fruit)",
+  "group": "Food",
+  "order": 13,
+  "id": "p13"
+ },
+ {
+  "when": "T-1 day",
+  "item": "Cash for tolls, villages and homestays",
+  "group": "Money",
+  "order": 14,
+  "id": "p14"
+ },
+ {
+  "when": "T-1 day",
+  "item": "Licence, RC, ID for everyone, booking confirmations",
+  "group": "Documents",
+  "order": 15,
+  "id": "p15"
+ },
+ {
+  "when": "T-1 day",
+  "item": "Board games, cards, chargers, power bank",
+  "group": "Packing",
+  "order": 16,
+  "id": "p16"
+ },
+ {
+  "when": "T-1 day",
+  "item": "Weather clothes: rain gear or warm layer",
+  "group": "Packing",
+  "order": 17,
+  "id": "p17"
+ },
+ {
+  "when": "On the trip",
+  "item": "Log spending every evening",
+  "group": "Money",
+  "order": 18,
+  "id": "p18"
+ },
+ {
+  "when": "On the trip",
+  "item": "Break every 2 hours; no driving after dark",
+  "group": "Health",
+  "order": 19,
+  "id": "p19"
+ },
+ {
+  "when": "After",
+  "item": "Review: happiness score, spend vs budget, repeat or skip",
+  "group": "Review",
+  "order": 20,
+  "id": "p20"
+ }
+]

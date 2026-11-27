@@ -1,0 +1,47 @@
+[
+ {
+  "date": "2026-11-27",
+  "query": "GitHub MCP servers for travel/India, Claude connector directory, AI trip planner reviews, Indian open data",
+  "sources": [
+   "https://github.com/openbnb-org/mcp-server-airbnb",
+   "https://github.com/cablate/mcp-google-map",
+   "https://github.com/jagan-shanmugam/open-streetmap-mcp",
+   "https://github.com/amith-vp/indian-railway-mcp",
+   "https://github.com/rehan1020/MCP-India-Stack",
+   "https://github.com/sparkgeo/geo-mcp-servers",
+   "https://github.com/shaikhspeare/wanderlog-mcp",
+   "https://github.com/urbanmorph/geodata",
+   "https://open-meteo.com/",
+   "https://api.imd.gov.in/",
+   "https://mtdc.co/",
+   "https://www.analyticsinsight.net/artificial-intelligence/best-ai-travel-planners-in-2026-features-prices-and-what-they-offer"
+  ],
+  "summary": "Claude connectors you can add in one tap (they work in chat and inside this app):\n• TomTom Maps: routing, live traffic, POI and EV charging search.\n• Booking.com: hotel and homestay search, no sign-in needed.\n• Tripadvisor: hotel search and review comparison, no sign-in needed.\n• AccuWeather: local forecasts and government weather alerts, no sign-in needed.\n• Also available: Civitatis (activities), Brek (wholesale hotel rates), LetsFG (flights and hotels), Tineo and TravExp (itineraries), MoSPI (India statistics).\n\nFree open-source MCP servers (run on your own computer through the Claude desktop app):\n• openbnb-org/mcp-server-airbnb (568 stars, MIT): Airbnb search.\n• cablate/mcp-google-map (505 stars, MIT): Google Maps places and routes, needs a Google API key.\n• jagan-shanmugam/open-streetmap-mcp (237 stars, MIT): free OpenStreetMap places and routing.\n• amith-vp/indian-railway-mcp and rajprem4214/indian-railways-mcp: train search and live status.\n• rehan1020/MCP-India-Stack: Indian pincode and other public lookups.\n• sparkgeo/geo-mcp-servers: curated list of map and GIS MCP servers.\n\nFree data sources:\n• Open-Meteo: free weather forecasts, no key; Claude can fetch it on request.\n• IMD (India Meteorological Department) API: official, needs whitelisting.\n• data.gov.in open data platform.\n• urbanmorph/geodata (bharatlas): India forests, rivers and boundaries.\n• MTDC (mtdc.co): official Maharashtra tourism resort booking.\n\nApps compared: TREK remains the best open-source planner; Wanderlog (with an MCP server, shaikhspeare/wanderlog-mcp) is a strong hosted alternative. None of them handles Pune ghat roads or veg-family rules, so this app stays the planning base and pulls from the connectors above.",
+  "title": "Better apps, data sources and connectors",
+  "id": "connectors-2026-11-27"
+ },
+ {
+  "date": "2026-11-27",
+  "query": "GitHub search: trip planner, travel planner, India travel planner",
+  "sources": [
+   "https://github.com/liketrek/TREK",
+   "https://github.com/seanmorley15/AdventureLog",
+   "https://github.com/itskovacs/trip"
+  ],
+  "summary": "Best existing projects:\n• TREK (liketrek/TREK), about 16k stars, AGPL-3.0, very active. Collaboration, bookings, budgets, packing lists, journal. Self-hosted.\n• AdventureLog (seanmorley15/AdventureLog), about 3.9k stars, GPL-3.0. Travel tracker and planner with maps. Self-hosted.\n• trip (itskovacs/trip), about 2k stars, MIT. Minimal map of places plus trip planner. Self-hosted.\nIndia-specific projects are small student demos (Lucknow, Odisha). None knows Pune routes, ghat roads or veg food.\nVerdict: none fits a Pune veg-family road trip out of the box. TREK is the strongest general tool if you want to self-host one; this planner covers the Pune-specific parts.",
+  "title": "Open-source trip planner apps on GitHub",
+  "id": "github-2026-11-27"
+ },
+ {
+  "date": "2026-11-27",
+  "query": "NH66 status, Pune ghat closures, Expressway missing link, NH48 works",
+  "sources": [
+   "https://www.freepressjournal.in/mumbai/mumbai-goa-highway-to-be-completed-by-end-of-2026-minister-shivendra-raje-bhosale",
+   "https://newsonair.gov.in/maharashtra-cm-devendra-fadnavis-inaugurates-13-3-km-missing-link-on-mumbai-pune-expressway/",
+   "https://www.freepressjournal.in/pune/pune-bopdev-ghat-to-remain-closed-till-january-14-all-you-need-to-know"
+  ],
+  "summary": "Saved as Road watch items: NH66 still under work, Expressway missing link open since 1 May 2026, NH48 works and holiday jams, Bopdev, Malshej, Varandha and Dive ghat closures.",
+  "title": "Road news around Pune",
+  "id": "roads-2026-11-27"
+ }
+]

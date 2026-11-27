@@ -1,0 +1,1418 @@
+[
+ {
+  "activities": [
+   {
+    "name": "Kashid beach"
+   },
+   {
+    "name": "Kolaba fort at low tide"
+   },
+   {
+    "name": "Water sports"
+   },
+   {
+    "name": "Nagaon beach"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹₹",
+  "hours": 3.5,
+  "km": 145,
+  "mapsQuery": "Alibaug & Kashid, Maharashtra",
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3
+  ],
+  "name": "Alibaug & Kashid",
+  "region": "Raigad",
+  "risks": [
+   "Weekend traffic on Pen–Alibaug road"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "sea",
+   "water",
+   "adventure",
+   "food"
+  ],
+  "tips": [
+   "Check tide times for Kolaba fort"
+  ],
+  "veg": 2,
+  "vegNote": "Seafood heavy, but veg thalis available at most restaurants",
+  "id": "alibaug",
+  "lat": 18.64,
+  "lon": 72.87
+ },
+ {
+  "activities": [
+   {
+    "name": "Monsoon waterfalls"
+   },
+   {
+    "name": "Biodiversity walks with local naturalists"
+   },
+   {
+    "name": "Sunset point"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹",
+  "hours": 7.5,
+  "km": 360,
+  "mapsQuery": "Amboli, Maharashtra",
+  "months": [
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "name": "Amboli",
+  "region": "Sindhudurg",
+  "risks": [
+   "Fog and heavy rain; drive only in daylight"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "greenery",
+   "mountains",
+   "water",
+   "nature"
+  ],
+  "tips": [
+   "Night frog and snake walks with local guides in monsoon"
+  ],
+  "veg": 2,
+  "vegNote": "Simple veg eateries",
+  "id": "amboli",
+  "lat": 15.96,
+  "lon": 74.0
+ },
+ {
+  "activities": [
+   {
+    "name": "Arthur lake"
+   },
+   {
+    "name": "Kalsubai peak trek"
+   },
+   {
+    "name": "Randha falls"
+   },
+   {
+    "name": "Fireflies in late May–early June"
+   },
+   {
+    "name": "Lakeside camping"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹₹",
+  "hours": 4,
+  "km": 180,
+  "mapsQuery": "Bhandardara, Maharashtra",
+  "months": [
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   1,
+   2
+  ],
+  "name": "Bhandardara",
+  "region": "Ahilyanagar",
+  "risks": [
+   "Monsoon rain very heavy; some roads slippery"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "water",
+   "mountains",
+   "treks",
+   "tents",
+   "nature"
+  ],
+  "tips": [
+   "Kalsubai is Maharashtra's highest peak, go early"
+  ],
+  "veg": 2,
+  "vegNote": "Resorts and camps serve veg; MTDC resort",
+  "id": "bhandardara",
+  "lat": 19.54,
+  "lon": 73.75
+ },
+ {
+  "activities": [
+   {
+    "name": "Flamingo and bird boat ride at sunrise"
+   },
+   {
+    "name": "Kumbhargaon village"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹",
+  "hours": 2,
+  "km": 100,
+  "mapsQuery": "Bhigwan backwaters, Maharashtra",
+  "months": [
+   12,
+   1,
+   2,
+   3
+  ],
+  "name": "Bhigwan backwaters",
+  "region": "Indapur",
+  "risks": [
+   "Few birds outside Dec–Mar"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "water",
+   "nature",
+   "greenery"
+  ],
+  "tips": [
+   "Go at sunrise for birds",
+   "Hire a local boatman at Kumbhargaon"
+  ],
+  "veg": 2,
+  "vegNote": "Simple dhabas; veg available",
+  "id": "bhigwan",
+  "lat": 18.3,
+  "lon": 74.77
+ },
+ {
+  "activities": [
+   {
+    "name": "Jyotirlinga temple"
+   },
+   {
+    "name": "Wildlife sanctuary walk (giant squirrel)"
+   },
+   {
+    "name": "Nagphani point"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹",
+  "hours": 3,
+  "km": 110,
+  "mapsQuery": "Bhimashankar, Maharashtra",
+  "months": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   1,
+   2
+  ],
+  "name": "Bhimashankar",
+  "region": "Ambegaon",
+  "risks": [
+   "Narrow ghat road, fog in monsoon"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "jungle",
+   "treks",
+   "spiritual",
+   "nature",
+   "greenery"
+  ],
+  "tips": [
+   "Very crowded on Mondays of Shravan and Mahashivratri"
+  ],
+  "veg": 3,
+  "vegNote": "Temple town, easy veg",
+  "id": "bhimashankar",
+  "lat": 19.07,
+  "lon": 73.54
+ },
+ {
+  "activities": [
+   {
+    "name": "Kali river rafting"
+   },
+   {
+    "name": "Jungle safari"
+   },
+   {
+    "name": "Riverside tents"
+   },
+   {
+    "name": "Syntheri rocks"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹₹",
+  "hours": 8,
+  "km": 430,
+  "mapsQuery": "Dandeli (Karnataka)",
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "name": "Dandeli (Karnataka)",
+  "region": "Uttara Kannada",
+  "risks": [
+   "Wildlife area: no driving inside forest after dark"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "jungle",
+   "adventure",
+   "river",
+   "tents",
+   "nature"
+  ],
+  "tips": [
+   "Rafting usually Oct–May"
+  ],
+  "veg": 2,
+  "vegNote": "Jungle lodges serve veg; tell them in advance",
+  "id": "dandeli",
+  "lat": 15.25,
+  "lon": 74.62
+ },
+ {
+  "activities": [
+   {
+    "name": "Murud and Karde beaches"
+   },
+   {
+    "name": "Dolphin boat rides at Harnai/Ladghar"
+   },
+   {
+    "name": "Unhavare hot springs"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹₹",
+  "hours": 5,
+  "km": 190,
+  "mapsQuery": "Dapoli & Murud, Maharashtra",
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "name": "Dapoli & Murud",
+  "region": "Ratnagiri",
+  "risks": [
+   "Narrow coastal roads, drive in daylight"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "sea",
+   "nature",
+   "food"
+  ],
+  "tips": [
+   "Dolphin rides early morning"
+  ],
+  "veg": 2,
+  "vegNote": "Homestays serve veg on request",
+  "id": "dapoli",
+  "lat": 17.76,
+  "lon": 73.19
+ },
+ {
+  "activities": [
+   {
+    "name": "Quiet beaches"
+   },
+   {
+    "name": "Harihareshwar temple and cliff walk"
+   },
+   {
+    "name": "Golden Ganesh temple, Diveagar"
+   },
+   {
+    "name": "Konkan homestays"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹₹",
+  "hours": 4.5,
+  "km": 170,
+  "mapsQuery": "Diveagar, Shrivardhan & Harihareshwar, Maharashtra",
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "name": "Diveagar, Shrivardhan & Harihareshwar",
+  "region": "Raigad Konkan",
+  "risks": [
+   "Dive and Tamhini ghats have occasional work closures"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "sea",
+   "nature",
+   "spiritual",
+   "wellness",
+   "food"
+  ],
+  "tips": [
+   "Great for a slow coastal break",
+   "Tamhini ghat is the usual route from Pune"
+  ],
+  "veg": 2,
+  "vegNote": "Homestays will cook veg Konkani food on request (ukadiche modak, amboli)",
+  "id": "diveagar",
+  "lat": 18.17,
+  "lon": 72.99
+ },
+ {
+  "activities": [
+   {
+    "name": "Ellora caves (Kailasa temple)"
+   },
+   {
+    "name": "Bibi ka Maqbara"
+   },
+   {
+    "name": "Daulatabad fort"
+   },
+   {
+    "name": "Paithani weaving at Paithan"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹₹",
+  "hours": 5,
+  "km": 240,
+  "mapsQuery": "Ellora & Chh. Sambhajinagar, Maharashtra",
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3
+  ],
+  "name": "Ellora & Chh. Sambhajinagar",
+  "region": "Marathwada",
+  "risks": [
+   "Summer heat from April"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "craft",
+   "spiritual",
+   "food"
+  ],
+  "tips": [
+   "Ellora is closed on Tuesdays",
+   "Ajanta (another 100 km) is closed on Mondays"
+  ],
+  "veg": 3,
+  "vegNote": "Easy veg",
+  "id": "ellora",
+  "lat": 20.03,
+  "lon": 75.18
+ },
+ {
+  "activities": [
+   {
+    "name": "Swayambhu Ganpati temple and beach"
+   },
+   {
+    "name": "Aare-Ware beach drive"
+   },
+   {
+    "name": "Jaigad fort"
+   },
+   {
+    "name": "Thibaw palace, Ratnagiri"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹₹",
+  "hours": 7,
+  "km": 330,
+  "mapsQuery": "Ganpatipule & Ratnagiri, Maharashtra",
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "name": "Ganpatipule & Ratnagiri",
+  "region": "Ratnagiri",
+  "risks": [
+   "Strong currents; NH66 work causes diversions"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "sea",
+   "spiritual",
+   "wellness",
+   "food"
+  ],
+  "tips": [
+   "MTDC beach resort sits right on the beach",
+   "Swim only where lifeguards are posted"
+  ],
+  "veg": 3,
+  "vegNote": "Temple town; veg is easy",
+  "id": "ganpatipule",
+  "lat": 17.15,
+  "lon": 73.27
+ },
+ {
+  "activities": [
+   {
+    "name": "South Goa quiet beaches"
+   },
+   {
+    "name": "Old Goa churches"
+   },
+   {
+    "name": "Spice plantations"
+   },
+   {
+    "name": "Dudhsagar falls"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹₹₹",
+  "hours": 9,
+  "km": 450,
+  "mapsQuery": "Goa",
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3
+  ],
+  "name": "Goa",
+  "region": "Goa",
+  "risks": [
+   "Two routes: NH48 + Amboli/Chorla ghat, or NH66 coast (work in progress)"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "sea",
+   "food",
+   "fun",
+   "adventure"
+  ],
+  "tips": [
+   "South Goa is calmer for families",
+   "Prices spike Christmas to New Year"
+  ],
+  "veg": 2,
+  "vegNote": "Seafood dominant; plenty of Udupi and Gujarati veg restaurants",
+  "id": "goa",
+  "lat": 15.49,
+  "lon": 73.83
+ },
+ {
+  "activities": [
+   {
+    "name": "Vipassana centre (10-day courses)"
+   },
+   {
+    "name": "Wellness resorts"
+   },
+   {
+    "name": "Bhavali dam"
+   },
+   {
+    "name": "Tringalwadi fort"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹₹",
+  "hours": 4,
+  "km": 190,
+  "mapsQuery": "Igatpuri, Maharashtra",
+  "months": [
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   1,
+   2
+  ],
+  "name": "Igatpuri",
+  "region": "Nashik",
+  "risks": [
+   "Fog on the Kasara ghat in monsoon"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "wellness",
+   "greenery",
+   "nature",
+   "treks"
+  ],
+  "tips": [
+   "Good wellness base"
+  ],
+  "veg": 3,
+  "vegNote": "Many veg options",
+  "id": "igatpuri",
+  "lat": 19.7,
+  "lon": 73.56
+ },
+ {
+  "activities": [
+   {
+    "name": "Flower plateau walk"
+   },
+   {
+    "name": "Thoseghar waterfall"
+   },
+   {
+    "name": "Kas lake"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹",
+  "hours": 3.5,
+  "km": 130,
+  "mapsQuery": "Kaas Plateau & Thoseghar, Maharashtra",
+  "months": [
+   8,
+   9,
+   10
+  ],
+  "name": "Kaas Plateau & Thoseghar",
+  "region": "Satara",
+  "risks": [
+   "Closed or bare outside season"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "nature",
+   "greenery",
+   "walks"
+  ],
+  "tips": [
+   "Flowers bloom roughly late Aug–early Oct only",
+   "Book entry slots online in season"
+  ],
+  "veg": 2,
+  "vegNote": "Few eateries; carry snacks, veg in Satara",
+  "id": "kaas",
+  "lat": 17.72,
+  "lon": 73.82
+ },
+ {
+  "activities": [
+   {
+    "name": "Kundalika river rafting"
+   },
+   {
+    "name": "Kayaking and zip-line"
+   },
+   {
+    "name": "Riverside camp night"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹₹",
+  "hours": 3,
+  "km": 120,
+  "mapsQuery": "Kolad, Maharashtra",
+  "months": [
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   1,
+   2
+  ],
+  "name": "Kolad",
+  "region": "Raigad",
+  "risks": [
+   "Pick operators with life jackets and helmets"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "adventure",
+   "river",
+   "water",
+   "tents"
+  ],
+  "tips": [
+   "Rafting runs on dam water release, usually mornings; confirm timing",
+   "Kids above about 12 for rafting"
+  ],
+  "veg": 2,
+  "vegNote": "Camps offer veg menus",
+  "id": "kolad",
+  "lat": 18.43,
+  "lon": 73.25
+ },
+ {
+  "activities": [
+   {
+    "name": "Mahalaxmi temple"
+   },
+   {
+    "name": "Panhala fort"
+   },
+   {
+    "name": "Kolhapuri chappal shopping"
+   },
+   {
+    "name": "Rankala lake"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹₹",
+  "hours": 4.5,
+  "km": 230,
+  "mapsQuery": "Kolhapur & Panhala, Maharashtra",
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3
+  ],
+  "name": "Kolhapur & Panhala",
+  "region": "Kolhapur",
+  "risks": [
+   "NH48 Pune–Kolhapur has flyover works and holiday jams"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "spiritual",
+   "food",
+   "craft",
+   "mountains"
+  ],
+  "tips": [
+   "Ask for less spicy, local food is hot"
+  ],
+  "veg": 2,
+  "vegNote": "Famous for non-veg, but veg Kolhapuri misal and thalis are easy to find",
+  "id": "kolhapur",
+  "lat": 16.7,
+  "lon": 74.24
+ },
+ {
+  "activities": [
+   {
+    "name": "Crater lake walk"
+   },
+   {
+    "name": "Daitya Sudan temple"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹",
+  "hours": 7.5,
+  "km": 390,
+  "mapsQuery": "Lonar Crater, Maharashtra",
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2
+  ],
+  "name": "Lonar Crater",
+  "region": "Buldhana",
+  "risks": [
+   "Few stays; book MTDC or the nearest town"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "nature",
+   "walks",
+   "spiritual"
+  ],
+  "tips": [
+   "Very hot from March"
+  ],
+  "veg": 3,
+  "vegNote": "Simple veg food",
+  "id": "lonar",
+  "lat": 19.98,
+  "lon": 76.51
+ },
+ {
+  "activities": [
+   {
+    "name": "Tiger Point and Lion's Point"
+   },
+   {
+    "name": "Karla and Bhaja caves"
+   },
+   {
+    "name": "Chikki and fudge shopping"
+   },
+   {
+    "name": "Bhushi dam (monsoon)"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹₹",
+  "hours": 1.5,
+  "km": 65,
+  "mapsQuery": "Lonavala & Khandala, Maharashtra",
+  "months": [
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   1,
+   2
+  ],
+  "name": "Lonavala & Khandala",
+  "region": "Maval",
+  "risks": [
+   "Monsoon weekend jams near Bhushi dam and Tiger Point"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "mountains",
+   "greenery",
+   "walks",
+   "food",
+   "nature",
+   "wellness"
+  ],
+  "tips": [
+   "The new Expressway missing link (opened May 2026) saves about 30 min",
+   "Avoid Saturday morning traffic leaving Pune"
+  ],
+  "veg": 3,
+  "vegNote": "Plenty of pure veg restaurants and Gujarati thalis",
+  "id": "lonavala",
+  "lat": 18.75,
+  "lon": 73.41
+ },
+ {
+  "activities": [
+   {
+    "name": "Venna lake boating"
+   },
+   {
+    "name": "Strawberry farms (Dec–Mar)"
+   },
+   {
+    "name": "Arthur's Seat and Kate's Point"
+   },
+   {
+    "name": "Table Land, Panchgani"
+   },
+   {
+    "name": "Mapro garden"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹₹",
+  "hours": 3,
+  "km": 120,
+  "mapsQuery": "Mahabaleshwar & Panchgani, Maharashtra",
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "name": "Mahabaleshwar & Panchgani",
+  "region": "Satara",
+  "risks": [
+   "NH48 jams near Khambatki ghat on holiday weekends",
+   "Heavy monsoon closes many points Jun–Sep"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "mountains",
+   "walks",
+   "food",
+   "water",
+   "nature",
+   "wellness"
+  ],
+  "tips": [
+   "Strawberry season is Dec–Mar",
+   "Book early for Christmas and New Year"
+  ],
+  "veg": 3,
+  "vegNote": "Lots of pure veg restaurants and Gujarati thalis",
+  "id": "mahabaleshwar",
+  "lat": 17.92,
+  "lon": 73.66
+ },
+ {
+  "activities": [
+   {
+    "name": "Waterfalls"
+   },
+   {
+    "name": "Flamingos in monsoon"
+   },
+   {
+    "name": "Shivneri fort near Junnar"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹",
+  "hours": 3,
+  "km": 125,
+  "mapsQuery": "Malshej Ghat, Maharashtra",
+  "months": [
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "name": "Malshej Ghat",
+  "region": "Junnar",
+  "risks": [
+   "Road collapse and closures in heavy rain in past monsoons; check before going"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "water",
+   "greenery",
+   "nature",
+   "mountains"
+  ],
+  "tips": [
+   "Best Jul–Sep"
+  ],
+  "veg": 2,
+  "vegNote": "Dhabas with veg; MTDC resort",
+  "id": "malshej",
+  "lat": 19.33,
+  "lon": 73.78
+ },
+ {
+  "activities": [
+   {
+    "name": "Car-free walks to viewpoints"
+   },
+   {
+    "name": "Toy train"
+   },
+   {
+    "name": "Horse rides"
+   },
+   {
+    "name": "Charlotte lake"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹₹",
+  "hours": 3,
+  "km": 120,
+  "mapsQuery": "Matheran, Maharashtra",
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "name": "Matheran",
+  "region": "Raigad",
+  "risks": [
+   "Red mud paths slippery after rain"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "mountains",
+   "walks",
+   "greenery",
+   "nature",
+   "wellness"
+  ],
+  "tips": [
+   "No cars inside: park at Dasturi and walk or take a hand-rickshaw",
+   "Pack light"
+  ],
+  "veg": 3,
+  "vegNote": "Many veg places; Gujarati thali common",
+  "id": "matheran",
+  "lat": 18.99,
+  "lon": 73.27
+ },
+ {
+  "activities": [
+   {
+    "name": "Lakeside stay"
+   },
+   {
+    "name": "Waterfalls in monsoon"
+   },
+   {
+    "name": "Tamhini ghat drive"
+   },
+   {
+    "name": "Kayaking at some resorts"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹₹",
+  "hours": 1.5,
+  "km": 50,
+  "mapsQuery": "Mulshi & Tamhini Ghat, Maharashtra",
+  "months": [
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   1,
+   2
+  ],
+  "name": "Mulshi & Tamhini Ghat",
+  "region": "Mulshi",
+  "risks": [
+   "Tamhini ghat: landslides and fog in heavy rain, avoid after dark"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "water",
+   "greenery",
+   "nature",
+   "river",
+   "tents"
+  ],
+  "tips": [
+   "Monsoon weekends get very crowded",
+   "Few fuel pumps after Paud"
+  ],
+  "veg": 2,
+  "vegNote": "Resorts serve veg thalis; ask for Maharashtrian veg",
+  "id": "mulshi-tamhini",
+  "lat": 18.52,
+  "lon": 73.42
+ },
+ {
+  "activities": [
+   {
+    "name": "Sula and other vineyards"
+   },
+   {
+    "name": "Trimbakeshwar Jyotirlinga"
+   },
+   {
+    "name": "Panchavati and Ramkund"
+   },
+   {
+    "name": "Anjaneri hill trek"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹₹",
+  "hours": 4.5,
+  "km": 210,
+  "mapsQuery": "Nashik & Trimbakeshwar, Maharashtra",
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3
+  ],
+  "name": "Nashik & Trimbakeshwar",
+  "region": "Nashik",
+  "risks": [
+   "Pune–Nashik road jams around Chakan and Narayangaon"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "spiritual",
+   "food",
+   "craft",
+   "nature"
+  ],
+  "tips": [
+   "Vineyard harvest season Jan–Mar"
+  ],
+  "veg": 3,
+  "vegNote": "Easy veg; Nashik misal",
+  "id": "nashik",
+  "lat": 20.0,
+  "lon": 73.79
+ },
+ {
+  "activities": [
+   {
+    "name": "Vitthal–Rukmini temple"
+   },
+   {
+    "name": "Chandrabhaga ghats"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹",
+  "hours": 4.5,
+  "km": 210,
+  "mapsQuery": "Pandharpur, Maharashtra",
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3
+  ],
+  "name": "Pandharpur",
+  "region": "Solapur",
+  "risks": [
+   "Extreme crowds during the wari"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "spiritual"
+  ],
+  "tips": [
+   "Avoid Ashadhi Ekadashi unless joining the wari"
+  ],
+  "veg": 3,
+  "vegNote": "Pure veg town",
+  "id": "pandharpur",
+  "lat": 17.68,
+  "lon": 75.33
+ },
+ {
+  "activities": [
+   {
+    "name": "Lakeside tent night"
+   },
+   {
+    "name": "Campfire and veg BBQ"
+   },
+   {
+    "name": "Board games and cards under the stars"
+   },
+   {
+    "name": "Tikona or Tung fort trek"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹",
+  "hours": 1.5,
+  "km": 55,
+  "mapsQuery": "Pawna Lake camping, Maharashtra",
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "name": "Pawna Lake camping",
+  "region": "Maval",
+  "risks": [
+   "Unregulated camps vary a lot; read recent reviews"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "tents",
+   "water",
+   "fun",
+   "food",
+   "nature"
+  ],
+  "tips": [
+   "Pick a camp with proper toilets for family",
+   "Carry a torch and warm layer in Dec–Jan"
+  ],
+  "veg": 2,
+  "vegNote": "Most camps offer a veg-only package; confirm when booking",
+  "id": "pawna",
+  "lat": 18.66,
+  "lon": 73.49
+ },
+ {
+  "activities": [
+   {
+    "name": "Village homestay night"
+   },
+   {
+    "name": "Fort trek"
+   },
+   {
+    "name": "Fireflies in late May–June"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹",
+  "hours": 2,
+  "km": 70,
+  "mapsQuery": "Rajmachi trek & camp, Maharashtra",
+  "months": [
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   1
+  ],
+  "name": "Rajmachi trek & camp",
+  "region": "Maval",
+  "risks": [
+   "Slippery in monsoon; not for small kids then"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "treks",
+   "tents",
+   "nature",
+   "adventure"
+  ],
+  "tips": [
+   "Last stretch is a rough jeep track",
+   "Carry cash, no cards"
+  ],
+  "veg": 2,
+  "vegNote": "Village homestays cook simple veg meals",
+  "id": "rajmachi",
+  "lat": 18.83,
+  "lon": 73.4
+ },
+ {
+  "activities": [
+   {
+    "name": "Sai Baba temple darshan"
+   },
+   {
+    "name": "Shani Shingnapur"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹",
+  "hours": 4.5,
+  "km": 190,
+  "mapsQuery": "Shirdi & Shani Shingnapur, Maharashtra",
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3
+  ],
+  "name": "Shirdi & Shani Shingnapur",
+  "region": "Ahilyanagar",
+  "risks": [
+   "Huge crowds on Thursdays and festivals"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "spiritual"
+  ],
+  "tips": [
+   "Book darshan online to save queue time"
+  ],
+  "veg": 3,
+  "vegNote": "Pure veg town; prasadalaya meals",
+  "id": "shirdi",
+  "lat": 19.77,
+  "lon": 74.48
+ },
+ {
+  "activities": [
+   {
+    "name": "Morning fort trek"
+   },
+   {
+    "name": "Pithla-bhakri and dahi at the top"
+   },
+   {
+    "name": "Sunrise views"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹",
+  "hours": 1.2,
+  "km": 35,
+  "mapsQuery": "Sinhagad Fort, Maharashtra",
+  "months": [
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   1,
+   2
+  ],
+  "name": "Sinhagad Fort",
+  "region": "Pune district",
+  "risks": [
+   "Ghat road sometimes shut for road work or events; check Pune traffic news"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "treks",
+   "mountains",
+   "food",
+   "nature"
+  ],
+  "tips": [
+   "Go on a weekday, weekends are crowded",
+   "Start by 6 AM to beat the heat and the queue at the ghat road"
+  ],
+  "veg": 3,
+  "vegNote": "Famous veg stalls: pithla bhakri, kanda bhaji, mataka dahi",
+  "id": "sinhagad",
+  "lat": 18.37,
+  "lon": 73.76
+ },
+ {
+  "activities": [
+   {
+    "name": "Snorkelling and scuba"
+   },
+   {
+    "name": "Sindhudurg fort"
+   },
+   {
+    "name": "Devbag sangam boat ride"
+   },
+   {
+    "name": "Backwater houseboat"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹₹",
+  "hours": 8,
+  "km": 380,
+  "mapsQuery": "Tarkarli & Malvan, Maharashtra",
+  "months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "name": "Tarkarli & Malvan",
+  "region": "Sindhudurg",
+  "risks": [
+   "Pick licensed scuba operators",
+   "NH66 four-laning still incomplete"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "sea",
+   "adventure",
+   "water"
+  ],
+  "tips": [
+   "Water sports pause in monsoon (about Jun–Sep)"
+  ],
+  "veg": 1,
+  "vegNote": "Seafood capital; veg needs planning, pick a stay with a veg kitchen",
+  "id": "tarkarli",
+  "lat": 16.03,
+  "lon": 73.47
+ },
+ {
+  "activities": [
+   {
+    "name": "Olive Ridley turtle festival"
+   },
+   {
+    "name": "Village homestays"
+   },
+   {
+    "name": "Bankot fort"
+   }
+  ],
+  "checked": "2026-11-27",
+  "cost": "₹",
+  "hours": 5.5,
+  "km": 210,
+  "mapsQuery": "Velas, Maharashtra",
+  "months": [
+   2,
+   3,
+   4
+  ],
+  "name": "Velas",
+  "region": "Ratnagiri",
+  "risks": [
+   "No hatchings outside about Feb–Apr"
+  ],
+  "source": "Claude research, distances approximate",
+  "tags": [
+   "sea",
+   "nature"
+  ],
+  "tips": [
+   "Turtle hatchlings are released at dawn and dusk only in season",
+   "Book homestays early"
+  ],
+  "veg": 2,
+  "vegNote": "Village homestays cook veg Konkani meals",
+  "id": "velas",
+  "lat": 17.96,
+  "lon": 73.03
+ }
+]

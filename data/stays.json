@@ -1,0 +1,93 @@
+[
+ {
+  "checked": "2026-11-27",
+  "family": true,
+  "name": "MTDC Resort Bhandardara",
+  "notes": "State tourism resort: good locations and parking. Prices and veg menu not checked yet.",
+  "price": "check site",
+  "pureVeg": false,
+  "source": "Claude research",
+  "spotId": "bhandardara",
+  "type": "resort",
+  "url": "https://www.mtdc.co/",
+  "id": "mtdc-bhandardara"
+ },
+ {
+  "checked": "2026-11-27",
+  "family": true,
+  "name": "MTDC Beach Resort Ganpatipule",
+  "notes": "State tourism resort: good locations and parking. Prices and veg menu not checked yet.",
+  "price": "check site",
+  "pureVeg": false,
+  "source": "Claude research",
+  "spotId": "ganpatipule",
+  "type": "resort",
+  "url": "https://www.mtdc.co/",
+  "id": "mtdc-ganpatipule"
+ },
+ {
+  "checked": "2026-11-27",
+  "family": true,
+  "name": "MTDC Resort Harihareshwar",
+  "notes": "State tourism resort: good locations and parking. Prices and veg menu not checked yet.",
+  "price": "check site",
+  "pureVeg": false,
+  "source": "Claude research",
+  "spotId": "diveagar",
+  "type": "resort",
+  "url": "https://www.mtdc.co/",
+  "id": "mtdc-harihareshwar"
+ },
+ {
+  "checked": "2026-11-27",
+  "family": true,
+  "name": "MTDC Karla Resort",
+  "notes": "State tourism resort: good locations and parking. Prices and veg menu not checked yet.",
+  "price": "check site",
+  "pureVeg": false,
+  "source": "Claude research",
+  "spotId": "lonavala",
+  "type": "resort",
+  "url": "https://www.mtdc.co/",
+  "id": "mtdc-karla"
+ },
+ {
+  "checked": "2026-11-27",
+  "family": true,
+  "name": "MTDC Holiday Resort Mahabaleshwar",
+  "notes": "State tourism resort: good locations and parking. Prices and veg menu not checked yet.",
+  "price": "check site",
+  "pureVeg": false,
+  "source": "Claude research",
+  "spotId": "mahabaleshwar",
+  "type": "resort",
+  "url": "https://www.mtdc.co/",
+  "id": "mtdc-mahabaleshwar"
+ },
+ {
+  "checked": "2026-11-27",
+  "family": true,
+  "name": "MTDC Flamingo Hill Resort Malshej",
+  "notes": "State tourism resort: good locations and parking. Prices and veg menu not checked yet.",
+  "price": "check site",
+  "pureVeg": false,
+  "source": "Claude research",
+  "spotId": "malshej",
+  "type": "resort",
+  "url": "https://www.mtdc.co/",
+  "id": "mtdc-malshej"
+ },
+ {
+  "checked": "2026-11-27",
+  "family": true,
+  "name": "MTDC Tarkarli Beach Resort",
+  "notes": "State tourism resort: good locations and parking. Prices and veg menu not checked yet.",
+  "price": "check site",
+  "pureVeg": false,
+  "source": "Claude research",
+  "spotId": "tarkarli",
+  "type": "resort",
+  "url": "https://www.mtdc.co/",
+  "id": "mtdc-tarkarli"
+ }
+]

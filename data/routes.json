@@ -1,0 +1,82 @@
+[
+ {
+  "name": "Pune → Lonavala / Mumbai",
+  "via": "Mumbai–Pune Expressway, new missing link",
+  "watch": "Weekend and holiday jams; tolls are high",
+  "best": "All year",
+  "dest": "Lonavala, Maharashtra",
+  "order": 1,
+  "checked": "2026-11-27",
+  "id": "expressway"
+ },
+ {
+  "name": "Pune → Goa / Dandeli (inland)",
+  "via": "NH48 to Kolhapur or Belagavi, then Amboli or Chorla ghat",
+  "watch": "Ghat fog in monsoon; Kolhapur flyover works",
+  "best": "Oct–May",
+  "dest": "Goa",
+  "order": 6,
+  "checked": "2026-11-27",
+  "id": "goa-inland"
+ },
+ {
+  "name": "Pune → Ellora / Lonar",
+  "via": "Ahilyanagar, Chh. Sambhajinagar",
+  "watch": "Long flat drive; heat from April",
+  "best": "Oct–Feb",
+  "dest": "Ellora Caves",
+  "order": 8,
+  "checked": "2026-11-27",
+  "id": "marathwada"
+ },
+ {
+  "name": "Pune → Nashik / Igatpuri / Bhandardara",
+  "via": "NH60 via Chakan, Sangamner",
+  "watch": "Chakan industrial traffic; Narayangaon bottlenecks",
+  "best": "Oct–Mar",
+  "dest": "Nashik, Maharashtra",
+  "order": 7,
+  "checked": "2026-11-27",
+  "id": "nashik"
+ },
+ {
+  "name": "Pune → Satara / Mahabaleshwar / Kolhapur",
+  "via": "NH48, Khambatki ghat",
+  "watch": "Flyover works, holiday jams near Khed-Shivapur toll and Khambatki",
+  "best": "Oct–May",
+  "dest": "Mahabaleshwar, Maharashtra",
+  "order": 2,
+  "checked": "2026-11-27",
+  "id": "nh48-south"
+ },
+ {
+  "name": "Konkan coast north–south (Ratnagiri, Malvan, Goa)",
+  "via": "NH66 Mumbai–Goa highway",
+  "watch": "Four-laning still incomplete; diversions and rough patches",
+  "best": "Nov–May",
+  "dest": "Ganpatipule, Maharashtra",
+  "order": 5,
+  "checked": "2026-11-27",
+  "id": "nh66"
+ },
+ {
+  "name": "Pune → Konkan coast (Diveagar, Dapoli)",
+  "via": "Paud, Tamhini ghat, Mangaon",
+  "watch": "Narrow ghat, landslides and fog in monsoon, few fuel pumps",
+  "best": "Oct–May",
+  "dest": "Diveagar, Maharashtra",
+  "order": 3,
+  "checked": "2026-11-27",
+  "id": "tamhini"
+ },
+ {
+  "name": "Pune → Mahad / Konkan (alternate)",
+  "via": "Bhor, Varandha ghat",
+  "watch": "Closed in monsoon for landslide risk",
+  "best": "Nov–May",
+  "dest": "Mahad, Maharashtra",
+  "order": 4,
+  "checked": "2026-11-27",
+  "id": "varandha"
+ }
+]

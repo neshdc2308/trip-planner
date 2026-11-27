@@ -1,0 +1,81 @@
+[
+ {
+  "title": "Bopdev Ghat closure reported till 14 January",
+  "area": "Bopdev Ghat, south-east Pune",
+  "status": "closed",
+  "detail": "A closure until 14 January for road work was reported. The year of the notice wasn't confirmed, so check before using this route.",
+  "sources": [
+   "https://www.freepressjournal.in/pune/pune-bopdev-ghat-to-remain-closed-till-january-14-all-you-need-to-know"
+  ],
+  "checked": "2026-11-27",
+  "id": "bopdev"
+ },
+ {
+  "title": "Dive Ghat short closures for widening",
+  "area": "Dive Ghat, Saswad road",
+  "status": "watch",
+  "detail": "Two-hour closures have been announced for road widening. Check the day's traffic notice.",
+  "sources": [
+   "https://www.thebridgechronicle.com/pune/pune-dive-ghat-traffic-closure-two-hours-wednesday-agn97"
+  ],
+  "checked": "2026-11-27",
+  "id": "dive"
+ },
+ {
+  "title": "Malshej Ghat shut after road collapse in heavy rain",
+  "area": "Malshej Ghat, Junnar",
+  "status": "watch",
+  "detail": "A road collapse shut traffic during heavy rain. Treat Malshej as a monsoon-risk road and check news before going.",
+  "sources": [
+   "https://www.freepressjournal.in/pune/pune-malshej-ghat-shut-after-road-collapse-dive-ghat-closed-amid-heavy-rain"
+  ],
+  "checked": "2026-11-27",
+  "id": "malshej"
+ },
+ {
+  "title": "Expressway missing link is open",
+  "area": "Mumbai–Pune Expressway near Lonavala",
+  "status": "open",
+  "detail": "The 13.3 km missing link opened on 1 May 2026 and bypasses the old ghat section, saving about 30 minutes.",
+  "sources": [
+   "https://newsonair.gov.in/maharashtra-cm-devendra-fadnavis-inaugurates-13-3-km-missing-link-on-mumbai-pune-expressway/"
+  ],
+  "checked": "2026-11-27",
+  "id": "missing-link"
+ },
+ {
+  "title": "Pune–Satara–Kolhapur works and holiday jams",
+  "area": "NH48 south of Pune",
+  "status": "watch",
+  "detail": "Flyover and upgrade works continue, Khambatki tunnel is in its final stage, and long jams were reported over Diwali. Leave by 6 AM on holiday weekends.",
+  "sources": [
+   "https://www.freepressjournal.in/pune/pune-major-relief-ahead-as-khambatki-ghat-tunnel-project-on-mumbai-bengaluru-national-highway-reaches-final-stage",
+   "https://www.lokmattimes.com/maharashtra/diwali-holidays-cause-major-traffic-jam-on-pune-bangalore-highway-commuters-stuck-for-hours-a510"
+  ],
+  "checked": "2026-11-27",
+  "id": "nh48-works"
+ },
+ {
+  "title": "Mumbai–Goa highway still not fully four-laned",
+  "area": "NH66, Konkan coast",
+  "status": "watch",
+  "detail": "Ministers target completion by the end of 2026, but stretches remain under work with diversions. Prefer daylight driving and allow extra time.",
+  "sources": [
+   "https://www.freepressjournal.in/mumbai/mumbai-goa-highway-to-be-completed-by-end-of-2026-minister-shivendra-raje-bhosale",
+   "https://www.freepressjournal.in/mumbai/mumbai-goa-national-highway-expansion-stuck-amid-key-construction-bottlenecks"
+  ],
+  "checked": "2026-11-27",
+  "id": "nh66-work"
+ },
+ {
+  "title": "Varandha Ghat closes every monsoon",
+  "area": "Bhor–Mahad",
+  "status": "watch",
+  "detail": "Closed until 31 August in the monsoon for landslide risk. Fine in winter.",
+  "sources": [
+   "https://www.punekarnews.in/?p=239273"
+  ],
+  "checked": "2026-11-27",
+  "id": "varandha"
+ }
+]
