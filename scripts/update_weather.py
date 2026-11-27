@@ -5,9 +5,15 @@ import json, urllib.request, urllib.parse, datetime, pathlib, time
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 spots = json.loads((ROOT / "data" / "spots.json").read_text())
 
-def get(url):
-    with urllib.request.urlopen(url, timeout=30) as r:
-        return json.loads(r.read())
+def get(url, tries=4):
+    for n in range(tries):
+        try:
+            with urllib.request.urlopen(url, timeout=30) as r:
+                return json.loads(r.read())
+        except Exception:
+            if n == tries - 1:
+                raise
+            time.sleep(3 * (n + 1))
 
 def coords(s):
     if "lat" in s and "lon" in s:
