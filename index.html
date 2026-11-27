@@ -109,6 +109,14 @@ details>summary{cursor:pointer;font-weight:600}
 .wx{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:6px}
 .wx>div{border:1px solid var(--line);border-radius:10px;padding:6px 8px;font-size:.8rem}
 .wx>div.on{border-color:var(--teal);border-width:2px}
+.sheet{border:2px solid var(--teal)}
+.pc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.pc>div{border-radius:10px;padding:8px 10px}
+.pc .pro{background:var(--ok-soft)} .pc .con{background:var(--bad-soft)}
+.pc ul{margin:4px 0 0;padding-left:18px}
+.pgal{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px}
+.pgal img{width:100%;height:110px;object-fit:cover;border-radius:8px;display:block}
+#sheet-map{height:240px;border-radius:10px}
 </style>
 </head>
 <body>
@@ -149,10 +157,11 @@ details>summary{cursor:pointer;font-weight:600}
 
 <!-- MAP -->
 <section id="v-map" class="view" hidden style="display:flex;flex-direction:column;gap:14px">
-  <p class="muted">Every place by distance from Pune. Rings are every 100 km in a straight line; road distance is usually 20–40% more. Tap a dot to open the place.</p>
+  <p class="muted">Every place by distance from Pune. Rings are every 100 km in a straight line; road distance is usually 20–40% more. Tap a dot for the full place page: photos, satellite and Earth views, pros and cons, things to do.</p>
   <div id="lmap" hidden></div>
   <div class="card" style="align-items:center"><div class="tbl" style="width:100%"><svg id="ringmap" viewBox="0 0 520 520" role="img" aria-label="Places around Pune with distance rings" style="width:100%;max-width:620px;display:block;margin:0 auto"></svg></div>
   <div class="row small muted"><span class="pill veg3">Easy veg</span><span class="pill veg2">Veg available</span><span class="pill veg1">Mostly non-veg</span></div></div>
+  <div id="place-sheet"></div>
 </section>
 
 <!-- PLAN -->
@@ -339,6 +348,7 @@ function renderSpots(){
       el("div",{class:"row"},[
         dealBtn,
         el("button",{type:"button",class:on?"on":"",text:on?"Picked ✓":"Pick for plan",onclick:function(){if(picked.has(s.id))picked.delete(s.id);else picked.add(s.id);renderSpots();renderPicked()}}),
+        el("button",{type:"button",class:"primary",text:"Full details",onclick:function(){openSheet(s.id)}}),
         el("a",{href:mapsUrl(s.mapsQuery||s.name),target:"_blank",rel:"noopener",text:"Route in Maps"}),
         reqBtn,
         el("button",{type:"button",text:"Listen",title:"Hear a short guide to this place",onclick:function(){speakText(placeStory(s))}})
@@ -563,14 +573,17 @@ function renderMap(){var svg=$("ringmap");if(!svg)return;while(svg.firstChild)sv
     var dot=document.createElementNS(NS,"circle");dot.setAttribute("cx",x);dot.setAttribute("cy",y);dot.setAttribute("r",6);dot.setAttribute("fill",col);dot.setAttribute("stroke","var(--surface)");dot.setAttribute("stroke-width",1.5);g.appendChild(dot);
     var lb=document.createElementNS(NS,"text");lb.setAttribute("x",x+8);lb.setAttribute("y",y+4);lb.setAttribute("font-size",9.5);lb.setAttribute("fill","var(--ink)");lb.textContent=s.name.split(/ [(&]/)[0].split(",")[0];g.appendChild(lb);
     var tt=document.createElementNS(NS,"title");tt.textContent=s.name+" · "+s.km+" km by road";g.appendChild(tt);
-    function go(){$("f-q").value=s.name.split(/ [(&]/)[0];$("f-km").value=600;location.hash="#explore";renderSpots()}
+    function go(){openSheet(s.id)}
     g.addEventListener("click",go);g.addEventListener("keydown",function(e){if(e.key==="Enter")go()});});
   mk("circle",{cx:c,cy:c,r:7,fill:"var(--teal)"});mk("text",{x:c+10,y:c+4,"font-size":12,"font-weight":700,fill:"var(--teal)"}).textContent="Pune";
   if(window.L&&!window._lmap){var box=$("lmap");box.hidden=false;var m=window._lmap=L.map(box).setView([PUNE.lat,PUNE.lon],7);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:"© OpenStreetMap contributors"}).addTo(m);
+    var osm=L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:"© OpenStreetMap contributors"}).addTo(m);
+    var sat=L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{maxZoom:18,attribution:"Imagery © Esri, Maxar, Earthstar Geographics"});
+    L.control.layers({"Map":osm,"Satellite":sat}).addTo(m);
     [100,300,500].forEach(function(r){L.circle([PUNE.lat,PUNE.lon],{radius:r*1000,fill:false,weight:1,dashArray:"4 4"}).addTo(m)});
     S.spots.forEach(function(s){if(s.lat==null)return;var mk2=L.circleMarker([s.lat,s.lon],{radius:7,weight:1,fillOpacity:.9,color:"#fff",fillColor:+s.veg===3?"#2f7d3a":+s.veg===1?"#b3261e":"#a85d00"}).addTo(m);
-      var d=document.createElement("div");var b=document.createElement("b");b.textContent=s.name;d.appendChild(b);d.appendChild(document.createElement("br"));d.appendChild(document.createTextNode(s.km+" km · ~"+s.hours+" h"));mk2.bindPopup(d)});}
+      var d=document.createElement("div");var b=document.createElement("b");b.textContent=s.name;d.appendChild(b);d.appendChild(document.createElement("br"));d.appendChild(document.createTextNode(s.km+" km · ~"+s.hours+" h"));d.appendChild(document.createElement("br"));
+      var bt=document.createElement("button");bt.type="button";bt.textContent="Open place page";bt.addEventListener("click",function(){openSheet(s.id)});d.appendChild(bt);mk2.bindPopup(d);mk2.on("click",function(){openSheet(s.id)})});}
   else if(window._lmap)window._lmap.invalidateSize();
 }
 
@@ -1165,7 +1178,74 @@ function watchNote(t){var w=S.watch.filter(function(x){return x.tripId===t.id}).
   var bad=(w.items||[]).some(function(x){return x.level==="act"});
   return el("div",{class:"note small"},[el("b",{text:"Morning check "+(w.date||"")+": "}),el("span",{text:w.summary||""}),(w.items||[]).length?el("ul",{class:"acts"},w.items.map(function(x){return el("li",{class:x.level==="act"?"warn":"",text:x.text})})):null])}
 
-function renderAll(){renderFamily();renderLearn();renderToday();renderKit();renderMap();renderSpots();renderPicked();renderTrips();renderRoad();renderLog();spotOptions();renderStays();tripOptions();renderPrep()}
+
+/* ---------- v7: place page ---------- */
+var SHEET=null;
+function openSheet(id){SHEET=id;if(location.hash!=="#map")location.hash="#map";else renderMap();renderSheet();
+  setTimeout(function(){var b=$("place-sheet");if(b&&b.firstChild)b.firstChild.scrollIntoView({behavior:"smooth",block:"start"})},60)}
+function earthUrl(s){return "https://earth.google.com/web/@"+s.lat+","+s.lon+",600a,6000d,35y,0h,60t,0r"}
+function satUrl(s){return "https://www.google.com/maps/@?api=1&map_action=map&center="+s.lat+"%2C"+s.lon+"&zoom=14&basemap=satellite"}
+function streetUrl(s){return "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint="+s.lat+"%2C"+s.lon}
+function nearPhotos(s,box){box.textContent="";var q=shortName(s);
+  var links=el("div",{class:"row small"},[el("a",{href:"https://commons.wikimedia.org/wiki/Special:Nearby#/coord/"+s.lat+","+s.lon,target:"_blank",rel:"noopener",text:"Photos taken here (Wikimedia)"}),
+    el("a",{href:"https://www.google.com/search?tbm=isch&q="+encodeURIComponent(q+" "+(s.region||"")),target:"_blank",rel:"noopener",text:"Google Images"}),
+    el("a",{href:"https://www.instagram.com/explore/tags/"+q.toLowerCase().replace(/[^a-z]/g,"")+"/",target:"_blank",rel:"noopener",text:"Latest on Instagram"}),
+    el("a",{href:"https://www.google.com/maps/search/"+encodeURIComponent(q)+"/@"+s.lat+","+s.lon+",13z",target:"_blank",rel:"noopener",text:"Visitor photos on Google Maps"})]);
+  if(window.claude&&window.claude.use){box.appendChild(el("p",{class:"small muted",text:"Photos open in your browser from here. On the website version they show right on this page."}));box.appendChild(links);return}
+  box.appendChild(el("span",{class:"small muted",text:"Loading photos taken near "+q+"…"}));
+  var u="https://commons.wikimedia.org/w/api.php?action=query&generator=geosearch&ggscoord="+s.lat+"%7C"+s.lon+"&ggsradius=10000&ggsnamespace=6&ggslimit=24&prop=imageinfo&iiprop=url%7Cextmetadata&iiurlwidth=400&format=json&origin=*";
+  fetch(u).then(function(r){return r.json()}).then(function(j){box.textContent="";
+    var ps=j&&j.query&&j.query.pages?Object.keys(j.query.pages).map(function(k){return j.query.pages[k]}):[];
+    ps=ps.filter(function(p){return/\.(jpe?g|png|webp)$/i.test(p.title||"")}).slice(0,12);
+    var g=el("div",{class:"pgal"});ps.forEach(function(p){var ii=p.imageinfo&&p.imageinfo[0];if(!ii||!safeUrl(ii.thumburl)||!safeUrl(ii.descriptionurl))return;
+      g.appendChild(el("a",{href:ii.descriptionurl,target:"_blank",rel:"noopener",title:(p.title||"").replace(/^File:/,"")},[el("img",{src:ii.thumburl,alt:(p.title||"").replace(/^File:|\.\w+$/g,""),loading:"lazy"})]))});
+    if(g.children.length){box.appendChild(g);box.appendChild(el("p",{class:"small muted",text:"Photos taken within 10 km, from Wikimedia Commons. Tap one for its author and date."}))}else box.appendChild(el("p",{class:"small muted",text:"No geotagged photos found nearby."}));
+    box.appendChild(links)}).catch(function(){box.textContent="";box.appendChild(links)})}
+function prosCons(s){var m=+$("f-month").value||(new Date().getMonth()+1),mo=s.months||[],pros=(s.pros||[]).slice(),cons=(s.cons||[]).slice();
+  if(mo.length){if(mo.indexOf(m)>=0)pros.unshift("In season in "+MONTHS[m-1]);else cons.unshift("Off season in "+MONTHS[m-1]+" (best: "+mo.map(function(n){return MONTHS[n-1]}).join(", ")+")")}
+  if(+s.veg===3)pros.push("Easy pure-veg food");else if(+s.veg===1)cons.push("Mostly non-veg food around");
+  if((+s.km||0)<=150)pros.push("Close: about "+s.hours+" h by car");else if((+s.km||0)>=350)cons.push("Long drive: about "+s.hours+" h each way");
+  (s.risks||[]).forEach(function(r){if(cons.indexOf(r)<0)cons.push(r)});
+  var F=famInfo();if(F.n){var w=[];famAdjust(s,w);w.forEach(function(x){(/enjoy/.test(x)?pros:cons).push(x.charAt(0).toUpperCase()+x.slice(1))})}
+  var L=learned();if(L){var w2=[];learnAdjust(s,w2);w2.forEach(function(x){pros.push(x.charAt(0).toUpperCase()+x.slice(1))})}
+  S.alerts.forEach(function(a){var nm=shortName(s).toLowerCase();if(a.status!=="open"&&((a.area||"")+" "+(a.title||"")).toLowerCase().indexOf(nm)>=0)cons.unshift("Road watch: "+a.title)});
+  return{pros:pros,cons:cons}}
+function renderSheet(){var box=$("place-sheet");if(!box)return;box.textContent="";var s=SHEET&&spotById(SHEET);if(!s)return;
+  var on=picked.has(s.id),months=(s.months||[]).map(function(n){return MONTHS[n-1]}),pc=prosCons(s);
+  var myStops=S.stops.filter(function(x){return x.spotId===s.id}).sort(function(a,b){return BEST_ORDER.indexOf(a.best)-BEST_ORDER.indexOf(b.best)});
+  var nStays=S.stays.filter(function(x){return x.spotId===s.id});
+  var photos=el("div",{});
+  var views=el("div",{style:"display:flex;flex-direction:column;gap:6px"},[
+    el("div",{class:"row"},[s.lat!=null?el("a",{href:earthUrl(s),target:"_blank",rel:"noopener",text:"Google Earth 3D"}):null,s.lat!=null?el("a",{href:satUrl(s),target:"_blank",rel:"noopener",text:"Satellite view"}):null,
+      s.lat!=null?el("a",{href:streetUrl(s),target:"_blank",rel:"noopener",text:"Street View"}):null,el("a",{href:mapsUrl(s.mapsQuery||s.name),target:"_blank",rel:"noopener",text:"Directions from Pune"})])]);
+  var mini=null;if(window.L&&s.lat!=null){mini=el("div",{id:"sheet-map"});views.appendChild(mini)}
+  var card=el("article",{class:"card sheet"},[
+    el("div",{class:"row between"},[el("h2",{text:s.name}),el("button",{type:"button",text:"Close",onclick:function(){SHEET=null;renderSheet()}})]),
+    el("div",{class:"row"},[vegPill(s.veg),el("span",{class:"chip km",text:(s.km||"?")+" km · ~"+(s.hours||"?")+" h"}),s.region?el("span",{class:"chip",text:s.region}):null,s.cost?el("span",{class:"chip",text:s.cost}):null].concat((s.tags||[]).map(function(t){return el("span",{class:"chip",text:t})}))),
+    s.notes?el("p",{text:s.notes}):null,
+    months.length?el("p",{class:"small"},[el("b",{text:"Best months: "}),months.join(", ")]):null,
+    s.vegNote?el("p",{class:"small"},[el("b",{text:"Food: "}),s.vegNote]):null,
+    el("div",{class:"pc"},[el("div",{class:"pro"},[el("b",{text:"Why go"}),el("ul",{},pc.pros.map(function(x){return el("li",{class:"small",text:x})}))]),
+      el("div",{class:"con"},[el("b",{text:"Watch out"}),el("ul",{},pc.cons.map(function(x){return el("li",{class:"small",text:x})}))])]),
+    el("h3",{text:"Photos"}),photos,
+    el("h3",{text:"See it from above"}),views,
+    myStops.length?el("h3",{text:"Things to do ("+myStops.length+")"}):null,myStops.length?stopsDetails(myStops,s):null,
+    (s.activities||[]).length?el("ul",{class:"acts"},s.activities.map(function(a){return el("li",{class:"small",text:a.name})})):null,
+    (s.tips||[]).length?el("details",{open:"open"},[el("summary",{class:"small",text:"Local knowledge ("+s.tips.length+")"}),el("ul",{class:"acts"},s.tips.map(function(t){return el("li",{class:"small",text:t})}))]):null,
+    liveBox(s),
+    el("p",{class:"small"},[el("b",{text:"Saved stays: "}),nStays.length?nStays.map(function(x){return x.name}).join(", "):"none yet",el("a",{href:"#stays",text:" · open Stays",onclick:function(){$("st-spot").value=s.id;renderStays()}})]),
+    socialRow(s),notesBox(s),
+    el("div",{class:"row"},[el("button",{type:"button",class:on?"primary":"",text:on?"Picked for plan ✓":"Pick for plan",onclick:function(){if(picked.has(s.id))picked.delete(s.id);else picked.add(s.id);renderPicked();renderSpots();renderSheet()}}),
+      el("button",{type:"button",text:"Listen",onclick:function(){speakText(placeStory(s)+" Why go: "+pc.pros.slice(0,3).join(". ")+". Watch out: "+pc.cons.slice(0,2).join(". ")+".")}})])]);
+  box.appendChild(card);
+  var stD=card.querySelector("details");if(myStops.length&&stD&&!stD.open)stD.open=true;
+  var lv=[].slice.call(card.querySelectorAll("details")).find(function(d){var sm=d.querySelector("summary");return sm&&/^Live/.test(sm.textContent)});if(lv)lv.open=true;
+  nearPhotos(s,photos);
+  if(mini){setTimeout(function(){try{var mm=L.map(mini,{scrollWheelZoom:false}).setView([s.lat,s.lon],13);
+    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{maxZoom:18,attribution:"Imagery © Esri, Maxar, Earthstar Geographics"}).addTo(mm);
+    L.circleMarker([s.lat,s.lon],{radius:8,color:"#fff",weight:2,fillColor:"#0f6b63",fillOpacity:1}).addTo(mm)}catch(e){}},30)}}
+
+function renderAll(){renderSheet();renderFamily();renderLearn();renderToday();renderKit();renderMap();renderSpots();renderPicked();renderTrips();renderRoad();renderLog();spotOptions();renderStays();tripOptions();renderPrep()}
 var loaded=false;renderAll();
 
 /* ---------- local database: data/*.json from the repo + your changes saved in this browser ---------- */
